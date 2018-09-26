@@ -1,0 +1,62 @@
+﻿@*@{
+        ViewBag.Title = "Home Page";
+    }*@
+<!DOCTYPE html>
+<head>
+    <title>Footprints</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <script src="~/Javascript/MapViewScripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/CSS/MapViewStyleSheet.css">
+    <meta charset="utf-8">
+</head>
+<body>
+    @*Sidebar*@
+    <nav role="navigation">
+        <div id="menuToggle">
+            <input id="HamburgerButtonInput" onclick="ToggleMenu()" type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+            <ul id="menu">
+                <li> <a href="#">Home</a></li>
+                <li> <a href="#">About</a></li>
+                <li> <a href="#">Info</a></li>
+                <li> <a href="#">Contact</a></li>
+                <li>
+                    <button id="ThemeMenuExpander" class="collapsible">Change Theme</button>
+                    <div class="content">
+                        <ul>
+                            <li> <button onclick="MidNightTheme()" class="SubThemeMenu">Midnight</button> </li>
+                            <li> <button onclick="DarkTheme()" class="SubThemeMenu">Dark</button> </li>
+                            <li> <button onclick="LightTheme()" class="SubThemeMenu">Light</button></li>
+                            <li> <button onclick="DefaultTheme()" class="SubThemeMenu">Default</button> </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    @*Map*@
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&callback=initMap"
+            async defer></script>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+</body>
+
