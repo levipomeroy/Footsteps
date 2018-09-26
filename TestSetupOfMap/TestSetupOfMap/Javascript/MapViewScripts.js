@@ -7,7 +7,7 @@ function initMap() {
         zoom: 2,
         disableDefaultUI: false,    //set to true to remove all overlaying UI
         streetViewControl: false,   //removes streetview button
-        mapTypeControl: false     //remove map/salelite toggle option buttons
+        mapTypeControl: false    //remove map/salelite toggle option buttons
     });
 
     //Markers
@@ -506,6 +506,17 @@ function LightTheme() {
                 }
             ]
     });
+}
+
+function HamburgerSpanClick() {
+    var checked = document.getElementById("HamburgerButtonInput").checked;
+    if (!checked) {
+        document.getElementById("HamburgerButtonInput").checked = true;
+    }
+    else {
+        document.getElementById("HamburgerButtonInput").checked = false;
+    }
+    ToggleMenu();
 }
 
 function ToggleMenu() {

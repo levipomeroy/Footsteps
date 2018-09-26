@@ -31,17 +31,17 @@ a {
     display: block;
     position: absolute;
     width: 90%;
-    top: 20px;
-    left: 15px;
-    /*z-index: 1;*/
+    top: 10px;
+    left: 10px;
     -webkit-user-select: none;
     user-select: none;
 }
 
     #menuToggle input {
+        text-align: "center";
         display: block;
-        width: 80px;
-        height: 60px;
+        width: 40px;
+        height: 30px;
         position: absolute;
         top: -7px;
         left: -5px;
@@ -54,6 +54,8 @@ a {
     /*hamburger itself */
     #menuToggle span {
         display: block;
+        /*margin-left: auto;
+        margin-right: auto;*/
         width: 33px;
         height: 4px;
         margin-bottom: 5px;
@@ -61,6 +63,7 @@ a {
         background: #000000;
         border-radius: 3px;
         z-index: 2;
+        cursor: pointer;
         transform-origin: 4px 0px;
         transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), background 0.5s cubic-bezier(0.77,0.2,0.05,1.0), opacity 0.55s ease;
     }
