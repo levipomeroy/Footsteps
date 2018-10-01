@@ -1,17 +1,106 @@
-﻿
+﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
+
 var map;
 function initMap() {
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
         zoom: 2,
+        minZoom: 2,
         disableDefaultUI: false,    //set to true to remove all overlaying UI
         streetViewControl: false,   //removes streetview button
         mapTypeControl: false    //remove map/salelite toggle option buttons
     });
+    var input = document.getElementById('SearchBar');
+
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.setFields(
+        ['address_components', 'geometry', 'icon', 'name']);
+
+    var infowindow = new google.maps.InfoWindow();
+    var infowindowContent = document.getElementById('infowindow-content');
+    infowindow.setContent(infowindowContent);
+    var marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+    });
+
+    autocomplete.addListener('place_changed', function () {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+        }
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+            address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+        }
+
+        infowindowContent.children['place-icon'].src = place.icon;
+        infowindowContent.children['place-name'].textContent = place.name;
+        infowindowContent.children['place-address'].textContent = address;
+        infowindow.open(map, marker);
+    });
+
+    map.addListener('rightclick', function (e) {
+        var lat = e.latLng.lat();
+        var lon = e.latLng.lng();
+
+        var contentString = '<div id="content">' +
+            '<p>Title</p>' +
+            '<input type="text" />' +
+            '<p>Description</p>' +
+            '<textarea cols="50"></textarea>' +
+            '<br />' +
+            '<select>' +
+            '    <option>Trip</option>' +
+            '    <option>Lived</option>' +
+            '    <option>Want to go</option>' +
+            '</select>' +
+            '<button type="button">' +
+            '    <img src="https://image.flaticon.com/icons/svg/53/53407.svg" height="20px" width="20px" />' +
+            '</button>' +
+            '<button type="button">' +
+            '    <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/picture-01-512.png" height="20px" width="20px" />' +
+            '</button>' +
+            '</div>';
+
+        var marker200 = new google.maps.Marker({
+            position: { lat: lat, lng: lon },
+            map: map,
+            icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }
+        });
+        marker200.addListener('click', function () {
+            infowindow.open(map, marker200);
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        //alert(lat + "," + lon);
+    });
 
     //Markers
-    var marker = new google.maps.Marker({
+    var marker5 = new google.maps.Marker({
         position: { lat: 42.216601, lng: -121.752205 },
         map: map,
         icon: {
@@ -27,12 +116,6 @@ function initMap() {
             url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
         },
         title: 'Portland apartment'
-    });
-
-    var marker3 = new google.maps.Marker({
-        position: { lat: 26.825704, lng: -81.177556 },
-        map: map,
-        title: 'Random spot in Florida'
     });
 }
 

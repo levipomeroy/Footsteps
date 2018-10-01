@@ -11,35 +11,38 @@
 </head>
 <body>
     @*Sidebar*@
-    @*<nav role="navigation">*@
-        <div id="menuToggle">
-            <input id="HamburgerButtonInput" onclick="ToggleMenu()" type="checkbox"/>
-            <span onclick="HamburgerSpanClick()"></span>
-            <span onclick="HamburgerSpanClick()"></span>
-            <span onclick="HamburgerSpanClick()"></span>
-            <ul id="menu">
-                <li> <a href="#">Home</a></li>
-                <li> <a href="#">About</a></li>
-                <li> <a href="#">Info</a></li>
-                <li> <a href="#">Contact</a></li>
-                <li>
-                    <button id="ThemeMenuExpander" class="collapsible">Change Theme</button>
-                    <div class="content">
-                        <ul>
-                            <li> <button onclick="MidNightTheme()" class="SubThemeMenu">Midnight</button> </li>
-                            <li> <button onclick="DarkTheme()" class="SubThemeMenu">Dark</button> </li>
-                            <li> <button onclick="LightTheme()" class="SubThemeMenu">Light</button></li>
-                            <li> <button onclick="DefaultTheme()" class="SubThemeMenu">Default</button> </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    @*</nav>*@
+    <div id="menuToggle">
+        <input id="HamburgerButtonInput" onclick="ToggleMenu()" type="checkbox" />
+        <span onclick="HamburgerSpanClick()"></span>
+        <span onclick="HamburgerSpanClick()"></span>
+        <span onclick="HamburgerSpanClick()"></span>
+        <ul id="menu">
+            <li> <a href="#">Home</a></li>
+            <li> <a href="#">About</a></li>
+            <li> <a href="#">Info</a></li>
+            <li> <a href="#">Contact</a></li>
+            <li>
+                <button id="ThemeMenuExpander" class="collapsible">Change Theme</button>
+                <div class="content">
+                    <ul>
+                        <li> <button onclick="MidNightTheme()" class="SubThemeMenu">Midnight</button> </li>
+                        <li> <button onclick="DarkTheme()" class="SubThemeMenu">Dark</button> </li>
+                        <li> <button onclick="LightTheme()" class="SubThemeMenu">Light</button></li>
+                        <li> <button onclick="DefaultTheme()" class="SubThemeMenu">Default</button> </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <form>
+        <input id="SearchBar" type="text" name="search" placeholder="Find a location">
+    </form>
 
     @*Map*@
     <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&callback=initMap"
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&callback=initMap"
+        async defer></script>*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
             async defer></script>
 
     <script>

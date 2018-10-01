@@ -27,6 +27,15 @@ a {
         color: tomato;
     }
 
+/*Trying tot edit google controls opacity*/
+/*.gm-fullscreen-control{
+    opacity: .4;
+}*/
+
+/*.gmnoprint.gm-bundled-control div.gmnoprint{
+    opacity: .3;
+}*/
+
 #menuToggle {
     display: block;
     position: absolute;
@@ -51,11 +60,32 @@ a {
         -webkit-touch-callout: none;
     }
 
+input[name=search] {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 25px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 16px;
+    background: transparent url("../../Images/searchIcon.png");
+    background-position: 10px 10px;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    margin-left: 45px;
+    margin-top: -5px;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    input[name=search]:focus {
+        width: 40%;
+    }
+
     /*hamburger itself */
     #menuToggle span {
         display: block;
-        /*margin-left: auto;
-        margin-right: auto;*/
         width: 33px;
         height: 4px;
         margin-bottom: 5px;
