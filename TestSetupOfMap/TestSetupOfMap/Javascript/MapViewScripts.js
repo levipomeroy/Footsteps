@@ -1,38 +1,29 @@
 ﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
 
+/**********************************************************************
+ * Purpose: This function creates the initial map object and sets the 
+ *          properties. 
+ **********************************************************************/
 var map;
 function initMap() {
-
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
         zoom: 2,
         minZoom: 2,
-        disableDefaultUI: false,    //set to true to remove all overlaying UI
         streetViewControl: false,   //removes streetview button
         mapTypeControl: false    //remove map/salelite toggle option buttons
     });
     var input = document.getElementById('SearchBar');
 
     var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.setFields(
-        ['address_components', 'geometry', 'icon', 'name']);
+    autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
 
-    var infowindow = new google.maps.InfoWindow();
-    var infowindowContent = document.getElementById('infowindow-content');
-    infowindow.setContent(infowindowContent);
     var marker = new google.maps.Marker({
         map: map,
         anchorPoint: new google.maps.Point(0, -29)
     });
 
-    //google.maps.event.addDomListener(input, 'keydown', function (event) {
-    //    if (event.keyCode === 13) {
-    //        event.preventDefault();
-    //    }
-    //}); 
-
     autocomplete.addListener('place_changed', function () {
-        infowindow.close();
         marker.setVisible(false);
         var place = autocomplete.getPlace();
         if (!place.geometry) {
@@ -48,20 +39,6 @@ function initMap() {
         }
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
-
-        var address = '';
-        if (place.address_components) {
-            address = [
-                place.address_components[0] && place.address_components[0].short_name || '',
-                place.address_components[1] && place.address_components[1].short_name || '',
-                place.address_components[2] && place.address_components[2].short_name || ''
-            ].join(' ');
-        }
-
-        infowindowContent.children['place-icon'].src = place.icon;
-        infowindowContent.children['place-name'].textContent = place.name;
-        infowindowContent.children['place-address'].textContent = address;
-        infowindow.open(map, marker);
     });
 
     map.addListener('rightclick', function (e) {
@@ -101,11 +78,9 @@ function initMap() {
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-
-        //alert(lat + "," + lon);
     });
 
-    //Markers
+    //Test Markers (no marker will be hardcoded when working properly)
     var marker5 = new google.maps.Marker({
         position: { lat: 42.216601, lng: -121.752205 },
         map: map,
@@ -125,6 +100,9 @@ function initMap() {
     });
 }
 
+/**********************************************************************
+ * Purpose: This function changes the map theme to a dark blue theme.
+ **********************************************************************/
 function MidNightTheme() {
 
     map.setOptions({
@@ -368,6 +346,9 @@ function MidNightTheme() {
     });
 }
 
+/**********************************************************************
+ * Purpose: This function changes the map theme to the default theme
+ **********************************************************************/
 function DefaultTheme() {
     map.setOptions({
         styles:
@@ -385,6 +366,9 @@ function DefaultTheme() {
     });
 }
 
+/**********************************************************************
+ * Purpose: This function changes the map theme to a dark theme
+ **********************************************************************/
 function DarkTheme() {
     map.setOptions({
         styles:
@@ -421,6 +405,9 @@ function DarkTheme() {
     });
 }
 
+/**********************************************************************
+ * Purpose: This function changes the map theme to a light theme
+ **********************************************************************/
 function LightTheme() {
     map.setOptions({
         styles:
@@ -597,6 +584,10 @@ function LightTheme() {
     });
 }
 
+/**********************************************************************
+ * Purpose: This function handles the click on the hamburger button lines
+ *          and calls ToggleMenu() to toggle visibilty of the menu
+ **********************************************************************/
 function HamburgerSpanClick() {
     var checked = document.getElementById("HamburgerButtonInput").checked;
     if (!checked) {
@@ -608,6 +599,10 @@ function HamburgerSpanClick() {
     ToggleMenu();
 }
 
+/**********************************************************************
+ * Purpose: This function toggles the visibility of the expandable 
+ *          hamburger button menu.
+ **********************************************************************/
 function ToggleMenu() {
     var checked = document.getElementById("HamburgerButtonInput").checked;
     if (checked) {
