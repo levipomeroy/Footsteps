@@ -25,6 +25,12 @@ function initMap() {
         anchorPoint: new google.maps.Point(0, -29)
     });
 
+    //google.maps.event.addDomListener(input, 'keydown', function (event) {
+    //    if (event.keyCode === 13) {
+    //        event.preventDefault();
+    //    }
+    //}); 
+
     autocomplete.addListener('place_changed', function () {
         infowindow.close();
         marker.setVisible(false);
@@ -46,9 +52,9 @@ function initMap() {
         var address = '';
         if (place.address_components) {
             address = [
-                (place.address_components[0] && place.address_components[0].short_name || ''),
-                (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
+                place.address_components[0] && place.address_components[0].short_name || '',
+                place.address_components[1] && place.address_components[1].short_name || '',
+                place.address_components[2] && place.address_components[2].short_name || ''
             ].join(' ');
         }
 
