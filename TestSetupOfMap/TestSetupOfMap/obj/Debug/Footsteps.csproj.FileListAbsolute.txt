@@ -180,3 +180,4 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\TestSetupOfMap\TestSetupOfMap\obj\
 C:\Users\levip_000\Documents\GitHub\Footsteps\TestSetupOfMap\TestSetupOfMap\obj\Debug\Footsteps.csproj.CopyComplete
 C:\Users\levip_000\Documents\GitHub\Footsteps\TestSetupOfMap\TestSetupOfMap\obj\Debug\TestSetupOfMap.dll
 C:\Users\levip_000\Documents\GitHub\Footsteps\TestSetupOfMap\TestSetupOfMap\obj\Debug\TestSetupOfMap.pdb
+C:\Users\levip_000\Documents\GitHub\Footsteps\TestSetupOfMap\TestSetupOfMap\obj\Debug\Footsteps.csprojAssemblyReference.cache

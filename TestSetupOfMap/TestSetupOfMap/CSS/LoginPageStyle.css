@@ -1,0 +1,29 @@
+﻿#loginfields {
+    margin: 10px;
+}
+
+#loginbutton {
+    float: right;
+}
+
+#register {
+    margin-top: 50px;
+}
+
+#register p {
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+/*#SignupBTN {
+    float: right;
+}*/
+
+#slideshow {
+    text-align: center;
+    background-color: grey;
+    padding: 10px;
+}
