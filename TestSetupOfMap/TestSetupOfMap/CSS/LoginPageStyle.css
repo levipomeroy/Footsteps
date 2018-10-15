@@ -8,6 +8,7 @@
 
 #register {
     margin-top: 50px;
+    text-align:center;
 }
 
 #register p {
@@ -18,12 +19,25 @@
     font-style: italic;
 }
 
-/*#SignupBTN {
+    #register a {
+        text-align: center;
+        color: black;
+        margin: auto;
+        padding: 10px;
+        font-size: 14px;
+        font-style: italic;
+    }
+
+#SignupBTN {
     float: right;
-}*/
+}
 
 #slideshow {
     text-align: center;
     background-color: grey;
     padding: 10px;
+}
+
+#RegisterFields {
+    margin: 10px;
 }
