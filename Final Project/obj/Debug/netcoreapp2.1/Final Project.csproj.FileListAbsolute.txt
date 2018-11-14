@@ -1,0 +1,23 @@
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.deps.json
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.runtimeconfig.json
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.runtimeconfig.dev.json
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.dll
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.pdb
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.Views.dll
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\bin\Debug\netcoreapp2.1\Final Project.Views.pdb
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.csproj.CoreCompileInputs.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorAssemblyInfo.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorAssemblyInfo.cs
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.AssemblyInfoInputs.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.AssemblyInfo.cs
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.TagHelpers.input.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.TagHelpers.output.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorCoreGenerate.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorTargetAssemblyInfo.cache
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorTargetAssemblyInfo.cs
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.Views.pdb
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.dll
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.pdb
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.csproj.CopyComplete
+C:\Users\levip_000\Desktop\school\ASP.net\Final Project\obj\Debug\netcoreapp2.1\Final Project.csprojAssemblyReference.cache
