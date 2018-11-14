@@ -61,7 +61,7 @@
                     <a href="#"><i class="fas fa-user-circle"></i> Account</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-at"></i> Contact</a>
+                    <a href="../Contact/Index"><i class="fas fa-at"></i> Contact</a>
                 </li>
             </ul>
         </nav>
@@ -81,5 +81,44 @@
 </html>
 
 
+<style>
+    .field-validation-error {
+        color: #b94a48;
+        display: inline-block;
+        *display: inline;
+        padding-left: 5px;
+        vertical-align: middle;
+        *zoom: 1;
+        width: 100%;
+    }
 
+    .field-validation-valid {
+        display: none;
+    }
+
+    .input-validation-error {
+        color: #b94a48;
+        border-color: #b94a48;
+    }
+
+        .input-validation-error:focus {
+            border-color: #953b39;
+            -webkit-box-shadow: 0 0 6px #d59392;
+            -moz-box-shadow: 0 0 6px #d59392;
+            box-shadow: 0 0 6px #d59392;
+        }
+
+    .validation-summary-errors {
+        /*font-weight: bold;*/
+        color: #b94a48;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+</style>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.js"></script>
 
