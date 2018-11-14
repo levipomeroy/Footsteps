@@ -12224,11 +12224,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\levip_000\\Desktop\\school\\ASP.net\\Final Project\\Final Project.csproj",
+      "projectUniqueName": "C:\\Users\\levip_000\\Documents\\GitHub\\Footsteps\\Final Project\\Final Project.csproj",
       "projectName": "Final Project",
-      "projectPath": "C:\\Users\\levip_000\\Desktop\\school\\ASP.net\\Final Project\\Final Project.csproj",
+      "projectPath": "C:\\Users\\levip_000\\Documents\\GitHub\\Footsteps\\Final Project\\Final Project.csproj",
       "packagesPath": "C:\\Users\\levip_000\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\levip_000\\Desktop\\school\\ASP.net\\Final Project\\obj\\",
+      "outputPath": "C:\\Users\\levip_000\\Documents\\GitHub\\Footsteps\\Final Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
