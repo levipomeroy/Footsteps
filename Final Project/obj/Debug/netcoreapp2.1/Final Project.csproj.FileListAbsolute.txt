@@ -36,9 +36,11 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.TagHelpers.input.cache
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.TagHelpers.output.cache
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorCoreGenerate.cache
+C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Contact\Index.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Defaultlayout.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\UserList\Index.g.cshtml.cs
+C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorTargetAssemblyInfo.cache
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.RazorTargetAssemblyInfo.cs
@@ -46,6 +48,3 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.dll
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.pdb
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csproj.CopyComplete
-C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csprojAssemblyReference.cache
-C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Contact\Index.g.cshtml.cs
-C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs

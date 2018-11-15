@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Final_Project.Models
 {
@@ -12,10 +8,11 @@ namespace Final_Project.Models
         [StringLength(25, ErrorMessage = "Name cannot be more than 25 characters long")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Type is requred")]
         public string Type { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Message cannot be empty")]
+        [StringLength(1000, ErrorMessage = "Message cannot be more than 1000 characters long")]
         public string Message { get; set; }
     }
 }
