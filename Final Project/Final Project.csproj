@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Scripts\MapPageScript.js" />
     <None Include="wwwroot\Styles\MapPageStyle.css" />
   </ItemGroup>
 

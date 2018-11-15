@@ -1,12 +1,13 @@
 ﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
 
 /**********************************************************************
- * Purpose: This function creates the initial map object and sets the 
- *          properties. 
+ * Purpose: This function creates the initial map object and sets the
+ *          properties.
  **********************************************************************/
 var map;
+//var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
 function initMap() {
-    map = new google.maps.Map(document.getElementById('content'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
         zoom: 2,
         minZoom: 2,
@@ -39,29 +40,38 @@ function initMap() {
         }
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
+
+        //Weird little test to exact lat, lon, address from serached place
+        var SearchedLocationOptions = "<div>" + "<p>Location: " + place.geometry.location + "</p >" +
+            "<p>" + "name: " + place.name + "</p></div>";
+        var infowindow = new google.maps.InfoWindow({
+            content: SearchedLocationOptions
+        });
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+        });
+        //end of test
     });
+
 
     map.addListener('rightclick', function (e) {
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
 
         var contentString = '<div id="content">' +
-            '<p>Title</p>' +
-            '<input type="text" />' +
-            '<p>Description</p>' +
-            '<textarea cols="50"></textarea>' +
+            '<label class="control-label" for="Title">Title</label>' +
+            '<input id="title" name="title" class="form-control" type="text" />' +
+            '<label class="control-label" for="Description">Description</label>' +
+            '<textarea id="Description" name="Description" class="form-control" cols="40"></textarea>' +
             '<br />' +
-            '<select>' +
-            '    <option>Trip</option>' +
-            '    <option>Lived</option>' +
-            '    <option>Want to go</option>' +
+            '<select class="form-control">' +
+            '    <option>I have been here</option>' +
+            '    <option>I have lived here</option>' +
+            '    <option>I want to go here</option>' +
             '</select>' +
-            '<button type="button">' +
-            '    <img src="https://image.flaticon.com/icons/svg/53/53407.svg" height="20px" width="20px" />' +
-            '</button>' +
-            '<button type="button">' +
-            '    <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/picture-01-512.png" height="20px" width="20px" />' +
-            '</button>' +
+            '<button type="button" class="btn btn-default">' + '<i class="fas fa-edit"></i>' + '</button>' +
+            '<button type="button" class="btn btn-default">' + '<i class="fas fa-images"></i>' + '</button>' +
+            '<button type="button" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
             '</div>';
 
         var marker200 = new google.maps.Marker({
@@ -80,24 +90,18 @@ function initMap() {
         });
     });
 
-    //Test Markers (no marker will be hardcoded when working properly)
-    var marker5 = new google.maps.Marker({
-        position: { lat: 42.216601, lng: -121.752205 },
-        map: map,
-        icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        },
-        title: 'Klamath Falls apartment'
-    });
-
-    var marker2 = new google.maps.Marker({
-        position: { lat: 45.533467, lng: -122.650095 },
-        map: map,
-        icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-        },
-        title: 'Portland apartment'
-    });
+    //Add all locations from model to the map
+    var i;
+    for (i = 0; i < LocList.length; i++) {
+        new google.maps.Marker({
+            position: { lat: LocList[i].latitude, lng: LocList[i].longitude },
+            map: map,
+            icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+            },
+            title: LocList[i].name
+        });
+    }
 }
 
 /**********************************************************************
