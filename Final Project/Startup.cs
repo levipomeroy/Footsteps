@@ -19,6 +19,7 @@ namespace Final_Project
             services.AddMvc();
 
             services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<IContactRepository, ContactRepository>();
 
         }
 

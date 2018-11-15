@@ -48,3 +48,26 @@ insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Long
 values('United States', 'DC', 'Washington DC', '20500', '1600 Pennsylvania Ave NW', 38.897663, -77.036575, 'The White House', 'Where the president lives', 2)
 go
 select * from Locations;
+go
+create table [Messages]
+(
+	ID int not null primary key identity(1,1),
+	[Name] varchar(25),
+	[Type] varchar(15),
+	[Message] varchar(1000)
+)
+go
+create procedure Messages_GetList
+as 
+select * from [Messages];
+go
+create procedure Messages_Insert (
+	@Name varchar(25),
+	@Type varchar(15),
+	@Message varchar(1000)
+)
+as
+insert into Messages([Name], [Type], [Message])
+values(@Name, @Type, @Message)
+go
+select * from  Messages;

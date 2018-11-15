@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Final_Project.Models;
+using Final_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project.Controllers
 {
     public class ContactController : Controller
     {
+        private IContactRepository _ContactRepo;
+
+        public ContactController(IContactRepository ContactRepo)
+        {
+            _ContactRepo = ContactRepo;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -17,9 +25,16 @@ namespace Final_Project.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(ContactModel model)
         {
-            //send email to me and store in db
+            //send email to me 
+
+            //store in db
+            if (ModelState.IsValid)
+            {
+                _ContactRepo.Insert(model);
+            }
             return View();
         }
     }
