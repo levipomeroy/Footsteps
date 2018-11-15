@@ -27,7 +27,7 @@ namespace Final_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(List<LocationObject> locList)
+        public IActionResult Index(LocationModel locList)
         {
             //insert into DB 
 

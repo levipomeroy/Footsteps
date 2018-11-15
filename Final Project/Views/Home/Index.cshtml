@@ -3,14 +3,14 @@
 
 <!-- Page Content -->
 <div id="content" class="grid">
-    <div id="ActionBar">
+    <div id="ActionBarMap">
         <div class="row">
             <button type="button" id="sidebarCollapse" class="navbar-btn">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <input id="SearchBar" class="col-6" autocomplete="on" type="text" name="search" placeholder="&#xF002 Find a location"/>
+            <input id="SearchBar" class="col-6" autocomplete="on" type="search" name="search" placeholder="&#xF002 Find a location"/>
         </div>
     </div>
     <div class="row" id="map"></div>
@@ -22,3 +22,4 @@
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
 </script>
+

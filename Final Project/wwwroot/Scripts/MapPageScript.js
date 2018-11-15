@@ -13,7 +13,8 @@ $(document).ready(function () {
  *          properties.
  **********************************************************************/
 var map;
-//var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
+var marker;
+var centerOfTheWorld;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
@@ -22,12 +23,13 @@ function initMap() {
         streetViewControl: false,   //removes streetview button
         mapTypeControl: false    //remove map/salelite toggle option buttons
     });
+    centerOfTheWorld = map.getCenter();
     var input = document.getElementById('SearchBar');
 
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
 
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         map: map,
         anchorPoint: new google.maps.Point(0, -29)
     });
@@ -49,18 +51,19 @@ function initMap() {
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
 
-        //Weird little test to exact lat, lon, address from serached place
+        //info window for searched place
         var SearchedLocationOptions = "<div>" + "<p>Location: " + place.geometry.location + "</p >" +
-            "<p>" + "name: " + place.name + "</p></div>";
+            "<p>" + "name: " + place.name +
+            "</p> <button onclick='RemoveMarkerForSearchedPlace()' id='RemoveSearchedMarkerBTN'>Remove</button>" +
+            "<button onclick='AddMarkerForSearchedPlace()' id=AddMarkerForSearchedPlace>Add to my map</button>" + 
+            "</div>";
         var infowindow = new google.maps.InfoWindow({
             content: SearchedLocationOptions
         });
         marker.addListener('click', function () {
             infowindow.open(map, marker);
         });
-        //end of test
     });
-
 
     map.addListener('rightclick', function (e) {
         var lat = e.latLng.lat();
@@ -110,6 +113,34 @@ function initMap() {
             title: LocList[i].name
         });
     }
+}
+
+/**********************************************************************
+ * Purpose: This function removes the serached marker from the map, clears 
+ * the search bar and return the map to the original state
+ **********************************************************************/
+function RemoveMarkerForSearchedPlace() {
+    marker.setVisible(false);
+    map.setCenter(centerOfTheWorld);
+    map.setZoom(2);
+    document.querySelector('[title="Close"]').click();
+    document.getElementById('SearchBar').value = '';
+}
+
+function AddMarkerForSearchedPlace() {
+    //alert("working");
+    //var url = "@Url.Action('Index','Home')";
+    //var myModel;
+    //myModel.LocationList = LocList;
+    //myModel.Latitude = autocomplete.getPlace().latLng.Latitude;
+    //myModel.Longitude = autocomplete.getPlace().latLng.Longitude;
+    //myModel = "hi";
+    //$.ajax({
+    //    type: "POST",
+    //    data: JSON.stringify(myModel),
+    //    url: url,
+    //    contentType: "application/json"
+    //});
 }
 
 /**********************************************************************

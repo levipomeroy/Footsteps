@@ -33,6 +33,7 @@ namespace Final_Project.Controllers
             //store in db
             if (ModelState.IsValid)
             {
+                ModelState.Clear();
                 _ContactRepo.Insert(model);
             }
             return View();
