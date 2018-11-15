@@ -5,13 +5,12 @@
 <div id="content" class="grid">
     <div id="ActionBar">
         <div class="row">
-            @*<div>*@
             <button type="button" id="sidebarCollapse" class="navbar-btn">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <input id="SearchBar" class="col-6" autocomplete="on" type="text" name="search" placeholder="Find a location">
+            <input id="SearchBar" class="col-6" autocomplete="on" type="text" name="search" placeholder="&#xF002 Find a location"/>
         </div>
     </div>
     <div class="row" id="map"></div>
@@ -19,7 +18,6 @@
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
         async defer></script>
-
 
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));

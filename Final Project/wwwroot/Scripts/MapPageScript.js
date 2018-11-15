@@ -1,5 +1,13 @@
 ﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
 
+
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+});
+
 /**********************************************************************
  * Purpose: This function creates the initial map object and sets the
  *          properties.
