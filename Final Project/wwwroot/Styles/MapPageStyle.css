@@ -28,9 +28,21 @@
 }
 
 #SearchBar {
-    border: none;
+    /*border: none;*/
     border-radius: 15px;
     font-family: Arial, FontAwesome;
+    outline-width: 0px;
+    border-width: .5px;
+    border-color: lightgray;
+}
+
+#AddLocationBTN{
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    outline-width: 0px;
+    margin-top:10px;
+    margin-left:5px;
 }
 
 body {

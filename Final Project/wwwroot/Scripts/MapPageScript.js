@@ -83,6 +83,7 @@ function initMap() {
             '<button type="button" class="btn btn-default">' + '<i class="fas fa-edit"></i>' + '</button>' +
             '<button type="button" class="btn btn-default">' + '<i class="fas fa-images"></i>' + '</button>' +
             '<button type="button" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
+            '<button type="button" class="btn btn-primary-outline">' + '<i class="fas fa-save"></i>' + '</button>' +
             '</div>';
 
         var marker200 = new google.maps.Marker({

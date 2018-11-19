@@ -1,0 +1,65 @@
+﻿@using Final_Project.Models
+@model LocationModel
+
+<div id="content" class="container grid">
+    <div id="ActionBar">
+        <div class="row">
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </div>
+    <div class="row" id="ContactContent">
+        <div class="col-8">
+            <form asp-action="Index" asp-controller="LocationForm" method="post">
+                @*@Html.AntiForgeryToken()*@
+
+                <label asp-for="Name" class="control-label">Name</label>
+                <input id="Name" name="Name" type="text" asp-for="Name" class="form-control" placeholder="Name" />
+                <span asp-validation-for="Name"> </span>
+
+                <label for="LocationSearcherForForm" class="form-label">Find Location</label>
+                <input id="LocationSearcherForForm" name="LocationSearcherForForm" class="form-control" autocomplete="on" type="search" placeholder="Search" />
+
+                <label asp-for="Latitude" class="control-label">Latitude</label>
+                <input id="Latitude" name="Latitude" type="text" asp-for="Latitude" class="form-control" placeholder="Latitude" />
+                <span asp-validation-for="Latitude"> </span>
+
+                <label asp-for="Longitude" class="control-label">Longitude</label>
+                <input id="Longitude" name="Longitude" type="text" asp-for="Longitude" class="form-control" placeholder="Longitude" />
+                <span asp-validation-for="Longitude"> </span>
+
+                <input id="Country" name="Country" type="hidden" asp-for="Country" class="form-control" placeholder="Country" />
+                <span asp-validation-for="Country"> </span>
+
+                <input id="City" name="City" type="hidden" asp-for="City" class="form-control" placeholder="City" />
+                <span asp-validation-for="City"> </span>
+
+                <input id="StateCode" name="StateCode" type="hidden" asp-for="StateCode" class="form-control" placeholder="State" />
+                <span asp-validation-for="StateCode"> </span>
+
+                <input id="ZipCode" name="ZipCode" type="hidden" asp-for="ZipCode" class="form-control" placeholder="Zip Code" />
+                <span asp-validation-for="ZipCode"> </span>
+
+                <input id="Address" name="Address" type="hidden" asp-for="Address" class="form-control" placeholder="Address" />
+                <span asp-validation-for="Address"> </span>
+
+                <input id="Category" name="AddCategoryress" type="hidden" asp-for="Category" class="form-control" placeholder="Category" />
+                <span asp-validation-for="Category"> </span>
+
+
+                <label asp-for="Description" class="control-label">Description</label>
+                <textarea id="Description" name="Description" asp-for="Description" class="form-control" placeholder="Description"> </textarea>
+                <span asp-validation-for="Description"> </span>
+
+                <br />
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLDZkRTvm9yKy3xikcPEZQ05PQkPG2PZ8&libraries=places"></script>
+<script src="~/Scripts/LocationFormScript.js"></script>

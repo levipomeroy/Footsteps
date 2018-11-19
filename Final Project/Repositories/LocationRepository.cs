@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Final_Project.BusinessObjects;
+using Final_Project.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Final_Project.Repositories
@@ -68,7 +69,7 @@ namespace Final_Project.Repositories
             return Locations;
         }
 
-        public void Insert(LocationObject location)
+        public void Insert(LocationModel location)
         {
             using (connection)
             {

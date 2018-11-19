@@ -1,0 +1,32 @@
+﻿    var input = document.getElementById('LocationSearcherForForm');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+    var address;
+    document.getElementById('Latitude').value = place.geometry.location.lat();
+    document.getElementById('Longitude').value = place.geometry.location.lng();
+        for (var i = 0; i < place.address_components.length; i++) {
+            for (var b = 0; b < place.address_components[i].types.length; b++) {
+                if (place.address_components[i].types[b] === "locality") {
+        document.getElementById('City').value = place.address_components[i].long_name
+    }
+    if (place.address_components[i].types[b] === "country") {
+        document.getElementById('Country').value = place.address_components[i].long_name
+    }
+    if (place.address_components[i].types[b] === "postal_code") {
+        document.getElementById('ZipCode').value = place.address_components[i].long_name;
+    }
+                if (place.address_components[i].types[b] === "administrative_area_level_1") {
+        document.getElementById('StateCode').value = place.address_components[i].long_name;
+    }
+                if (place.address_components[i].types[b] === "street_number") {
+        address = place.address_components[i].long_name;
+    }
+                if (place.address_components[i].types[b] === "route") {
+        address += " " + place.address_components[i].long_name;
+    }
+}
+}
+document.getElementById('Address').value = address;
+document.getElementById('Category').value = 0;
+});

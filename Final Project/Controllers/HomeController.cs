@@ -33,5 +33,10 @@ namespace Final_Project.Controllers
 
             return View(locList);
         }
+        [HttpGet]
+        public IActionResult GetLocationList()
+        {
+            return Json(_LocationRepo.GetList());
+        }
     }
 }
