@@ -33,6 +33,10 @@ namespace Final_Project.Controllers
 
             return View(locList);
         }
+
+        //This is the thing Allan wrote for you to get the list for js without 
+        //doing it the sketchy way you were doing it before. Its a service that
+        //you can call from js but still need to figure out.
         [HttpGet]
         public IActionResult GetLocationList()
         {

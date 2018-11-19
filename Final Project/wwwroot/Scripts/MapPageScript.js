@@ -1,12 +1,12 @@
 ﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
 
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-    });
-});
+//This really isnt a page page script, it should be moved to another file for the default layout to use
+//$(document).ready(function () {
+//    $('#sidebarCollapse').on('click', function () {
+//        $('#sidebar').toggleClass('active');
+//        $(this).toggleClass('active');
+//    });
+//});
 
 /**********************************************************************
  * Purpose: This function creates the initial map object and sets the
@@ -103,6 +103,21 @@ function initMap() {
     });
 
     //Add all locations from model to the map
+    
+    //var LocList = Json(@Model.LocationList);
+   // var LocList = Url.Action("GetLocationList", "Home", null, Request.Url.Scheme);
+
+    //var LocList;
+    //$.ajax({
+    //    url: '@Url.Action("~/HomeController/GetLocationList")',
+    //    type: 'GET',
+    //    cache: false,
+    //    data: {},
+    //    success: function (data) {
+    //        alert(JSON.stringify(data));
+    //        //LocList = JSON.stringify(data);
+    //    }
+    //});
     var i;
     for (i = 0; i < LocList.length; i++) {
         new google.maps.Marker({

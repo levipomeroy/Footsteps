@@ -1,6 +1,5 @@
 ﻿@using Final_Project.Models
 @model LocationModel
-
 <!-- Page Content -->
 <div id="content" class="grid">
     <div id="ActionBarMap">
@@ -10,7 +9,7 @@
                 <span></span>
                 <span></span>
             </button>
-            <input id="SearchBar" class="col-6" autocomplete="on" type="search" name="search" placeholder="&#xF002 Find a location"/>
+            <input id="SearchBar" class="col-6" autocomplete="on" type="search" name="search" placeholder="&#xF002 Find a location" />
             <a href="../LocationForm" id="AddLocationBTN" name="AddLocationBTN"> <i class="fas fa-plus"></i></a>
         </div>
     </div>
@@ -21,8 +20,20 @@
         async defer></script>
 
 <script>
-    var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
-    //$.get("@Url.Action("GetLocationList", "Home")")
-    //$.ajax()
+     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
+    @*$.get("@Url.Action("GetLocationList", "Home")")*@
+
+@*$.ajax({
+      url: '@Url.Action("GetLocationList")',
+      type: 'GET',
+      cache: false,
+    data: {},
+    success: function (data) {
+        //alert(JSON.stringify(data));
+        var LocList = JSON.stringify(data);
+    }
+    });*@
+
 </script>
 
+<script src="~/Scripts/MapPageScript.js"></script>

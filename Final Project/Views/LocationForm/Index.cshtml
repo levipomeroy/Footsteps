@@ -14,7 +14,7 @@
     <div class="row" id="ContactContent">
         <div class="col-8">
             <form asp-action="Index" asp-controller="LocationForm" method="post">
-                @*@Html.AntiForgeryToken()*@
+                @Html.AntiForgeryToken()
 
                 <label asp-for="Name" class="control-label">Name</label>
                 <input id="Name" name="Name" type="text" asp-for="Name" class="form-control" placeholder="Name" />

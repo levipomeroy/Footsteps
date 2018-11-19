@@ -23,6 +23,7 @@ namespace Final_Project.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(LocationModel loc)
         {
             //insert into DB 
