@@ -34,13 +34,19 @@ namespace Final_Project.Controllers
             return View(locList);
         }
 
-        //This is the thing Allan wrote for you to get the list for js without 
-        //doing it the sketchy way you were doing it before. Its a service that
-        //you can call from js but still need to figure out.
+        //Service to get location list from js
         [HttpGet]
         public IActionResult GetLocationList()
         {
             return Json(_LocationRepo.GetList());
         }
+
+        [HttpPost]
+        public IActionResult AddLocation(double lat, double lon)
+        {
+            //_LocationRepo.Insert(lat,lon); //this wont work until add proc
+            return View(_LocationRepo.GetList());
+        }
+
     }
 }

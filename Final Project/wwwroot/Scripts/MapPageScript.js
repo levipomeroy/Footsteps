@@ -1,12 +1,4 @@
-﻿src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
-
-//This really isnt a page page script, it should be moved to another file for the default layout to use
-//$(document).ready(function () {
-//    $('#sidebarCollapse').on('click', function () {
-//        $('#sidebar').toggleClass('active');
-//        $(this).toggleClass('active');
-//    });
-//});
+﻿src = "https://code.jquery.com/jquery-3.3.1.slim.min.js";
 
 /**********************************************************************
  * Purpose: This function creates the initial map object and sets the
@@ -103,20 +95,19 @@ function initMap() {
     });
 
     //Add all locations from model to the map
-    
-    //var LocList = Json(@Model.LocationList);
-   // var LocList = Url.Action("GetLocationList", "Home", null, Request.Url.Scheme);
 
-    //var LocList;
+    //var LocList = {};
     //$.ajax({
-    //    url: '@Url.Action("~/HomeController/GetLocationList")',
+    //    url: '("GetLocationList")',
     //    type: 'GET',
-    //    cache: false,
-    //    data: {},
-    //    success: function (data) {
-    //        alert(JSON.stringify(data));
-    //        //LocList = JSON.stringify(data);
-    //    }
+    //    data: {}
+    //}).done(function (data) {
+    //    // alert(JSON.stringify(data));
+    //    LocList = data;
+    //    });
+
+    //$.get('@Url.Action("GetLocationList", "Home")', function (data) {
+    //    LocList = data;
     //});
     var i;
     for (i = 0; i < LocList.length; i++) {
@@ -143,7 +134,7 @@ function RemoveMarkerForSearchedPlace() {
     document.getElementById('SearchBar').value = '';
 }
 
-function AddMarkerForSearchedPlace() {
+//function AddMarkerForSearchedPlace() {
     //alert("working");
     //var url = "@Url.Action('Index','Home')";
     //var myModel;
@@ -157,7 +148,7 @@ function AddMarkerForSearchedPlace() {
     //    url: url,
     //    contentType: "application/json"
     //});
-}
+//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.

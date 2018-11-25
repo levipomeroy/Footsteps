@@ -7,30 +7,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Final_Project.Repositories
 {
     public class ContactRepository : IContactRepository
     {
-        SqlConnection connection;
-        public ContactRepository()
+        private Settings _MySettings;
+
+        public ContactRepository(IOptions<Settings> settings)
         {
-            connection = new SqlConnection(new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build()
-            .GetConnectionString("DefaultConnection"));
+            _MySettings = settings.Value;
         }
 
         public List<ContactModel> GetList()
         {
             List<ContactModel> Messages = new List<ContactModel>();
-            using (connection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
-                using (SqlCommand command = new SqlCommand("Messages_GetList", connection))
+                using (SqlCommand command = new SqlCommand("Messages_GetList", newConnection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                    newConnection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -52,16 +50,16 @@ namespace Final_Project.Repositories
 
         public void Insert(ContactModel model)
         {
-            using (connection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
-                using (SqlCommand command = new SqlCommand("Messages_Insert", connection))
+                using (SqlCommand command = new SqlCommand("Messages_Insert", newConnection))
                 {
                     command.Parameters.AddWithValue("@Name", model.UserName);
                     command.Parameters.AddWithValue("@Type", model.Type);
                     command.Parameters.AddWithValue("@Message", model.Message);
 
                     command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                    newConnection.Open();
                     command.ExecuteNonQuery();
                 }
             }

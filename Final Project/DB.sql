@@ -30,7 +30,9 @@ create procedure Location_Insert (
 as
 insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category)
 VALUES (@Country, @StateCode, @City, @ZipCode, @Address, @Latitude, @Longitude, @Name, @Description, @Category)
+
 go
+
 create procedure Location_Insert_Min (
 	@Latitude DOUBLE PRECISION,
 	@Longitude DOUBLE PRECISION,
@@ -48,6 +50,7 @@ AS
 Select * from Locations;
 
 go
+
 --Test Locations
 delete from Locations;
 go
@@ -58,7 +61,9 @@ insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Long
 values('United States', 'DC', 'Washington DC', '20500', '1600 Pennsylvania Ave NW', 38.897663, -77.036575, 'The White House', 'Where the president lives', 2)
 go
 select * from Locations;
+
 go
+
 create table [Messages]
 (
 	ID int not null primary key identity(1,1),
@@ -66,11 +71,15 @@ create table [Messages]
 	[Type] varchar(15),
 	[Message] varchar(1000)
 )
+
 go
+
 create procedure Messages_GetList
 as 
 select * from [Messages];
+
 go
+
 create procedure Messages_Insert (
 	@Name varchar(25),
 	@Type varchar(15),
@@ -79,15 +88,21 @@ create procedure Messages_Insert (
 as
 insert into Messages([Name], [Type], [Message])
 values(@Name, @Type, @Message)
+
 go
+
 select * from  Messages;
+
 go
+
 create table UserList
 (
 	ID int not null primary key identity(1,1),
 	[Name] varchar(50) 
 )
+
 go
+
 create table UserListItem
 (
 	ID int not null primary key identity(1,1),
@@ -96,13 +111,29 @@ create table UserListItem
 	IsChecked bit
 )
 go
+delete from UserListItem;
+go
 delete from UserList;
+
+go
+
 Insert into UserList ([Name]) values ('Bucket List');
 Insert into UserList ([Name]) values ('Trips this year');
+
 go
+
+delete from UserList;
+
+go
+
 select * from UserList;
+
 go
+
 delete from UserListItem;
+
+go
+
 insert into UserListItem (ListID, Item, IsChecked) values (3, 'Visit Greece', 0);
 insert into UserListItem (ListID, Item, IsChecked) values (3, 'See the Pyramids in Egypt', 0);
 insert into UserListItem (ListID, Item, IsChecked) values (3, 'Snorkel in the Bahamas', 0);
@@ -112,6 +143,9 @@ insert into UserListItem (ListID, Item, IsChecked) values (3, 'Climb to the top 
 
 insert into UserListItem (ListID, Item, IsChecked) values (4, 'Go to the coast', 0);
 insert into UserListItem (ListID, Item, IsChecked) values (4, 'Visit Seattle, WA', 0);
+
+go
+
 select * from UserListItem;
 
 go
@@ -130,6 +164,3 @@ as
 select * from UserListItem where ListID = @ListID;
 
 go
-
-
-

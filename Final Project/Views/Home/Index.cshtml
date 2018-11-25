@@ -1,5 +1,9 @@
 ﻿@using Final_Project.Models
 @model LocationModel
+
+<head>
+    <title>Map</title>
+</head>
 <!-- Page Content -->
 <div id="content" class="grid">
     <div id="ActionBarMap">
@@ -20,20 +24,37 @@
         async defer></script>
 
 <script>
-     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
-    @*$.get("@Url.Action("GetLocationList", "Home")")*@
-
-@*$.ajax({
-      url: '@Url.Action("GetLocationList")',
-      type: 'GET',
-      cache: false,
-    data: {},
-    success: function (data) {
-        //alert(JSON.stringify(data));
-        var LocList = JSON.stringify(data);
-    }
+    @*var LocList = {};
+    $.get('@Url.Action("GetLocationList", "Home")', function (data) {
+        LocList = data;
     });*@
 
+    var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
+    //var LocList;
+
+    @*$.get("@Url.Action("GetLocationList", "Home")")*@
+
+        @*$.ajax({
+            url: '@Url.Action("GetLocationList")',
+            type: 'GET',
+            data: { }
+        }).done(function (data) {
+            // alert(JSON.stringify(data));
+            LocList = data;
+        });*@
+
+    function AddMarkerForSearchedPlace() {
+        $.ajax({
+            url: '@Url.Action("AddLocation")',
+            type: 'POST',
+            data: { lat: autocomplete.getPlace().latLng.Latitude, lon: autocomplete.getPlace().latLng.Longitude}
+        }).done(function (data) {
+             alert(JSON.stringify(data));
+           // LocList = data;
+        });
+    }
+
 </script>
+
 
 <script src="~/Scripts/MapPageScript.js"></script>

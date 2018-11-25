@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 using Final_Project.BusinessObjects;
 using Final_Project.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Final_Project.Repositories
 {
     public class LocationRepository : ILocationRepository
     {
-        SqlConnection connection;
-        public LocationRepository()
+        private Settings _MySettings;
+
+        public LocationRepository(IOptions<Settings> settings)
         {
-            connection = new SqlConnection(new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build()
-            .GetConnectionString("DefaultConnection"));
+            _MySettings = settings.Value;
         }
 
         public void Delete(LocationObject location)
@@ -36,12 +34,12 @@ namespace Final_Project.Repositories
         public List<LocationObject> GetList()
         {
             List<LocationObject> Locations = new List<LocationObject>();
-            using (connection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
-                using (SqlCommand command = new SqlCommand("Location_GetList", connection))
+                using (SqlCommand command = new SqlCommand("Location_GetList", newConnection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                    newConnection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -71,9 +69,9 @@ namespace Final_Project.Repositories
 
         public void Insert(LocationModel location)
         {
-            using (connection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
-                using (SqlCommand command = new SqlCommand("Location_Insert", connection))
+                using (SqlCommand command = new SqlCommand("Location_Insert", newConnection))
                 {
                     command.Parameters.AddWithValue("@Country", location.Country);
                     command.Parameters.AddWithValue("@StateCode", location.StateCode);
@@ -87,7 +85,7 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@Category", location.Category);
 
                     command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                    newConnection.Open();
                     command.ExecuteNonQuery();
                 }
             }

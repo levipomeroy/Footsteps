@@ -7,31 +7,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Final_Project.Repositories
 {
     public class ListRepository : IListRepository
     {
-        SqlConnection connection;
-        public ListRepository()
+        private Settings _MySettings;
+
+        public ListRepository(IOptions<Settings> settings)
         {
-            connection = new SqlConnection(new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build()
-            .GetConnectionString("DefaultConnection"));
+            _MySettings = settings.Value;
         }
 
         public List<UserListItem> GetUserListItems(int ListID)
         {
-            SqlConnection newConnection = new SqlConnection(new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build()
-            .GetConnectionString("DefaultConnection"));
-
             List<UserListItem> UserListsItems = new List<UserListItem>();
-            using (newConnection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
                 using (SqlCommand command = new SqlCommand("Get_List_Items", newConnection))
                 {
@@ -62,12 +54,12 @@ namespace Final_Project.Repositories
         public List<UserListModel> GetUserLists()
         {
             List<UserListModel> UserLists = new List<UserListModel>();
-            using (connection)
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
-                using (SqlCommand command = new SqlCommand("Get_Lists", connection))
+                using (SqlCommand command = new SqlCommand("Get_Lists", newConnection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                    newConnection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
