@@ -1,4 +1,6 @@
-﻿create table Locations 
+﻿drop table Locations;
+go
+create table Locations 
 (
 	ID int not null primary key identity(1,1),
 	Country varchar(50),
@@ -11,10 +13,12 @@
 	[Name] varchar(50),
 	[Description] varchar(1000),
 	Category int,
+	UserID varchar(100)
 );
 
 go
-
+drop procedure Location_Insert;
+go
 create procedure Location_Insert (
 	@Country varchar(50),
 	@StateCode varchar(2),
@@ -25,11 +29,12 @@ create procedure Location_Insert (
 	@Longitude DOUBLE PRECISION,
 	@Name varchar(50),
 	@Description varchar(1000),
-	@Category int
+	@Category int,
+	@UserID varchar(100)
 )
 as
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category)
-VALUES (@Country, @StateCode, @City, @ZipCode, @Address, @Latitude, @Longitude, @Name, @Description, @Category)
+insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
+VALUES (@Country, @StateCode, @City, @ZipCode, @Address, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
 
 go
 
@@ -44,21 +49,24 @@ insert into Locations(Latitude, Longitude, Name, Description)
 VALUES (@Latitude, @Longitude, @Name, @Description)
 
 go
-
-create procedure Location_GetList
+drop procedure Location_GetList;
+go
+create procedure Location_GetList(
+	@UserID varchar(100)
+)
 AS
-Select * from Locations;
+Select * from Locations where UserID = @UserID;
 
 go
 
 --Test Locations
 delete from Locations;
 go
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category)
-values('United States', 'OR', 'Klamath Falls', '97603', '3201 Campus Dr', 42.254300, -121.782270, 'OIT', 'My School', 1)
+insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
+values('United States', 'OR', 'Klamath Falls', '97603', '3201 Campus Dr', 42.254300, -121.782270, 'OIT', 'My School', 1, '219c4b40-278d-49df-adeb-d8b30351ea11')
 go
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category)
-values('United States', 'DC', 'Washington DC', '20500', '1600 Pennsylvania Ave NW', 38.897663, -77.036575, 'The White House', 'Where the president lives', 2)
+insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
+values('United States', 'DC', 'Washington DC', '20500', '1600 Pennsylvania Ave NW', 38.897663, -77.036575, 'The White House', 'Where the president lives', 2, '219c4b40-278d-49df-adeb-d8b30351ea11')
 go
 select * from Locations;
 
@@ -164,3 +172,19 @@ as
 select * from UserListItem where ListID = @ListID;
 
 go
+drop procedure GetNumberOfLocations;
+go
+create procedure GetNumberOfLocations(
+	@UserID varchar(100)
+)
+as
+select count(ID) LocCount from Locations where UserID = @UserID ;
+
+go
+-----------------------------------------------------
+select * from sys.objects 
+order by create_date desc;
+
+select * from AspNetUsers;
+
+-----------------------------------------------------

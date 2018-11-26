@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Final_Project.BusinessObjects;
 using Final_Project.Models;
 using Final_Project.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private ILocationRepository _LocationRepo;
@@ -20,8 +22,10 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+           // string name = User.Identity.Name;
+            string ID = User.Claims.ElementAt(0).Value;
             LocationModel locationModel = new LocationModel();
-            locationModel.LocationList = _LocationRepo.GetList();
+            locationModel.LocationList = _LocationRepo.GetList(ID);
 
             return View(locationModel);
         }
@@ -38,14 +42,18 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult GetLocationList()
         {
-            return Json(_LocationRepo.GetList());
+            string ID = User.Claims.ElementAt(0).Value;
+
+            return Json(_LocationRepo.GetList(ID));
         }
 
         [HttpPost]
         public IActionResult AddLocation(double lat, double lon)
         {
             //_LocationRepo.Insert(lat,lon); //this wont work until add proc
-            return View(_LocationRepo.GetList());
+            string ID = User.Claims.ElementAt(0).Value;
+
+            return View(_LocationRepo.GetList(ID));
         }
 
     }

@@ -9,9 +9,11 @@ namespace Final_Project.Repositories
 {
     public interface ILocationRepository
     {
-        List<LocationObject> GetList();
+        List<LocationObject> GetList(string UserID);
         void Insert(LocationModel location);
         void Delete(LocationObject location);
         void Edit(LocationObject location);
+
+        int GetNumberOfLocationsForUser(string UserId);
     }
 }

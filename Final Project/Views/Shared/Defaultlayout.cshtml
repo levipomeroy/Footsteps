@@ -62,7 +62,7 @@
                     <a href="../UserList/Index"><i class="fas fa-list-ul"></i> Lists</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-user-circle"></i> Account</a>
+                    <a href="../Account/Index"><i class="fas fa-user-circle"></i> Account</a>
                 </li>
                 <li>
                     <a href="../Contact/Index"><i class="fas fa-at"></i> Contact</a>
@@ -70,7 +70,10 @@
             </ul>
         </nav>
         <!-- Page Content will go here -->
+
         @RenderBody()
+        @*<partial name="_LoginPartial" />*@
+        @*@RenderSection("Scripts", false)*@
         <!------------------------------->
     </div>
 </body>

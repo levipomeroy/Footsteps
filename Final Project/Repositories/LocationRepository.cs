@@ -31,13 +31,15 @@ namespace Final_Project.Repositories
             throw new NotImplementedException();
         }
 
-        public List<LocationObject> GetList()
+        public List<LocationObject> GetList(string UserID)
         {
             List<LocationObject> Locations = new List<LocationObject>();
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
                 using (SqlCommand command = new SqlCommand("Location_GetList", newConnection))
                 {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();
 
@@ -83,12 +85,39 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@Name", location.Name);
                     command.Parameters.AddWithValue("@Description", location.Description);
                     command.Parameters.AddWithValue("@Category", location.Category);
+                    command.Parameters.AddWithValue("@UserID", location.UserID);
+
 
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public int GetNumberOfLocationsForUser(string UserId)
+        {
+            int numLocations = 0;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetNumberOfLocations", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserId);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            numLocations = (int)reader["LocCount"];
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return numLocations;
         }
     }
 }

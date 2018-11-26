@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Final_Project.Models;
 using Final_Project.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project.Controllers
 {
+    [Authorize]
     public class UserListController : Controller
     {
         IListRepository _ListRepo;

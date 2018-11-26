@@ -24,18 +24,11 @@ namespace Final_Project
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<IListRepository, ListRepository>();
 
-
-            //var myconfig = new ConfigurationBuilder()
-            // .SetBasePath(Directory.GetCurrentDirectory())
-            // .AddJsonFile("treatersSettings.json", optional: false, reloadOnChange: true)
-            // .Build();
-
-
+            //Set u settings for connectionstring
             var MyConfig = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
-            //.GetConnectionString("DefaultConnection");
 
             services.Configure<Settings>(MyConfig);
         }
@@ -44,7 +37,7 @@ namespace Final_Project
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
             if (env.IsDevelopment())

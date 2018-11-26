@@ -38,5 +38,7 @@ namespace Final_Project.Models
         public int Category { get; set; }
 
         public List<LocationObject> LocationList { get; set; }
+
+        public string UserID { get; set; }
     }
 }

@@ -7,6 +7,7 @@
 var map;
 var marker;
 var centerOfTheWorld;
+//var counter = 0;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
@@ -85,13 +86,14 @@ function initMap() {
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
             }
         });
-        marker200.addListener('click', function () {
-            infowindow.open(map, marker200);
-        });
-
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
+        marker200.addListener('click', function () {
+            infowindow.open(map, marker200);
+        });
+        //LocList.push(marker200);
+        //counter = LocList.length + 1;
     });
 
     //Add all locations from model to the map
