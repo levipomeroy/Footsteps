@@ -22,12 +22,18 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-           // string name = User.Identity.Name;
-            string ID = User.Claims.ElementAt(0).Value;
-            LocationModel locationModel = new LocationModel();
-            locationModel.LocationList = _LocationRepo.GetList(ID);
+            if (User.Identity.IsAuthenticated)
+            {
+                string ID = User.Claims.ElementAt(0).Value;
+                LocationModel locationModel = new LocationModel();
+                locationModel.LocationList = _LocationRepo.GetList(ID);
 
-            return View(locationModel);
+                return View(locationModel);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
@@ -42,13 +48,19 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult GetLocationList()
         {
-            string ID = User.Claims.ElementAt(0).Value;
-
-            return Json(_LocationRepo.GetList(ID));
+            if (User.Identity.IsAuthenticated)
+            {
+                string ID = User.Claims.ElementAt(0).Value;
+                return Json(_LocationRepo.GetList(ID));
+            }
+            else
+            {
+                return Json(null);
+            }
         }
 
         [HttpPost]
-        public IActionResult AddLocation(double lat, double lon)
+        public IActionResult AddLocation(double lat, double lon) //not used yet
         {
             //_LocationRepo.Insert(lat,lon); //this wont work until add proc
             string ID = User.Claims.ElementAt(0).Value;

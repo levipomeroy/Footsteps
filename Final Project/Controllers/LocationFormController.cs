@@ -29,7 +29,7 @@ namespace Final_Project.Controllers
         public IActionResult Index(LocationModel loc)
         {
             //insert into DB 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
                 loc.UserID = User.Claims.ElementAt(0).Value;
                 _LocationRepo.Insert(loc);

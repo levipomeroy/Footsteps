@@ -20,9 +20,15 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
-            int num = _LocationRepo.GetNumberOfLocationsForUser(User.Claims.ElementAt(0).Value);
-            return View(num);
+            if (User.Identity.IsAuthenticated)
+            {
+                int num = _LocationRepo.GetNumberOfLocationsForUser(User.Claims.ElementAt(0).Value);
+                return View(num);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

@@ -21,29 +21,44 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var UserLists = _ListRepo.GetUserLists();
-            foreach (var list in UserLists)
+            if (User.Identity.IsAuthenticated)
             {
-                list.ItemsList = _ListRepo.GetUserListItems(list.ID);
-            }
+                var UserLists = _ListRepo.GetUserLists();
+                foreach (var list in UserLists)
+                {
+                    list.ItemsList = _ListRepo.GetUserListItems(list.ID);
+                }
 
-            return View(UserLists);
+                return View(UserLists);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public IActionResult Index(UserListModel model)
         {
-            //model.Selected = true;
-            var UserLists = _ListRepo.GetUserLists();
-            foreach (var list in UserLists)
+            if (User.Identity.IsAuthenticated)
             {
-                list.ItemsList = _ListRepo.GetUserListItems(list.ID);
-                if (list.ID == model.ID)
+                var UserLists = _ListRepo.GetUserLists();
+                foreach (var list in UserLists)
                 {
-                    list.Selected = true;
+                    list.ItemsList = _ListRepo.GetUserListItems(list.ID);
+                    if (list.ID == model.ID)
+                    {
+                        list.Selected = true;
+                    }
                 }
+                return View(UserLists);
             }
-            return View(UserLists);
+            else
+            {
+                return View();
+            }
         }
     }
 }

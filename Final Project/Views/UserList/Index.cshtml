@@ -28,6 +28,8 @@
                     {
                         @*<p>@Model[i].Name</p>*@
                     <form asp-action="Index" asp-controller="UserList" method="post">
+                        @Html.AntiForgeryToken()
+
                         <input type="hidden" id="id" name="id" asp-for="@Model[i].ID" />
                         <input type="hidden" id="Name" name="Name" asp-for="@Model[i].Name" />
                         @for (int j = 0; j < Model[i].ItemsList.Count(); j++)

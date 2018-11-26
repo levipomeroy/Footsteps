@@ -22,18 +22,22 @@ namespace Final_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ContactModel model = new ContactModel();
-            return View(model);
+            if (User.Identity.IsAuthenticated)
+            {
+                ContactModel model = new ContactModel();
+                return View(model);
+            }
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Index(ContactModel model)
         {
-            //send email to me 
+            //send email to me w/ user email who submitted message - future addition
 
             //store in db
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
                 ModelState.Clear();
                 _ContactRepo.Insert(model);
