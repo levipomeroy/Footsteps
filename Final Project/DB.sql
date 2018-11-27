@@ -183,8 +183,14 @@ select count(ID) LocCount from Locations where UserID = @UserID ;
 go
 -----------------------------------------------------
 select * from sys.objects 
+where type_desc = 'USER_TABLE'
 order by create_date desc;
 
 select * from AspNetUsers;
+select * from AspNetRoles;
+select * from AspNetUserTokens;
+select * from AspNetUserLogins;
+select * from AspNetUserClaims;
+select * from AspNetRoleClaims;
 
 -----------------------------------------------------

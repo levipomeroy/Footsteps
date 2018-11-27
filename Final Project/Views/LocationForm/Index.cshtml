@@ -4,6 +4,17 @@
     <title>Add Location</title>
 </head>
 
+@*@{ 
+    var Success = ViewBag.LocationAddSuccess;
+}
+
+<script>
+    var message = '@Success';
+    if (message == true) {
+        alert("Added location successfully");
+    }
+</script>*@
+
 <div id="content" class="container grid">
     <div id="ActionBar">
         <div class="row">

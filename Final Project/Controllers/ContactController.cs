@@ -6,10 +6,12 @@ using Final_Project.Models;
 using Final_Project.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace Final_Project.Controllers
 {
     [Authorize]
+    //[InitializeSimpleMembership]
     public class ContactController : Controller
     {
         private IContactRepository _ContactRepo;
@@ -24,10 +26,28 @@ namespace Final_Project.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ContactModel model = new ContactModel();
-                return View(model);
+                //if (User.IsInRole("Admins"))
+                //{
+                //    ContactModel model = new ContactModel();
+                //    return View("AdminContact", model);
+                //}
+                //else
+                //{
+                    ContactModel model = new ContactModel();
+                    return View(model);
+                //}
             }
             return View();
+        }
+
+        //[Authorize(Roles = "ADMINS")]
+        [HttpGet]
+        public IActionResult AdminContact()
+        {
+            var Messages = _ContactRepo.GetList();
+
+            //ContactModel model = new ContactModel();
+            return View(Messages);
         }
 
         [HttpPost]

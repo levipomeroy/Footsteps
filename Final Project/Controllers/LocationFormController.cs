@@ -28,14 +28,16 @@ namespace Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(LocationModel loc)
         {
+            ViewBag.LocationAddSuccess = false;
             //insert into DB 
             if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
                 loc.UserID = User.Claims.ElementAt(0).Value;
                 _LocationRepo.Insert(loc);
                 ModelState.Clear();
+                ViewBag.LocationAddSuccess = true;
             }
-
+            
             return View();
         }
     }
