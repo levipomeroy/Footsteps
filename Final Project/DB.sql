@@ -71,6 +71,17 @@ go
 select * from Locations;
 
 go
+drop procedure Remove_Location;
+go
+create procedure Remove_Location
+(
+	@Latitude DOUBLE PRECISION,
+	@Longitude DOUBLE PRECISION
+)
+as
+delete from Locations where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
+go
+
 
 create table [Messages]
 (

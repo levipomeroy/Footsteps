@@ -24,34 +24,20 @@
         async defer></script>
 
 <script>
-    @*var LocList = {};
-    $.get('@Url.Action("GetLocationList", "Home")', function (data) {
-        LocList = data;
-    });*@
-
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
-    //var LocList;
 
-    @*$.get("@Url.Action("GetLocationList", "Home")")*@
-
-        @*$.ajax({
-            url: '@Url.Action("GetLocationList")',
-            type: 'GET',
-            data: { }
-        }).done(function (data) {
-            // alert(JSON.stringify(data));
-            LocList = data;
-        });*@
-
-    function AddMarkerForSearchedPlace() {
+    function RemoveMarkerFromMap(id) {
         $.ajax({
-            url: '@Url.Action("AddLocation")',
+            //url: '/HomeController/Remove_Location',
+            url: '@Url.Action("Remove_Location", "Home")',
             type: 'POST',
-            data: { lat: autocomplete.getPlace().latLng.Latitude, lon: autocomplete.getPlace().latLng.Longitude}
-        }).done(function (data) {
-             alert(JSON.stringify(data));
-           // LocList = data;
+            data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },
+            success: function () {
+                   //do something on success
+            }
         });
+
+        //alert('hi'); //used for testing if got here
     }
 
 </script>

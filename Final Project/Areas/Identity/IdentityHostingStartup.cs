@@ -20,20 +20,28 @@ namespace Final_Project.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("Final_ProjectContextConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequiredLength = 8;
-                    options.Password.RequiredUniqueChars = 1;
-                })
-                .AddRoles<IdentityRole>()
+                //services.AddDefaultIdentity<IdentityUser>(options =>
+                //{
+                //    options.Password.RequireDigit = false;
+                //    options.Password.RequireLowercase = false;
+                //    options.Password.RequireNonAlphanumeric = false;
+                //    options.Password.RequireUppercase = true;
+                //    options.Password.RequiredLength = 8;
+                //    options.Password.RequiredUniqueChars = 1;
+                //})
+                //.AddRoles<IdentityRole>()
+                //.AddRoleManager<RoleManager<IdentityRole>>()
+                //.AddDefaultUI()
+                //.AddDefaultTokenProviders()
+                //.AddEntityFrameworkStores<Final_ProjectContext>();
+
+
+                services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<Final_ProjectContext>();
+
 
             });
         }

@@ -21,9 +21,20 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
-        public void Delete(LocationObject location)
+        public void Delete(double lat, double lon)
         {
-            throw new NotImplementedException();
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("Remove_Location", newConnection))
+                {
+                    command.Parameters.AddWithValue("@Latitude", lat);
+                    command.Parameters.AddWithValue("@Longitude", lon);
+ 
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Edit(LocationObject location)

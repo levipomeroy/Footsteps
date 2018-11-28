@@ -11,7 +11,7 @@ namespace Final_Project.Repositories
     {
         List<LocationObject> GetList(string UserID);
         void Insert(LocationModel location);
-        void Delete(LocationObject location);
+        void Delete(double lat, double lon);
         void Edit(LocationObject location);
 
         int GetNumberOfLocationsForUser(string UserId);

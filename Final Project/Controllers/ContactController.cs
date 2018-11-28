@@ -40,7 +40,7 @@ namespace Final_Project.Controllers
             return View();
         }
 
-        //[Authorize(Roles = "ADMINS")]
+        [Authorize(Roles = "Admins")]
         [HttpGet]
         public IActionResult AdminContact()
         {

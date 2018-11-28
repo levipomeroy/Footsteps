@@ -68,5 +68,15 @@ namespace Final_Project.Controllers
             return View(_LocationRepo.GetList(ID));
         }
 
+        [HttpPost]
+        //[AcceptVerbs]
+        public IActionResult Remove_Location(double lat, double lon)
+        {
+            _LocationRepo.Delete(lat, lon);
+
+            string ID = User.Claims.ElementAt(0).Value;
+            return View(_LocationRepo.GetList(ID));
+            //return null;
+        }
     }
 }

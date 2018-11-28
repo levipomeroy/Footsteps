@@ -7,6 +7,8 @@
 var map;
 var marker;
 var centerOfTheWorld;
+var infowindow = null;
+var MarkerList = [];
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 32.854980, lng: 0 }, //centerish of the world
@@ -94,42 +96,53 @@ function initMap() {
     });
 
     //Add all locations from model to the map
-    //var LocList = {};
-    //$.ajax({
-    //    url: '("GetLocationList")',
-    //    type: 'GET',
-    //    data: {}
-    //}).done(function (data) {
-    //    // alert(JSON.stringify(data));
-    //    LocList = data;
-    //    });
-
-    var MarkerList = [];
     var i;
     for (i = 0; i < LocList.length; i++) {
+        AddMarker(LocList[i].latitude, LocList[i].longitude, LocList[i].name, i);
+    }
+
+    function AddMarker(latitude, longitude, MarkerTitle, index) {
+        var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
+
         var tempMarker = new google.maps.Marker({
-            position: { lat: LocList[i].latitude, lng: LocList[i].longitude },
+            position: { lat: latitude, lng: longitude },
             map: map,
             icon: {
                 url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
             },
-            title: LocList[i].name
+            title: MarkerTitle,
+            id: index
         });
+
+        google.maps.event.addListener(tempMarker, 'click', function () {
+            //Remove all other visible infowindows when this marker is clicked
+            if (infowindow) {
+                infowindow.close();
+            }
+            infowindow = new google.maps.InfoWindow({
+                content: InfoWindowContent
+            });
+            //show infowindow
+            infowindow.open(map, this);
+        });
+
         MarkerList.push(tempMarker);
     }
-
-    //Create the main/default infowindow
-    var MainInfoWindow = new google.maps.InfoWindow({
-        content: 'test window'
-    });
-
-    //Add InfoWindow onclick for each marker on the map
-    for (i = 0; i < MarkerList.length; i++) {
-        google.maps.event.addListener(MarkerList[i], 'click', function () {
-            MainInfoWindow.open(map, this);
-        });
-    }
 }
+
+//function RemoveMarkerFromMap(id) {
+//    //alert(MarkerList[id].getPosition().lat());
+
+//    $.ajax({
+//        type: "POST",
+//        url: 'Home/Remove_Location',
+//        data: { 'lat': MarkerList[id].getPosition().lat(), 'lon': MarkerList[id].getPosition().lon() },
+//        dataType: "json"
+//    });
+
+
+//    alert('hi');
+//}
 
 /**********************************************************************
  * Purpose: This function removes the serached marker from the map, clears 
