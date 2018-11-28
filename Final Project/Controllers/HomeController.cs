@@ -75,7 +75,8 @@ namespace Final_Project.Controllers
             _LocationRepo.Delete(lat, lon);
 
             string ID = User.Claims.ElementAt(0).Value;
-            return View(_LocationRepo.GetList(ID));
+            //return View(_LocationRepo.GetList(ID));
+            return View("Index");
             //return null;
         }
     }

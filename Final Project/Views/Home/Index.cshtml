@@ -32,12 +32,10 @@
             url: '@Url.Action("Remove_Location", "Home")',
             type: 'POST',
             data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },
-            success: function () {
-                   //do something on success
-            }
         });
 
-        //alert('hi'); //used for testing if got here
+        MarkerList[id].setMap(null);
+
     }
 
 </script>
