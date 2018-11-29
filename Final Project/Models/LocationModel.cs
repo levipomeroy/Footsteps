@@ -13,10 +13,6 @@ namespace Final_Project.Models
         public int ID { get; set; }
 
         public string Country { get; set; }
-        public string StateCode { get; set; }
-        public string City { get; set; }
-        public string ZipCode { get; set; }
-        public string Address { get; set; }
 
         [Required(ErrorMessage = "Latitude is a required field")]
         [RegularExpression("\\-?\\d+(\\.\\d+)?", ErrorMessage = "Latitude must be of the form +-xx.xxxxxx")]

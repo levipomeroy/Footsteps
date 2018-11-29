@@ -62,10 +62,6 @@ namespace Final_Project.Repositories
                             LocationObject location = new LocationObject();
                             location.ID = (int)reader["ID"];
                             location.Country = reader["Country"].ToString();
-                            location.StateCode = reader["StateCode"].ToString();
-                            location.City = reader["City"].ToString();
-                            location.ZipCode = reader["ZipCode"].ToString();
-                            location.Address = reader["Address"].ToString();
                             location.Latitude =(double)reader["Latitude"];
                             location.Longitude = (double)reader["Longitude"];
                             location.Name = reader["Name"].ToString();
@@ -88,10 +84,6 @@ namespace Final_Project.Repositories
                 using (SqlCommand command = new SqlCommand("Location_Insert", newConnection))
                 {
                     command.Parameters.AddWithValue("@Country", location.Country);
-                    command.Parameters.AddWithValue("@StateCode", location.StateCode);
-                    command.Parameters.AddWithValue("@City", location.City);
-                    command.Parameters.AddWithValue("@ZipCode", location.ZipCode);
-                    command.Parameters.AddWithValue("@Address", location.Address);
                     command.Parameters.AddWithValue("@Latitude", location.Latitude);
                     command.Parameters.AddWithValue("@Longitude", location.Longitude);
                     command.Parameters.AddWithValue("@Name", location.Name);

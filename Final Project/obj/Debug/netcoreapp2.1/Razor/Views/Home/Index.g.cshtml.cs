@@ -50,7 +50,7 @@ using Final_Project.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(53, 39, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8eb1852c8ee47dfa829d9dfe75b0639", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b5e2d3d60c0d48ccaa023d2ee1f589f2", async() => {
                 BeginContext(59, 26, true);
                 WriteLiteral("\r\n    <title>Map</title>\r\n");
                 EndContext();
@@ -111,7 +111,7 @@ using Final_Project.Models;
             WriteLiteral("\', //either url works \r\n            type: \'POST\',\r\n            data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },\r\n        });\r\n\r\n        MarkerList[id].setMap(null);\r\n    }\r\n</script>\r\n\r\n\r\n");
             EndContext();
             BeginContext(1368, 50, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f33f8e4c2f9453e99e591f7e1b19195", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "490de2aaf4f14c4e97f21099272856be", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

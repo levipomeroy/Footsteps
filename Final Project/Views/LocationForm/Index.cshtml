@@ -4,17 +4,6 @@
     <title>Add Location</title>
 </head>
 
-@*@{ 
-    var Success = ViewBag.LocationAddSuccess;
-}
-
-<script>
-    var message = '@Success';
-    if (message == true) {
-        alert("Added location successfully");
-    }
-</script>*@
-
 <div id="content" class="container grid">
     <div id="ActionBar">
         <div class="row">
@@ -48,17 +37,14 @@
                 <input id="Country" name="Country" type="hidden" asp-for="Country" class="form-control" placeholder="Country" />
                 <span asp-validation-for="Country"> </span>
 
-                <input id="City" name="City" type="hidden" asp-for="City" class="form-control" placeholder="City" />
-                <span asp-validation-for="City"> </span>
-
-                <input id="StateCode" name="StateCode" type="hidden" asp-for="StateCode" class="form-control" placeholder="State" />
+                @*<input id="StateCode" name="StateCode" type="hidden" asp-for="StateCode" class="form-control" placeholder="State" />
                 <span asp-validation-for="StateCode"> </span>
 
                 <input id="ZipCode" name="ZipCode" type="hidden" asp-for="ZipCode" class="form-control" placeholder="Zip Code" />
                 <span asp-validation-for="ZipCode"> </span>
 
                 <input id="Address" name="Address" type="hidden" asp-for="Address" class="form-control" placeholder="Address" />
-                <span asp-validation-for="Address"> </span>
+                <span asp-validation-for="Address"> </span>*@
 
                 <input id="Category" name="AddCategoryress" type="hidden" asp-for="Category" class="form-control" placeholder="Category" />
                 <span asp-validation-for="Category"> </span>

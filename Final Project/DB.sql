@@ -7,10 +7,6 @@ create table Locations
 (
 	ID int not null primary key identity(1,1),
 	Country varchar(50),
-	StateCode varchar(2),
-	City varchar(50),
-	ZipCode varchar(10),
-	[Address] varchar(100),
 	Latitude DOUBLE PRECISION,
 	Longitude DOUBLE PRECISION,
 	[Name] varchar(50),
@@ -23,10 +19,6 @@ drop procedure Location_Insert;
 go
 create procedure Location_Insert (
 	@Country varchar(50),
-	@StateCode varchar(2),
-	@City varchar(50),
-	@ZipCode varchar(10),
-	@Address varchar(100),
 	@Latitude DOUBLE PRECISION,
 	@Longitude DOUBLE PRECISION,
 	@Name varchar(50),
@@ -35,8 +27,8 @@ create procedure Location_Insert (
 	@UserID varchar(100)
 )
 as
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
-VALUES (@Country, @StateCode, @City, @ZipCode, @Address, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
+insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID)
+VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
 go
 drop procedure Location_GetList;
 go
