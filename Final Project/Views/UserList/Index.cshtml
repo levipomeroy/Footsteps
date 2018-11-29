@@ -95,8 +95,9 @@
                 type: 'POST',
                 data: { ID: SelectedListID, Item: Item },
             });
+
+            document.getElementById("ItemBody").innerHTML += "<div>" + Item + "</div>";
         }
-        document.getElementById("ItemBody").innerHTML += "<div>" + Item + "</div>";
 
         //alert(SelectedListID);
     }
