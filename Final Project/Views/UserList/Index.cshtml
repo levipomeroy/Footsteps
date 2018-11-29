@@ -2,14 +2,12 @@
 @using Final_Project.BusinessObjects
 @model List<UserListModel>
 
-
 <head>
     <title>Lists</title>
     <link href="~/Styles/UserListStyle.css" rel="stylesheet" />
 </head>
 
-
-<!-- Page Content -->
+<!-- Nav drawer-->
 <div id="content" class="container grid">
     <div id="ActionBar">
         <div class="row">
@@ -20,11 +18,13 @@
             </button>
         </div>
     </div>
+    <!-- Page Content -->
     <div class="row" id="ListContent">
         <div class="col-4">
             <div class="card">
-                <div class="card-header">Lists 
-                <button id="AddListBtn" type="button" onclick="AddList()" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                <div class="card-header">
+                    Lists
+                    <button id="AddListBtn" type="button" onclick="AddList()" class="btn btn-default"><i class="fas fa-plus"></i></button>
                 </div>
                 <div id="ListOfLists" class="card-body">
                     @for (int i = 0; i < Model.Count(); i++)
@@ -38,7 +38,8 @@
         </div>
         <div class="col-8">
             <div class="card">
-                <div id="ItemHeader" class="card-header"> List Items
+                <div id="ItemHeader" class="card-header">
+                    List Items
                     <button id="AddListItemBtn" onclick="AddListItem()" type="button" class="btn btn-default"><i class="fas fa-plus"></i></button>
                 </div>
                 <div id="ItemBody" class="card-body">
@@ -49,57 +50,5 @@
     </div>
 </div>
 
-<script>
-    var SelectedListID = null;
-
-    function AddList() {
-        //Get new list name
-        var Name = prompt("Enter the list name", "i.e. Bucket List");
-        //Store new list name in DB via service call
-        if (Name != null) {
-            $.ajax({
-                url: '@Url.Action("AddList", "UserList")',
-                type: 'POST',
-                data: { Name: Name },
-            });
-            //update list of lists with new list name 
-            document.getElementById("ListOfLists").innerHTML += "<div><a href='#'>" + Name + "</a></div>"
-        }
-    }
-
-    function ListClicked(ID) {
-        if (ID != null) {
-            SelectedListID = ID;
-            //send list id to server and get back list of items in that list
-            $.ajax({
-                url: '@Url.Action("GetListItemsForList", "UserList")',
-                type: 'POST',
-                data: { ID: ID },
-                success: function (data) {
-                    var objList = JSON.parse(JSON.stringify(data)); //parse result into object
-                    //update html to contain the list items
-                    document.getElementById("ItemBody").innerHTML = '';
-                    for (var i = 0; i < objList.length; i++) {
-                        document.getElementById("ItemBody").innerHTML += "<div>" + objList[i].item + "</div>";
-                    }
-                }
-            });
-        }
-    }
-
-    function AddListItem() {
-        var Item = prompt("Enter a new item", "i.e. Visit...");
-        if (Item != null) {
-            $.ajax({
-                url: '@Url.Action("AddListItem", "UserList")',
-                type: 'POST',
-                data: { ID: SelectedListID, Item: Item },
-            });
-
-            document.getElementById("ItemBody").innerHTML += "<div>" + Item + "</div>";
-        }
-
-        //alert(SelectedListID);
-    }
-</script>
+<script src="~/Scripts/ListScript.js"></script>
 

@@ -36,15 +36,6 @@ namespace Final_Project.Controllers
             }
         }
 
-        //Not used or complete currently 
-        [HttpPost]
-        public IActionResult Index(LocationModel locList)
-        {
-            //insert into DB 
-
-            return View(locList);
-        }
-
         //Service to get location list from js
         [HttpGet]
         public IActionResult GetLocationList()
@@ -60,24 +51,33 @@ namespace Final_Project.Controllers
             }
         }
 
-        //Not used or complete currently 
+        //Service to remove a selected marker
         [HttpPost]
-        public IActionResult AddLocation(double lat, double lon) //not used yet
-        {
-            //_LocationRepo.Insert(lat,lon); //this wont work until add proc
-            string ID = User.Claims.ElementAt(0).Value;
-
-            return View(_LocationRepo.GetList(ID));
-        }
-
-        //service to remmove a selected marker
-        [HttpPost]
-        public IActionResult Remove_Location(double lat, double lon)
+        public void Remove_Location(double lat, double lon)
         {
             string ID = User.Claims.ElementAt(0).Value;
             _LocationRepo.Delete(lat, lon, ID);
-
-            return View("Index"); //shoudnt matter what i return, matbe void
         }
+
+
+        //Not used or complete currently 
+        //[HttpPost]
+        //public IActionResult Index(LocationModel locList)
+        //{
+        //    //insert into DB 
+
+        //    return View(locList);
+        //}
+
+
+        //Not used or complete currently 
+        //[HttpPost]
+        //public IActionResult AddLocation(double lat, double lon) //not used yet
+        //{
+        //    //_LocationRepo.Insert(lat,lon); //this wont work until add proc
+        //    string ID = User.Claims.ElementAt(0).Value;
+
+        //    return View(_LocationRepo.GetList(ID));
+        //}
     }
 }

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 namespace Final_Project.Controllers
 {
     [Authorize]
-    //[InitializeSimpleMembership]
     public class ContactController : Controller
     {
         private IContactRepository _ContactRepo;
@@ -26,16 +25,8 @@ namespace Final_Project.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                //if (User.IsInRole("Admins"))
-                //{
-                //    ContactModel model = new ContactModel();
-                //    return View("AdminContact", model);
-                //}
-                //else
-                //{
-                    ContactModel model = new ContactModel();
-                    return View(model);
-                //}
+                ContactModel model = new ContactModel();
+                return View(model);
             }
             return View();
         }
@@ -46,7 +37,6 @@ namespace Final_Project.Controllers
         {
             var Messages = _ContactRepo.GetList();
 
-            //ContactModel model = new ContactModel();
             return View(Messages);
         }
 
@@ -54,7 +44,7 @@ namespace Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(ContactModel model)
         {
-            //send email to me w/ user email who submitted message - future addition
+            //maybe send email to me w/ user email who submitted message - future addition
 
             //store in db
             if (ModelState.IsValid && User.Identity.IsAuthenticated)

@@ -1,4 +1,7 @@
-﻿drop table Locations;
+﻿------------------------------------------------------------------------------
+---------------- Location stuff ----------------------------------------------
+------------------------------------------------------------------------------
+drop table Locations;
 go
 create table Locations 
 (
@@ -15,7 +18,6 @@ create table Locations
 	Category int,
 	UserID varchar(100)
 );
-
 go
 drop procedure Location_Insert;
 go
@@ -35,19 +37,6 @@ create procedure Location_Insert (
 as
 insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
 VALUES (@Country, @StateCode, @City, @ZipCode, @Address, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
-
-go
-
-create procedure Location_Insert_Min (
-	@Latitude DOUBLE PRECISION,
-	@Longitude DOUBLE PRECISION,
-	@Name varchar(50),
-	@Description varchar(1000)
-)
-as
-insert into Locations(Latitude, Longitude, Name, Description)
-VALUES (@Latitude, @Longitude, @Name, @Description)
-
 go
 drop procedure Location_GetList;
 go
@@ -56,20 +45,8 @@ create procedure Location_GetList(
 )
 AS
 Select * from Locations where UserID = @UserID;
-
-go
-
---Test Locations
-delete from Locations;
-go
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
-values('United States', 'OR', 'Klamath Falls', '97603', '3201 Campus Dr', 42.254300, -121.782270, 'OIT', 'My School', 1, '219c4b40-278d-49df-adeb-d8b30351ea11')
-go
-insert into Locations(Country, StateCode, City, ZipCode, Address, Latitude, Longitude, Name, Description, Category, UserID)
-values('United States', 'DC', 'Washington DC', '20500', '1600 Pennsylvania Ave NW', 38.897663, -77.036575, 'The White House', 'Where the president lives', 2, '219c4b40-278d-49df-adeb-d8b30351ea11')
 go
 select * from Locations;
-
 go
 drop procedure Remove_Location;
 go
@@ -84,8 +61,21 @@ delete from Locations
 where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
 and UserID = @UserID;
 go
+drop procedure GetNumberOfLocations;
+go
+create procedure GetNumberOfLocations(
+	@UserID varchar(100)
+)
+as
+select count(ID) LocCount from Locations where UserID = @UserID ;
+go
 
 
+------------------------------------------------------------------------------
+---------------- Message stuff -----------------------------------------------
+------------------------------------------------------------------------------
+drop table [Messages];
+go
 create table [Messages]
 (
 	ID int not null primary key identity(1,1),
@@ -93,15 +83,15 @@ create table [Messages]
 	[Type] varchar(15),
 	[Message] varchar(1000)
 )
-
 go
-
+drop procedure Messages_GetList;
+go
 create procedure Messages_GetList
 as 
 select * from [Messages];
-
 go
-
+drop procedure Messages_Insert;
+go
 create procedure Messages_Insert (
 	@Name varchar(25),
 	@Type varchar(15),
@@ -110,11 +100,13 @@ create procedure Messages_Insert (
 as
 insert into Messages([Name], [Type], [Message])
 values(@Name, @Type, @Message)
-
 go
-
 select * from  Messages;
 
+
+------------------------------------------------------------------------------
+---------------- List stuff --------------------------------------------------
+------------------------------------------------------------------------------
 go
 drop table UserListItem;
 go
@@ -126,7 +118,8 @@ create table UserList
 	[Name] varchar(50),
 	UserID varchar(100)
 )
-
+go
+drop procedure AddList;
 go
 create procedure AddList
 (
@@ -147,19 +140,10 @@ create table UserListItem
 	UserID varchar(100)
 )
 go
---insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'go places', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
---insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'do things', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
---insert into UserListItem (ListID, Item, IsChecked, UserID) values (30, 'other things', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
-go
 select * from UserList;
-
 go
-
 select * from UserListItem;
---delete from UserListItem where IsChecked is null
-
 go
-
 drop procedure AddListItem;
 go
 create procedure AddListItem
@@ -170,7 +154,6 @@ create procedure AddListItem
 )
 as
 insert into UserListItem (ListID, Item, IsChecked, UserID) values (@ListID, @ItemName, 0, @UserID);
-
 go
 drop procedure Get_Lists;
 go
@@ -180,7 +163,6 @@ create procedure Get_Lists
 )
 as
 select * from UserList where UserID = @UserID;
-
 go
 drop procedure Get_List_Items;
 go
@@ -192,21 +174,14 @@ create procedure Get_List_Items
 as 
 select * from UserListItem where ListID = @ListID and UserID = @UserID;
 
+------------------------------------------------------------------------------
+---------------- User stuff --------------------------------------------------
+------------------------------------------------------------------------------
 go
-drop procedure GetNumberOfLocations;
-go
-create procedure GetNumberOfLocations(
-	@UserID varchar(100)
-)
-as
-select count(ID) LocCount from Locations where UserID = @UserID ;
-
-go
------------------------------------------------------
 select * from sys.objects 
 where type_desc = 'USER_TABLE'
 order by create_date desc;
-
+go
 select * from AspNetUsers;
 select * from AspNetRoles;
 select * from AspNetUserTokens;
@@ -214,5 +189,3 @@ select * from AspNetUserLogins;
 select * from AspNetUserClaims;
 select * from AspNetRoleClaims;
 
------------------------------------------------------
---delete from UserList where UserID = '219c4b40-278d-49df-adeb-d8b30351ea11'

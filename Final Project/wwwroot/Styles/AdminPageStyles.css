@@ -5,3 +5,7 @@ h1{
     font-size: 30px;
     margin: 15px;
 }
+
+#ActionBar {
+    width: 60%;
+}

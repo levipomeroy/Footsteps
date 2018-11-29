@@ -36,7 +36,15 @@ namespace Final_Project.Areas.Identity
                 //.AddEntityFrameworkStores<Final_ProjectContext>();
 
 
-                services.AddIdentity<IdentityUser, IdentityRole>()
+                services.AddIdentity<IdentityUser, IdentityRole>(options=>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 1;
+                    options.Password.RequiredUniqueChars = 1;
+                })
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()

@@ -51,7 +51,7 @@ namespace Final_Project.Controllers
             //Check the status of the result
             if (!result.Succeeded)
             {
-             //   throw new Exception(result.Errors.Select(e => e.Description).Aggregate((a, b) => a + "," + b));
+                //dont break, just dont do anyhting. User will see if it worked based on list of admins
             }
             return RedirectToAction("Index");
         }

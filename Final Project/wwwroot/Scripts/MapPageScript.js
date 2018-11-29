@@ -104,11 +104,12 @@ function initMap() {
     function AddMarker(latitude, longitude, MarkerTitle, index) {
         var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
 
+        //create new marker
         var tempMarker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
             },
             title: MarkerTitle,
             id: index
@@ -130,20 +131,6 @@ function initMap() {
     }
 }
 
-//function RemoveMarkerFromMap(id) {
-//    //alert(MarkerList[id].getPosition().lat());
-
-//    $.ajax({
-//        type: "POST",
-//        url: 'Home/Remove_Location',
-//        data: { 'lat': MarkerList[id].getPosition().lat(), 'lon': MarkerList[id].getPosition().lon() },
-//        dataType: "json"
-//    });
-
-
-//    alert('hi');
-//}
-
 /**********************************************************************
  * Purpose: This function removes the serached marker from the map, clears 
  * the search bar and return the map to the original state
@@ -155,22 +142,6 @@ function RemoveMarkerForSearchedPlace() {
     document.querySelector('[title="Close"]').click();
     document.getElementById('SearchBar').value = '';
 }
-
-//function AddMarkerForSearchedPlace() {
-    //alert("working");
-    //var url = "@Url.Action('Index','Home')";
-    //var myModel;
-    //myModel.LocationList = LocList;
-    //myModel.Latitude = autocomplete.getPlace().latLng.Latitude;
-    //myModel.Longitude = autocomplete.getPlace().latLng.Longitude;
-    //myModel = "hi";
-    //$.ajax({
-    //    type: "POST",
-    //    data: JSON.stringify(myModel),
-    //    url: url,
-    //    contentType: "application/json"
-    //});
-//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.

@@ -62,3 +62,4 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.pdb
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csproj.CopyComplete
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csprojAssemblyReference.cache
+C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
