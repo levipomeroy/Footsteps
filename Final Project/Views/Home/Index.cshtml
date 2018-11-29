@@ -29,7 +29,7 @@
     function RemoveMarkerFromMap(id) {
         $.ajax({
             //url: '/HomeController/Remove_Location',
-            url: '@Url.Action("Remove_Location", "Home")',
+            url: '@Url.Action("Remove_Location", "Home")', //either url works 
             type: 'POST',
             data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },
         });

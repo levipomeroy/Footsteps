@@ -41,9 +41,9 @@ namespace Final_Project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddUserToRole(string Email, string RoleName)
         {
-            //IdentityRole role = new IdentityRole();
-            //role.Name = "Admins";
-            //IdentityResult role_result = _RoleManager.CreateAsync(role).Result;
+            IdentityRole role = new IdentityRole();
+            role.Name = "Admins";
+            IdentityResult role_result = _RoleManager.CreateAsync(role).Result;
 
             IdentityUser user = _UserManager.FindByEmailAsync(Email).Result;
             IdentityResult result = _UserManager.AddToRoleAsync(user, RoleName).Result;

@@ -21,7 +21,7 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
-        public void Delete(double lat, double lon)
+        public void Delete(double lat, double lon, string UserID)
         {
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
@@ -29,6 +29,7 @@ namespace Final_Project.Repositories
                 {
                     command.Parameters.AddWithValue("@Latitude", lat);
                     command.Parameters.AddWithValue("@Longitude", lon);
+                    command.Parameters.AddWithValue("@UserID", UserID);
  
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();

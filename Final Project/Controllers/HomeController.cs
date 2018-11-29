@@ -36,6 +36,7 @@ namespace Final_Project.Controllers
             }
         }
 
+        //Not used or complete currently 
         [HttpPost]
         public IActionResult Index(LocationModel locList)
         {
@@ -59,6 +60,7 @@ namespace Final_Project.Controllers
             }
         }
 
+        //Not used or complete currently 
         [HttpPost]
         public IActionResult AddLocation(double lat, double lon) //not used yet
         {
@@ -68,16 +70,14 @@ namespace Final_Project.Controllers
             return View(_LocationRepo.GetList(ID));
         }
 
+        //service to remmove a selected marker
         [HttpPost]
-        //[AcceptVerbs]
         public IActionResult Remove_Location(double lat, double lon)
         {
-            _LocationRepo.Delete(lat, lon);
-
             string ID = User.Claims.ElementAt(0).Value;
-            //return View(_LocationRepo.GetList(ID));
-            return View("Index");
-            //return null;
+            _LocationRepo.Delete(lat, lon, ID);
+
+            return View("Index"); //shoudnt matter what i return, matbe void
         }
     }
 }

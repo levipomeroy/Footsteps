@@ -76,10 +76,13 @@ go
 create procedure Remove_Location
 (
 	@Latitude DOUBLE PRECISION,
-	@Longitude DOUBLE PRECISION
+	@Longitude DOUBLE PRECISION,
+	@UserID varchar(100)
 )
 as
-delete from Locations where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
+delete from Locations 
+where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
+and UserID = @UserID;
 go
 
 
@@ -113,74 +116,66 @@ go
 select * from  Messages;
 
 go
-
+drop table UserListItem;
+go
+drop table UserList;
+go
 create table UserList
 (
 	ID int not null primary key identity(1,1),
-	[Name] varchar(50) 
+	[Name] varchar(50),
+	UserID varchar(100)
 )
 
 go
-
+create procedure AddList
+(
+	@Name varchar(50),
+	@UserID varchar(100)
+)
+as
+insert into UserList ([Name], UserID) values (@Name, @UserID);
+go
+drop table UserListItem;
+go
 create table UserListItem
 (
 	ID int not null primary key identity(1,1),
 	ListID int not null foreign key references USerList(ID),
 	Item varchar(250),
-	IsChecked bit
+	IsChecked bit,
+	UserID varchar(100)
 )
 go
-delete from UserListItem;
+--insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'go places', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
+--insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'do things', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
 go
-delete from UserList;
-
-go
-
-Insert into UserList ([Name]) values ('Bucket List');
-Insert into UserList ([Name]) values ('Trips this year');
-
-go
-
-delete from UserList;
-
-go
-
 select * from UserList;
-
-go
-
-delete from UserListItem;
-
-go
-
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'Visit Greece', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'See the Pyramids in Egypt', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'Snorkel in the Bahamas', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'Go parasailing in Mexico', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'Visit all 7 continents', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (3, 'Climb to the top of Mt. Evertest', 0);
-
-insert into UserListItem (ListID, Item, IsChecked) values (4, 'Go to the coast', 0);
-insert into UserListItem (ListID, Item, IsChecked) values (4, 'Visit Seattle, WA', 0);
 
 go
 
 select * from UserListItem;
 
 go
-
+drop procedure Get_Lists;
+go
 create procedure Get_Lists
+(
+	@UserID varchar(100)
+)
 as
-select * from UserList;
+select * from UserList where UserID = @UserID;
 
 go
-
+drop procedure Get_List_Items;
+go
 create procedure Get_List_Items
 (
-	@ListID int
+	@ListID int,
+	@UserID varchar(100)
 )
 as 
-select * from UserListItem where ListID = @ListID;
+select * from UserListItem where ListID = @ListID and UserID = @UserID;
 
 go
 drop procedure GetNumberOfLocations;
@@ -205,3 +200,4 @@ select * from AspNetUserClaims;
 select * from AspNetRoleClaims;
 
 -----------------------------------------------------
+--delete from UserList where UserID = '219c4b40-278d-49df-adeb-d8b30351ea11'

@@ -8,7 +8,8 @@ namespace Final_Project.Repositories
 {
     public interface IListRepository
     {
-        List<UserListModel> GetUserLists();
-        List<UserListItem> GetUserListItems(int ListID);
+        List<UserListModel> GetUserLists(string UserID);
+        List<UserListItem> GetUserListItems(int ListID, string UserID);
+        void AddList(string Name, string UserID);
     }
 }

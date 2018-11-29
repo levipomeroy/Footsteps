@@ -20,7 +20,23 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
-        public List<UserListItem> GetUserListItems(int ListID)
+        public void AddList(string Name, string UserID)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("AddList", newConnection))
+                {
+                    command.Parameters.AddWithValue("@Name", Name);
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<UserListItem> GetUserListItems(int ListID, string UserID)
         {
             List<UserListItem> UserListsItems = new List<UserListItem>();
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
@@ -28,6 +44,7 @@ namespace Final_Project.Repositories
                 using (SqlCommand command = new SqlCommand("Get_List_Items", newConnection))
                 {
                     command.Parameters.AddWithValue("@ListID", ListID);
+                    command.Parameters.AddWithValue("@UserID", UserID);
 
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();
@@ -51,13 +68,14 @@ namespace Final_Project.Repositories
 
         }
 
-        public List<UserListModel> GetUserLists()
+        public List<UserListModel> GetUserLists(string UserID)
         {
             List<UserListModel> UserLists = new List<UserListModel>();
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
                 using (SqlCommand command = new SqlCommand("Get_Lists", newConnection))
                 {
+                    command.Parameters.AddWithValue("@UserID", UserID);
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();
 

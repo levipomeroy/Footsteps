@@ -5,6 +5,7 @@
 
 <head>
     <title>Lists</title>
+    <link href="~/Styles/UserListStyle.css" rel="stylesheet" />
 </head>
 
 <!-- Page Content -->
@@ -21,47 +22,66 @@
     <div class="row" id="ListContent">
         <div class="col-4">
             <div class="card">
-                <div class="card-header">Lists</div>
-                <div class="card-body">
-                    @*@foreach (var list in Model)*@
+                <div class="card-header">Lists 
+                <button id="AddListBtn" type="button" onclick="AddList()" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                </div>
+                <div id="ListOfLists" class="card-body">
                     @for (int i = 0; i < Model.Count(); i++)
                     {
-                        @*<p>@Model[i].Name</p>*@
-                    <form asp-action="Index" asp-controller="UserList" method="post">
-                        @Html.AntiForgeryToken()
-
-                        <input type="hidden" id="id" name="id" asp-for="@Model[i].ID" />
-                        <input type="hidden" id="Name" name="Name" asp-for="@Model[i].Name" />
-                        @for (int j = 0; j < Model[i].ItemsList.Count(); j++)
-                        {
-                            <input type="hidden" id="ItemsList" name="ItemsList" asp-for="@Model[i].ItemsList[j]" />
-                        }
-                        <input type="hidden" id="Selected" name="Selected" asp-for="@Model[i].Selected" />
-
-                        <button type="submit" class="btn btn-default">@Model[i].Name</button>
-                    </form>
+                        <div>
+                            <a onclick="ListClicked([@(Model[i].ID)])" href="#">@Model[i].Name</a>
+                        </div>
                     }
                 </div>
             </div>
         </div>
         <div class="col-8">
             <div class="card">
-                <div class="card-header">@Model.Where(m => m.Selected == true).Select(m => m.Name).FirstOrDefault()</div>
-                <div class="card-body">
-                    <ul>
-                        @*@foreach(var item in Model.Where(m => m.Selected == true).Select(m => m.ItemsList))*@
-                        @{ List<UserListItem> SelectedItems = Model.Where(m => m.Selected == true).Select(m => m.ItemsList).FirstOrDefault();}
-                        @for (int i = 0; i < SelectedItems?.Count(); i++)
-                        {
-                            <li>@SelectedItems[i].Item</li>
-                        }
-                        @*<li>List item 1</li>foreach
-                        <li>List item 2</li>
-                        <li>List item 3</li>*@
-                    </ul>
+                <div id="ItemHeader" class="card-header"> List name goes here
+                    <button id="AddListItemBtn" type="button" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                </div>
+                <div id="ItemBody" class="card-body">
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    function AddList() {
+        //Get new list name
+        var Name = prompt("Enter the list name", "i.e. Bucket List");
+        //Store new list name in DB via service call
+        if (Name != null) {
+            $.ajax({
+                url: '@Url.Action("AddList", "UserList")',
+                type: 'POST',
+                data: { Name: Name },
+            });
+            //update list of lists with new list name 
+            document.getElementById("ListOfLists").innerHTML += "<div><a href='#'>" + Name + "</a></div>"
+        }
+    }
+
+    function ListClicked(ID) {
+        if (ID != null) {
+            //send list id to server and get back list of items in that list
+            $.ajax({
+                url: '@Url.Action("GetListItemsForList", "UserList")',
+                type: 'POST',
+                data: { ID: ID },
+                success: function (data) {
+                    var objList = JSON.parse(JSON.stringify(data)); //parse result into object
+                    //update html to contain the list items
+                    document.getElementById("ItemBody").innerHTML = '';
+                    for (var i = 0; i < objList.length; i++) {
+                        document.getElementById("ItemBody").innerHTML += "<div>" + objList[i].item + "</div>";
+                    }
+                }
+            });
+        }
+    }
+</script>
 

@@ -23,11 +23,12 @@ namespace Final_Project.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var UserLists = _ListRepo.GetUserLists();
-                foreach (var list in UserLists)
-                {
-                    list.ItemsList = _ListRepo.GetUserListItems(list.ID);
-                }
+                string ID = User.Claims.ElementAt(0).Value;
+                var UserLists = _ListRepo.GetUserLists(ID);
+                //foreach (var list in UserLists)
+                //{
+                //    list.ItemsList = _ListRepo.GetUserListItems(list.ID);
+                //}
 
                 return View(UserLists);
             }
@@ -35,30 +36,49 @@ namespace Final_Project.Controllers
             {
                 return View();
             }
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Index(UserListModel model)
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        string ID = User.Claims.ElementAt(0).Value;
+
+        //        var UserLists = _ListRepo.GetUserLists(ID);
+        //        foreach (var list in UserLists)
+        //        {
+        //            list.ItemsList = _ListRepo.GetUserListItems(list.ID, ID);
+        //            if (list.ID == model.ID)
+        //            {
+        //                list.Selected = true;
+        //            }
+        //        }
+        //        return View(UserLists);
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //Service to add list
+        [HttpPost]
+        public void AddList(string Name)
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            _ListRepo.AddList(Name, ID);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public IActionResult Index(UserListModel model)
+        public JsonResult GetListItemsForList(int ID)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                var UserLists = _ListRepo.GetUserLists();
-                foreach (var list in UserLists)
-                {
-                    list.ItemsList = _ListRepo.GetUserListItems(list.ID);
-                    if (list.ID == model.ID)
-                    {
-                        list.Selected = true;
-                    }
-                }
-                return View(UserLists);
-            }
-            else
-            {
-                return View();
-            }
+            string UserID = User.Claims.ElementAt(0).Value;
+
+            var ItemList = _ListRepo.GetUserListItems(ID, UserID);
+            return Json(ItemList);
         }
+
     }
 }
