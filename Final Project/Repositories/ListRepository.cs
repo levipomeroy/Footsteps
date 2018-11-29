@@ -36,6 +36,23 @@ namespace Final_Project.Repositories
             }
         }
 
+        public void AddListItem(int ListID, string ItemName, string UserID)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("AddListItem", newConnection))
+                {
+                    command.Parameters.AddWithValue("@ListID", ListID);
+                    command.Parameters.AddWithValue("@ItemName", ItemName);
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public List<UserListItem> GetUserListItems(int ListID, string UserID)
         {
             List<UserListItem> UserListsItems = new List<UserListItem>();

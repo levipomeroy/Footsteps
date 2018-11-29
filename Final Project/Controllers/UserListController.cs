@@ -71,6 +71,7 @@ namespace Final_Project.Controllers
             _ListRepo.AddList(Name, ID);
         }
 
+        //service to get list items for a specific list
         [HttpPost]
         public JsonResult GetListItemsForList(int ID)
         {
@@ -78,6 +79,13 @@ namespace Final_Project.Controllers
 
             var ItemList = _ListRepo.GetUserListItems(ID, UserID);
             return Json(ItemList);
+        }
+
+        [HttpPost]
+        public void AddListItem(int ID, string Item)
+        {
+            string UserID = User.Claims.ElementAt(0).Value;
+            _ListRepo.AddListItem(ID, Item, UserID);
         }
 
     }

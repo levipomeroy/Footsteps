@@ -141,7 +141,7 @@ go
 create table UserListItem
 (
 	ID int not null primary key identity(1,1),
-	ListID int not null foreign key references USerList(ID),
+	ListID int,
 	Item varchar(250),
 	IsChecked bit,
 	UserID varchar(100)
@@ -149,12 +149,27 @@ create table UserListItem
 go
 --insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'go places', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
 --insert into UserListItem (ListID, Item, IsChecked, UserID) values (29, 'do things', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
+--insert into UserListItem (ListID, Item, IsChecked, UserID) values (30, 'other things', 0, '219c4b40-278d-49df-adeb-d8b30351ea11');
 go
 select * from UserList;
 
 go
 
 select * from UserListItem;
+--delete from UserListItem where IsChecked is null
+
+go
+
+drop procedure AddListItem;
+go
+create procedure AddListItem
+(
+	@ListID int,
+	@ItemName varchar(250),
+	@UserID varchar(100)
+)
+as
+insert into UserListItem (ListID, Item, IsChecked, UserID) values (@ListID, @ItemName, 0, @UserID);
 
 go
 drop procedure Get_Lists;

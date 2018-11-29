@@ -8,6 +8,7 @@
     <link href="~/Styles/UserListStyle.css" rel="stylesheet" />
 </head>
 
+
 <!-- Page Content -->
 <div id="content" class="container grid">
     <div id="ActionBar">
@@ -37,8 +38,8 @@
         </div>
         <div class="col-8">
             <div class="card">
-                <div id="ItemHeader" class="card-header"> List name goes here
-                    <button id="AddListItemBtn" type="button" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                <div id="ItemHeader" class="card-header"> List Items
+                    <button id="AddListItemBtn" onclick="AddListItem()" type="button" class="btn btn-default"><i class="fas fa-plus"></i></button>
                 </div>
                 <div id="ItemBody" class="card-body">
 
@@ -49,6 +50,7 @@
 </div>
 
 <script>
+    var SelectedListID = null;
 
     function AddList() {
         //Get new list name
@@ -67,6 +69,7 @@
 
     function ListClicked(ID) {
         if (ID != null) {
+            SelectedListID = ID;
             //send list id to server and get back list of items in that list
             $.ajax({
                 url: '@Url.Action("GetListItemsForList", "UserList")',
@@ -82,6 +85,20 @@
                 }
             });
         }
+    }
+
+    function AddListItem() {
+        var Item = prompt("Enter a new item", "i.e. Visit...");
+        if (Item != null) {
+            $.ajax({
+                url: '@Url.Action("AddListItem", "UserList")',
+                type: 'POST',
+                data: { ID: SelectedListID, Item: Item },
+            });
+        }
+        document.getElementById("ItemBody").innerHTML += "<div>" + Item + "</div>";
+
+        //alert(SelectedListID);
     }
 </script>
 
