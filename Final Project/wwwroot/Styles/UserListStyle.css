@@ -7,3 +7,9 @@
 #ActionBar {
     width: 60%;
 }
+#AddListBtn{
+    border-radius: 50%;
+}
+#AddListItemBtn {
+    border-radius: 50%;
+}

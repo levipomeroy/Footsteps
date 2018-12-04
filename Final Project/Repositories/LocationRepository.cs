@@ -21,7 +21,7 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
-        public void Delete(double lat, double lon, string UserID)
+        virtual public void Delete(double lat, double lon, string UserID)
         {
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
@@ -43,7 +43,7 @@ namespace Final_Project.Repositories
             throw new NotImplementedException();
         }
 
-        public List<LocationObject> GetList(string UserID)
+        virtual public List<LocationObject> GetList(string UserID)
         {
             List<LocationObject> Locations = new List<LocationObject>();
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
@@ -77,7 +77,7 @@ namespace Final_Project.Repositories
             return Locations;
         }
 
-        public void Insert(LocationModel location)
+        virtual public void Insert(LocationModel location)
         {
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
@@ -99,7 +99,7 @@ namespace Final_Project.Repositories
             }
         }
 
-        public int GetNumberOfLocationsForUser(string UserId)
+        virtual public int GetNumberOfLocationsForUser(string UserId)
         {
             int numLocations = 0;
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))

@@ -9,10 +9,14 @@ function AddList() {
             //url: '@Url.Action("AddList", "UserList")',
             url: '/UserList/AddList',
             type: 'POST',
-            data: { Name: Name }
+            data: { Name: Name },
+            success: function (data) {
+                document.getElementById("ListOfLists").innerHTML += "<div><a onclick='ListClicked(" + data + ")'  href='#'>" + Name + "</a></div>"
+
+            }
         });
         //update list of lists with new list name 
-        document.getElementById("ListOfLists").innerHTML += "<div><a href='#'>" + Name + "</a></div>"
+       // document.getElementById("ListOfLists").innerHTML += "<div><a href='#'>" + Name + "</a></div>"
     }
 }
 

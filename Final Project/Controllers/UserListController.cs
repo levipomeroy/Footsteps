@@ -36,12 +36,19 @@ namespace Final_Project.Controllers
 
         //Service to add list
         [HttpPost]
-        public void AddList(string Name)
+        public JsonResult AddList(string Name)
         {
             if (User.Identity.IsAuthenticated)
             {
-                string ID = User.Claims.ElementAt(0).Value;
-                _ListRepo.AddList(Name, ID);
+                string UserID = User.Claims.ElementAt(0).Value;
+                _ListRepo.AddList(Name, UserID);
+                int ListID = _ListRepo.GetIDFromName(Name, UserID);
+
+                return Json(ListID);
+            }
+            else
+            {
+                return null;
             }
         }
 

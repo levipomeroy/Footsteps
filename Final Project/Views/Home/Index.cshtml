@@ -1,5 +1,7 @@
 ﻿@using Final_Project.Models
 @model LocationModel
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration config
 
 <head>
     <title>Map</title>
@@ -20,8 +22,12 @@
     <div class="row" id="map"></div>
 
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
-        async defer></script>
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
+    async defer></script>*@
+<script 
+        src="https://maps.googleapis.com/maps/api/js?key=@(config["GoogleAPIKey"])&libraries=places&callback=initMap"
+    async defer>
+</script>
 
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
@@ -29,7 +35,7 @@
     function RemoveMarkerFromMap(id) {
         $.ajax({
             //url: '/HomeController/Remove_Location',
-            url: '@Url.Action("Remove_Location", "Home")', //either url works 
+            url: '@Url.Action("Remove_Location", "Home")', //either url works
             type: 'POST',
             data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },
         });

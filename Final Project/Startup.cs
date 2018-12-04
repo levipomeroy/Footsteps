@@ -14,13 +14,14 @@ namespace Final_Project
 {
     public class Startup
     {
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<ILocationRepository, CachingLocationRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<IListRepository, ListRepository>();
 
@@ -28,9 +29,12 @@ namespace Final_Project
             var MyConfig = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
+            .AddEnvironmentVariables();
+            //.Build();
 
-            services.Configure<Settings>(MyConfig);
+            services.Configure<Settings>(MyConfig.Build());
+
+            MyConfig.AddUserSecrets<Startup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

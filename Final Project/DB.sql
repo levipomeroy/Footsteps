@@ -61,7 +61,16 @@ create procedure GetNumberOfLocations(
 as
 select count(ID) LocCount from Locations where UserID = @UserID ;
 go
-
+drop procedure GetListIDByName
+go
+create procedure GetListIDByName
+(
+	@Name varchar(255),
+	@UserID varchar(100)
+)
+as
+select ID from UserList where [Name] = @Name and UserID = @UserID;
+go
 
 ------------------------------------------------------------------------------
 ---------------- Message stuff -----------------------------------------------

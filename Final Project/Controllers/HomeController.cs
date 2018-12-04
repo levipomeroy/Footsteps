@@ -7,6 +7,7 @@ using Final_Project.Models;
 using Final_Project.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Final_Project.Controllers
 {
@@ -16,6 +17,7 @@ namespace Final_Project.Controllers
         private ILocationRepository _LocationRepo;
         public HomeController(ILocationRepository LocationRepo)
         {
+            
             _LocationRepo = LocationRepo;
         }
 

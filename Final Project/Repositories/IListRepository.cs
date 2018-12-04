@@ -12,5 +12,6 @@ namespace Final_Project.Repositories
         List<UserListItem> GetUserListItems(int ListID, string UserID);
         void AddList(string Name, string UserID);
         void AddListItem(int ListID, string ItemName, string UserID);
+        int GetIDFromName(string Name, string UserID);
     }
 }
