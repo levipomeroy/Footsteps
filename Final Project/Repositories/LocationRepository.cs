@@ -123,5 +123,22 @@ namespace Final_Project.Repositories
             }
             return numLocations;
         }
+
+        public void AddLocationWithLatLon(string UserID, double Latitude, double Longitude)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("AddMarkerWithLatLon", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserId", UserID);
+                    command.Parameters.AddWithValue("@Latitude", Latitude);
+                    command.Parameters.AddWithValue("@Longitude", Longitude);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

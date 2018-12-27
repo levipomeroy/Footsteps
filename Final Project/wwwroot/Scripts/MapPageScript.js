@@ -18,19 +18,28 @@ function initMap() {
         mapTypeControl: false    //remove map/salelite toggle option buttons
     });
     centerOfTheWorld = map.getCenter();
-    var input = document.getElementById('SearchBar');
 
+    //Auto-complete search bar on map page stuff
+    var input = document.getElementById('SearchBar');
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
 
     marker = new google.maps.Marker({
         map: map,
+        icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        },
         anchorPoint: new google.maps.Point(0, -29)
     });
 
+     /***************************************************************
+     * Purpose: Allows user to search for a location and has the option
+     * to save the location the thier locations if desired.
+     ***************************************************************/
     autocomplete.addListener('place_changed', function () {
         marker.setVisible(false);
         var place = autocomplete.getPlace();
+        //Couldnt find location 
         if (!place.geometry) {
             window.alert("No details available for input: '" + place.name + "'");
             return;
@@ -45,12 +54,10 @@ function initMap() {
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
 
+        var lat = place.geometry.location.lat();
+        var lon = place.geometry.location.lng();
         //info window for searched place
-        var SearchedLocationOptions = "<div>" + "<p>Location: " + place.geometry.location + "</p >" +
-            "<p>" + "name: " + place.name +
-            "</p> <button onclick='RemoveMarkerForSearchedPlace()' id='RemoveSearchedMarkerBTN'>Remove</button>" +
-            "<button onclick='AddMarkerForSearchedPlace()' id=AddMarkerForSearchedPlace>Add to my map</button>" + 
-            "</div>";
+        var SearchedLocationOptions = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" +')" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
         var infowindow = new google.maps.InfoWindow({
             content: SearchedLocationOptions
         });
@@ -59,26 +66,36 @@ function initMap() {
         });
     });
 
+    /***************************************************************
+     * Purpose: Allows user to right click on map and add marker wherever
+     * they clicked. This is usefult because it doenst have to be an address,
+     * it can be in the middle of no where. 
+     ***************************************************************/
     map.addListener('rightclick', function (e) {
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
 
-        var contentString = '<div id="content">' +
-            '<label class="control-label" for="Title">Title</label>' +
-            '<input id="title" name="title" class="form-control" type="text" />' +
-            '<label class="control-label" for="Description">Description</label>' +
-            '<textarea id="Description" name="Description" class="form-control" cols="40"></textarea>' +
-            '<br />' +
-            '<select class="form-control">' +
-            '    <option>I have been here</option>' +
-            '    <option>I have lived here</option>' +
-            '    <option>I want to go here</option>' +
-            '</select>' +
-            '<button type="button" class="btn btn-default">' + '<i class="fas fa-edit"></i>' + '</button>' +
-            '<button type="button" class="btn btn-default">' + '<i class="fas fa-images"></i>' + '</button>' +
-            '<button type="button" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
-            '<button type="button" class="btn btn-primary-outline">' + '<i class="fas fa-save"></i>' + '</button>' +
-            '</div>';
+        //Old content string
+        {
+            //var contentString = '<div id="content">' +
+            //    '<label class="control-label" for="Title">Title</label>' +
+            //    '<input id="title" name="title" class="form-control" type="text" />' +
+            //    '<label class="control-label" for="Description">Description</label>' +
+            //    '<textarea id="Description" name="Description" class="form-control" cols="40"></textarea>' +
+            //    '<br />' +
+            //    '<select class="form-control">' +
+            //    '    <option>I have been here</option>' +
+            //    '    <option>I have lived here</option>' +
+            //    '    <option>I want to go here</option>' +
+            //    '</select>' +
+            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-edit"></i>' + '</button>' +
+            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-images"></i>' + '</button>' +
+            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
+            //    '<button type="button" class="btn btn-primary-outline">' + '<i class="fas fa-save"></i>' + '</button>' +
+            //    '</div>';
+        }
+        //New content string 
+        var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" +')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
 
         var marker200 = new google.maps.Marker({
             position: { lat: lat, lng: lon },
@@ -87,11 +104,11 @@ function initMap() {
                 url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
             }
         });
-        var infowindow = new google.maps.InfoWindow({
+        var NewLocationinfowindow = new google.maps.InfoWindow({
             content: contentString
         });
         marker200.addListener('click', function () {
-            infowindow.open(map, marker200);
+            NewLocationinfowindow.open(map, marker200);
         });
     });
 
@@ -135,13 +152,13 @@ function initMap() {
  * Purpose: This function removes the serached marker from the map, clears 
  * the search bar and return the map to the original state
  **********************************************************************/
-function RemoveMarkerForSearchedPlace() {
-    marker.setVisible(false);
-    map.setCenter(centerOfTheWorld);
-    map.setZoom(2);
-    document.querySelector('[title="Close"]').click();
-    document.getElementById('SearchBar').value = '';
-}
+//function RemoveMarkerForSearchedPlace() {
+//    marker.setVisible(false);
+//    map.setCenter(centerOfTheWorld);
+//    map.setZoom(2);
+//    document.querySelector('[title="Close"]').click();
+//    document.getElementById('SearchBar').value = '';
+//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.

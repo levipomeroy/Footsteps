@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Final_Project.Models;
+﻿using Final_Project.Models;
 using Final_Project.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 
 namespace Final_Project.Controllers
 {
@@ -25,19 +20,9 @@ namespace Final_Project.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ContactModel model = new ContactModel();
-                return View(model);
+                return View(new ContactModel());
             }
             return View();
-        }
-
-        [Authorize(Roles = "Admins")]
-        [HttpGet]
-        public IActionResult AdminContact()
-        {
-            var Messages = _ContactRepo.GetList();
-
-            return View(Messages);
         }
 
         [HttpPost]

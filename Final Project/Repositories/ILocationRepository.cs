@@ -15,5 +15,6 @@ namespace Final_Project.Repositories
         void Edit(LocationObject location);
 
         int GetNumberOfLocationsForUser(string UserId);
+        void AddLocationWithLatLon(string UserID, double Latitude, double Longitude);
     }
 }

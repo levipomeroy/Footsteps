@@ -1,7 +1,7 @@
 ﻿@using Final_Project.Models
 @model LocationModel
-@using Microsoft.Extensions.Configuration
-@inject IConfiguration config
+@*@using Microsoft.Extensions.Configuration
+@inject IConfiguration config*@
 
 <head>
     <title>Map</title>
@@ -22,19 +22,15 @@
     <div class="row" id="map"></div>
 
 </div>
-@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
-    async defer></script>*@
-<script 
-        src="https://maps.googleapis.com/maps/api/js?key=@(config["GoogleAPIKey"])&libraries=places&callback=initMap"
-    async defer>
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
+    async defer></script>
 
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
 
     function RemoveMarkerFromMap(id) {
         $.ajax({
-            //url: '/HomeController/Remove_Location',
+            //url: '/Home/Remove_Location',
             url: '@Url.Action("Remove_Location", "Home")', //either url works
             type: 'POST',
             data: { lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng() },
@@ -42,6 +38,19 @@
 
         MarkerList[id].setMap(null);
     }
+
+
+    //add marker from right click or search on map
+    function AddMarkerFromLatLon(lat, lon) {
+         $.ajax({
+            //url: '/Home/AddLocationWithLatLon',
+            url: '@Url.Action("AddLocationWithLatLon", "Home")', //either url works
+            type: 'POST',
+            data: { lat: lat, lon: lon },
+        });
+        window.location.reload(); //reloads page but kinda a shitty way to do it, hopefully will fix later
+    }   
+
 </script>
 
 

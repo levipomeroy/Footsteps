@@ -37,23 +37,23 @@ namespace Final_Project.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddUserToRole(string Email, string RoleName)
-        {
-            IdentityRole role = new IdentityRole();
-            role.Name = "Admins";
-            IdentityResult role_result = _RoleManager.CreateAsync(role).Result;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult AddUserToRole(string Email, string RoleName)
+        //{
+        //    IdentityRole role = new IdentityRole();
+        //    role.Name = "Admins";
+        //    IdentityResult role_result = _RoleManager.CreateAsync(role).Result;
 
-            IdentityUser user = _UserManager.FindByEmailAsync(Email).Result;
-            IdentityResult result = _UserManager.AddToRoleAsync(user, RoleName).Result;
+        //    IdentityUser user = _UserManager.FindByEmailAsync(Email).Result;
+        //    IdentityResult result = _UserManager.AddToRoleAsync(user, RoleName).Result;
 
-            //Check the status of the result
-            if (!result.Succeeded)
-            {
-                //dont break, just dont do anyhting. User will see if it worked based on list of admins
-            }
-            return RedirectToAction("Index");
-        }
+        //    //Check the status of the result
+        //    if (!result.Succeeded)
+        //    {
+        //        //dont break, just dont do anyhting. User will see if it worked based on list of admins
+        //    }
+        //    return RedirectToAction("Index");
+        //}
     }
 }

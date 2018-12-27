@@ -72,14 +72,12 @@ namespace Final_Project.Controllers
         //}
 
 
-        //Not used or complete currently 
-        //[HttpPost]
-        //public IActionResult AddLocation(double lat, double lon) //not used yet
-        //{
-        //    //_LocationRepo.Insert(lat,lon); //this wont work until add proc
-        //    string ID = User.Claims.ElementAt(0).Value;
-
-        //    return View(_LocationRepo.GetList(ID));
-        //}
+        //Attempting to add location from click anywhere on the map
+        [HttpPost]
+        public void AddLocationWithLatLon(double lat, double lon) //not used yet
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            _LocationRepo.AddLocationWithLatLon(ID, lat, lon);
+        }
     }
 }

@@ -31,33 +31,10 @@
                     <div>
                         <label class="control-label" for="UserName">Number of locations: @Model</label>
                     </div>
-                    @*<partial name="_LoginPartial" />*@
+                    <partial name="_loginpartial" />
                 </div>
             </div>
             <br />
-            <div class="card">
-                <div class="card-header">
-                    <h1>Role Manager</h1>
-                </div>
-                <div class="card-body">
-                    <form asp-action="AddUserToRole" asp-controller="Account" method="post">
-                        @Html.AntiForgeryToken()
-                        @Html.Hidden("Email", User.Identity.Name)
-                        @Html.Hidden("RoleName", "Admins")
-                        <button type="submit" class="btn btn-primary">Make me an admin</button>
-                    </form>
-                    <br/>
-                    <div>
-                        <h3>List of Administrators</h3>
-                        <ul>
-                            @foreach (var user in UserManager.GetUsersInRoleAsync("Admins").Result)
-                            {
-                                <li>@user.UserName</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

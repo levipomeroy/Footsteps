@@ -38,6 +38,18 @@ create procedure Location_GetList(
 AS
 Select * from Locations where UserID = @UserID;
 go
+drop procedure AddMarkerWithLatLon;
+go
+create procedure AddMarkerWithLatLon
+(
+	@UserId varchar(100),
+	@Latitude double precision,
+	@Longitude double precision
+)
+as
+insert into Locations (UserID, Latitude, Longitude, Country, [Name], [Description], Category) values (@UserId, @Latitude, @Longitude, '', '','',0);
+go
+
 select * from Locations;
 go
 drop procedure Remove_Location;
@@ -190,3 +202,5 @@ select * from AspNetUserLogins;
 select * from AspNetUserClaims;
 select * from AspNetRoleClaims;
 
+--select * from locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840';
+--delete from locations where Country is null

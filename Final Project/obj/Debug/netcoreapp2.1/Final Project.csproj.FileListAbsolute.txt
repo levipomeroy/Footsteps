@@ -45,7 +45,6 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Account\Index.g.cshtml.cs
-C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Contact\AdminContact.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Contact\Index.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Razor\Views\LocationForm\Index.g.cshtml.cs
@@ -62,3 +61,4 @@ C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.dll
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.pdb
 C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csproj.CopyComplete
+C:\Users\levip_000\Documents\GitHub\Footsteps\Final Project\obj\Debug\netcoreapp2.1\Final Project.csprojAssemblyReference.cache
