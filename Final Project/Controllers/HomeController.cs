@@ -22,6 +22,12 @@ namespace Final_Project.Controllers
         }
 
         [HttpGet]
+        public IActionResult test()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
@@ -61,23 +67,33 @@ namespace Final_Project.Controllers
             _LocationRepo.Delete(lat, lon, ID);
         }
 
-
-        //Not used or complete currently 
-        //[HttpPost]
-        //public IActionResult Index(LocationModel locList)
-        //{
-        //    //insert into DB 
-
-        //    return View(locList);
-        //}
-
-
-        //Attempting to add location from click anywhere on the map
+        //Service to add location from click anywhere on the map
         [HttpPost]
         public void AddLocationWithLatLon(double lat, double lon) //not used yet
         {
             string ID = User.Claims.ElementAt(0).Value;
             _LocationRepo.AddLocationWithLatLon(ID, lat, lon);
+        }
+
+        //Service to get title and description from db for infowindow on marker on map
+        [HttpPost]
+        public JsonResult GetTitleAndDescription(double lat, double lon)
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            LocationModel model = _LocationRepo.GetTitleAndDescription(ID, lat, lon);
+            string title = string.Empty;
+            string desription = string.Empty;
+
+            if(model.Name != null)
+            {
+                title = model.Name;
+            }
+            if(model.Description != null)
+            {
+                desription = model.Description;
+            }
+            var result = new { title = title, description = desription };
+            return Json(result);
         }
     }
 }

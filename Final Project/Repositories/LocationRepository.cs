@@ -140,5 +140,33 @@ namespace Final_Project.Repositories
                 }
             }
         }
+
+        public LocationModel GetTitleAndDescription(string UserID, double Latitude, double Longitude)
+        {
+            LocationModel model = new LocationModel();
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetTitleAndDescription", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@Latitude", Latitude);
+                    command.Parameters.AddWithValue("@Longitude", Longitude);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            model.Name = reader["Name"].ToString();
+                            model.Description = reader["Description"].ToString();
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return model;
+        }
     }
 }

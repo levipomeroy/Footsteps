@@ -30,6 +30,20 @@ as
 insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID)
 VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
 go
+drop procedure GetTitleAndDescription;
+go 
+create procedure GetTitleAndDescription
+(
+	@UserId varchar(100),
+	@Latitude double precision,
+	@Longitude double precision
+)
+as
+select [Name], [Description] from Locations
+where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
+and UserID = @UserId;
+go
+
 drop procedure Location_GetList;
 go
 create procedure Location_GetList(

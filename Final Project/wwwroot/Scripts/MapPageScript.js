@@ -75,25 +75,6 @@ function initMap() {
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
 
-        //Old content string
-        {
-            //var contentString = '<div id="content">' +
-            //    '<label class="control-label" for="Title">Title</label>' +
-            //    '<input id="title" name="title" class="form-control" type="text" />' +
-            //    '<label class="control-label" for="Description">Description</label>' +
-            //    '<textarea id="Description" name="Description" class="form-control" cols="40"></textarea>' +
-            //    '<br />' +
-            //    '<select class="form-control">' +
-            //    '    <option>I have been here</option>' +
-            //    '    <option>I have lived here</option>' +
-            //    '    <option>I want to go here</option>' +
-            //    '</select>' +
-            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-edit"></i>' + '</button>' +
-            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-images"></i>' + '</button>' +
-            //    '<button type="button" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
-            //    '<button type="button" class="btn btn-primary-outline">' + '<i class="fas fa-save"></i>' + '</button>' +
-            //    '</div>';
-        }
         //New content string 
         var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" +')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
 
@@ -119,8 +100,18 @@ function initMap() {
     }
 
     function AddMarker(latitude, longitude, MarkerTitle, index) {
-        var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
+        //var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
+        var InfoWindowContent = '<div>' +
+            '<div id="TitleLBL"> <strong>Title</strong> </div>' +
+            '<div contentEditable="true" id="Title">...</div>' +
+            '<div id="DescritptionLBL"> <strong>Descritption</strong> </div>' +
+            '<div contentEditable="true" id="Description">...</div>' + 
+            '</div>' +
+            '<button style="background: none" type="button" class="btn btn-default" id="EditBtn"><i class="fas fa-edit"></i> </button>' +
+            '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
 
+
+        //<i class="fas fa-edit"></i>
         //create new marker
         var tempMarker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
@@ -133,6 +124,11 @@ function initMap() {
         });
 
         google.maps.event.addListener(tempMarker, 'click', function () {
+            //send lat and lon
+            GetTitleAndDescription(latitude, longitude);
+            //get back title and description
+            //change html via js to display that
+
             //Remove all other visible infowindows when this marker is clicked
             if (infowindow) {
                 infowindow.close();
@@ -147,18 +143,6 @@ function initMap() {
         MarkerList.push(tempMarker);
     }
 }
-
-/**********************************************************************
- * Purpose: This function removes the serached marker from the map, clears 
- * the search bar and return the map to the original state
- **********************************************************************/
-//function RemoveMarkerForSearchedPlace() {
-//    marker.setVisible(false);
-//    map.setCenter(centerOfTheWorld);
-//    map.setZoom(2);
-//    document.querySelector('[title="Close"]').click();
-//    document.getElementById('SearchBar').value = '';
-//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.
