@@ -168,5 +168,24 @@ namespace Final_Project.Repositories
             }
             return model;
         }
+
+        public void Update_Location(string UserID, string Title, string Description, double lat, double lon)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("Update_Location", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@Title", Title);
+                    command.Parameters.AddWithValue("@Description", Description);
+                    command.Parameters.AddWithValue("@Latitude", lat);
+                    command.Parameters.AddWithValue("@Longitude", lon);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

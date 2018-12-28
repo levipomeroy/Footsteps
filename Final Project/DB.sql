@@ -44,6 +44,20 @@ where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Lo
 and UserID = @UserId;
 go
 
+drop procedure Update_Location;
+go
+create procedure Update_Location
+(
+	@UserId varchar(100),
+	@Title varchar(50),
+	@Description varchar(1000),
+	@Latitude double precision,
+	@Longitude double precision
+)
+as
+update Locations set [Name] = @Title, [Description] = @Description where UserID = @UserId and Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
+go
+
 drop procedure Location_GetList;
 go
 create procedure Location_GetList(

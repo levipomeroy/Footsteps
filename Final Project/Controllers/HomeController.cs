@@ -95,5 +95,11 @@ namespace Final_Project.Controllers
             var result = new { title = title, description = desription };
             return Json(result);
         }
+
+        public void Update_Location(string Title, string Description, double lat, double lon)
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            _LocationRepo.Update_Location(ID, Title, Description, lat, lon);
+        }
     }
 }

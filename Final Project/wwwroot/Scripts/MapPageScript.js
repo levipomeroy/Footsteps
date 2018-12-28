@@ -32,10 +32,10 @@ function initMap() {
         anchorPoint: new google.maps.Point(0, -29)
     });
 
-     /***************************************************************
-     * Purpose: Allows user to search for a location and has the option
-     * to save the location the thier locations if desired.
-     ***************************************************************/
+    /***************************************************************
+    * Purpose: Allows user to search for a location and has the option
+    * to save the location the thier locations if desired.
+    ***************************************************************/
     autocomplete.addListener('place_changed', function () {
         marker.setVisible(false);
         var place = autocomplete.getPlace();
@@ -57,7 +57,7 @@ function initMap() {
         var lat = place.geometry.location.lat();
         var lon = place.geometry.location.lng();
         //info window for searched place
-        var SearchedLocationOptions = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" +')" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
+        var SearchedLocationOptions = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + ')" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
         var infowindow = new google.maps.InfoWindow({
             content: SearchedLocationOptions
         });
@@ -76,7 +76,7 @@ function initMap() {
         var lon = e.latLng.lng();
 
         //New content string 
-        var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" +')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
+        var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + ')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
 
         var marker200 = new google.maps.Marker({
             position: { lat: lat, lng: lon },
@@ -103,15 +103,14 @@ function initMap() {
         //var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
         var InfoWindowContent = '<div>' +
             '<div id="TitleLBL"> <strong>Title</strong> </div>' +
-            '<div contentEditable="true" id="Title">...</div>' +
+            '<div contentEditable="false" id="Title">...</div>' +
             '<div id="DescritptionLBL"> <strong>Descritption</strong> </div>' +
-            '<div contentEditable="true" id="Description">...</div>' + 
+            '<div contentEditable="false" id="Description">...</div>' +
             '</div>' +
-            '<button style="background: none" type="button" class="btn btn-default" id="EditBtn"><i class="fas fa-edit"></i> </button>' +
-            '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
+            '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="EditBtn" onclick="EditMarkerClickHandle()"><i class="fas fa-edit"></i></button>' +
+            '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
+            '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="SaveUpdatesBtn" onclick="SaveUpdatesForMarker(' + "'" + index + "'" + ')"><i class="fas fa-save"></i></button>';
 
-
-        //<i class="fas fa-edit"></i>
         //create new marker
         var tempMarker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
@@ -124,10 +123,8 @@ function initMap() {
         });
 
         google.maps.event.addListener(tempMarker, 'click', function () {
-            //send lat and lon
+            //send lat and lon to get title and description
             GetTitleAndDescription(latitude, longitude);
-            //get back title and description
-            //change html via js to display that
 
             //Remove all other visible infowindows when this marker is clicked
             if (infowindow) {
@@ -142,7 +139,18 @@ function initMap() {
 
         MarkerList.push(tempMarker);
     }
+
 }
+
+function EditMarkerClickHandle() {
+    document.getElementById("Title").contentEditable = true;
+    document.getElementById("Description").contentEditable = true;
+}
+
+//function SaveUpdatesForMarker() {
+//    document.getElementById("Title").contentEditable = false;
+//    document.getElementById("Description").contentEditable = false;
+//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.

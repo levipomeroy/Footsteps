@@ -64,6 +64,20 @@
         });
     }
 
+    function SaveUpdatesForMarker(id) {
+        document.getElementById("Title").contentEditable = false;
+        document.getElementById("Description").contentEditable = false;
+
+        //Will probably want to add more fields to the data later but these 2 are all i have right now
+
+        $.ajax({
+            url: '@Url.Action("Update_Location", "Home")', 
+            type: 'POST',
+            data: { Title: document.getElementById("Title").innerHTML, Description: document.getElementById("Description").innerHTML, lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng()  },
+        });
+
+    }
+
 </script>
 
 
