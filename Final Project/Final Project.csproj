@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Images\splitmap.png" />
     <None Include="wwwroot\Scripts\MapPageScript.js" />
     <None Include="wwwroot\Styles\MapPageStyle.css" />
   </ItemGroup>

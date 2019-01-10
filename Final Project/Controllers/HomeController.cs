@@ -96,6 +96,7 @@ namespace Final_Project.Controllers
             return Json(result);
         }
 
+        //service to update a location from edit in infowindow
         public void Update_Location(string Title, string Description, double lat, double lon)
         {
             string ID = User.Claims.ElementAt(0).Value;

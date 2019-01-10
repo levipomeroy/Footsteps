@@ -12,7 +12,9 @@ create table Locations
 	[Name] varchar(50),
 	[Description] varchar(1000),
 	Category int,
-	UserID varchar(100)
+	UserID varchar(100),
+	DateVisited varchar(12),
+	DateAdded varchar(12)
 );
 go
 drop procedure Location_Insert;
@@ -24,11 +26,12 @@ create procedure Location_Insert (
 	@Name varchar(50),
 	@Description varchar(1000),
 	@Category int,
-	@UserID varchar(100)
+	@UserID varchar(100),
+	@DateVisited varchar(12)
 )
 as
-insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID)
-VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID)
+insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID, DateVisited)
+VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID, @DateVisited)
 go
 drop procedure GetTitleAndDescription;
 go 

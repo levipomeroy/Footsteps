@@ -36,5 +36,8 @@ namespace Final_Project.Models
         public List<LocationObject> LocationList { get; set; }
 
         public string UserID { get; set; }
+
+        [Required(ErrorMessage = "Date Visited is a required field")]
+        public string DateVisited { get; set; }
     }
 }

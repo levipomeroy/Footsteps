@@ -90,6 +90,7 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@Description", location.Description);
                     command.Parameters.AddWithValue("@Category", location.Category);
                     command.Parameters.AddWithValue("@UserID", location.UserID);
+                    command.Parameters.AddWithValue("@DateVisited", location.DateVisited);
 
 
                     command.CommandType = CommandType.StoredProcedure;
