@@ -106,6 +106,8 @@ function initMap() {
             '<div contentEditable="false" id="Title">...</div>' +
             '<div id="DescritptionLBL"> <strong>Descritption</strong> </div>' +
             '<div contentEditable="false" id="Description">...</div>' +
+            '<div id="DateVisitedLBL"> <strong>Date Visited</strong> </div>' +
+            '<input contentEditable="false" type="date" id="DateVisited" readonly="true" style="border: none; outline: none"/>' +
             '</div>' +
             '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="EditBtn" onclick="EditMarkerClickHandle()"><i class="fas fa-edit"></i></button>' +
             '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
@@ -142,15 +144,12 @@ function initMap() {
 
 }
 
+//Makes fields in the infowindow editable
 function EditMarkerClickHandle() {
     document.getElementById("Title").contentEditable = true;
     document.getElementById("Description").contentEditable = true;
+    document.getElementById("DateVisited").readOnly = false;
 }
-
-//function SaveUpdatesForMarker() {
-//    document.getElementById("Title").contentEditable = false;
-//    document.getElementById("Description").contentEditable = false;
-//}
 
 /**********************************************************************
  * Purpose: This function changes the map theme to a dark blue theme.

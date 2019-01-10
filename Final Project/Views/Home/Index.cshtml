@@ -67,8 +67,9 @@
     function SaveUpdatesForMarker(id) {
         document.getElementById("Title").contentEditable = false;
         document.getElementById("Description").contentEditable = false;
+        document.getElementById("DateVisited").readOnly = true;
 
-        //Will probably want to add more fields to the data later but these 2 are all i have right now
+        //Will want to add more fields to the data later but these 2 are all i have right now
 
         $.ajax({
             url: '@Url.Action("Update_Location", "Home")', 
