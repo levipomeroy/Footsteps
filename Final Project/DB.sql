@@ -30,8 +30,8 @@ create procedure Location_Insert (
 	@DateVisited varchar(12)
 )
 as
-insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID, DateVisited)
-VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID, @DateVisited)
+insert into Locations(Country, Latitude, Longitude, Name, Description, Category, UserID, DateVisited, DateAdded)
+VALUES (@Country, @Latitude, @Longitude, @Name, @Description, @Category, @UserID, @DateVisited, GETDATE())
 go
 drop procedure GetTitleAndDescription;
 go 
@@ -79,7 +79,8 @@ create procedure AddMarkerWithLatLon
 	@Longitude double precision
 )
 as
-insert into Locations (UserID, Latitude, Longitude, Country, [Name], [Description], Category) values (@UserId, @Latitude, @Longitude, '', '','',0);
+insert into Locations (UserID, Latitude, Longitude, Country, [Name], [Description], Category, DateAdded) 
+values (@UserId, @Latitude, @Longitude, '', '','',0, GETDATE());
 go
 
 select * from Locations;
