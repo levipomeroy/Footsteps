@@ -49,7 +49,7 @@
         window.location.reload(); //reloads page but kinda a shitty way to do it, hopefully will fix later
     }   
 
-     //Send lat and lon and get back title and description
+     //Send lat and lon and get back title, description, and DateVisited
     function GetTitleAndDescription(lat, lon) {
         $.ajax({
             url: '@Url.Action("GetTitleAndDescription", "Home")', 
@@ -59,7 +59,7 @@
                 var objResult = JSON.parse(JSON.stringify(data)); //parse result into object
                 document.getElementById("Title").innerHTML = objResult.title;
                 document.getElementById("Description").innerHTML = objResult.description;
-
+                document.getElementById("DateVisited").value = objResult.dateVisited;
             }
         });
     }
@@ -69,12 +69,18 @@
         document.getElementById("Description").contentEditable = false;
         document.getElementById("DateVisited").readOnly = true;
 
-        //Will want to add more fields to the data later but these 2 are all i have right now
+        //Will want to add more fields to the data later but these 3 are all i have right now
 
         $.ajax({
             url: '@Url.Action("Update_Location", "Home")', 
             type: 'POST',
-            data: { Title: document.getElementById("Title").innerHTML, Description: document.getElementById("Description").innerHTML, lat: MarkerList[id].getPosition().lat(), lon: MarkerList[id].getPosition().lng()  },
+            data: {
+                Title: document.getElementById("Title").innerHTML,
+                Description: document.getElementById("Description").innerHTML,
+                DateVisited: document.getElementById("DateVisited").value,
+                lat: MarkerList[id].getPosition().lat(),
+                lon: MarkerList[id].getPosition().lng()
+            },
         });
 
     }

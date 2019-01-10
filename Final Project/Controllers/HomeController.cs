@@ -83,6 +83,7 @@ namespace Final_Project.Controllers
             LocationModel model = _LocationRepo.GetTitleAndDescription(ID, lat, lon);
             string title = string.Empty;
             string desription = string.Empty;
+            string date = string.Empty;
 
             if(model.Name != null)
             {
@@ -92,15 +93,19 @@ namespace Final_Project.Controllers
             {
                 desription = model.Description;
             }
-            var result = new { title = title, description = desription };
+            if(model.DateVisited != null)
+            {
+                date = model.DateVisited;
+            }
+            var result = new { title = title, description = desription, dateVisited = date };
             return Json(result);
         }
 
         //service to update a location from edit in infowindow
-        public void Update_Location(string Title, string Description, double lat, double lon)
+        public void Update_Location(string Title, string Description, string DateVisited, double lat, double lon)
         {
             string ID = User.Claims.ElementAt(0).Value;
-            _LocationRepo.Update_Location(ID, Title, Description, lat, lon);
+            _LocationRepo.Update_Location(ID, Title, Description, DateVisited, lat, lon);
         }
     }
 }

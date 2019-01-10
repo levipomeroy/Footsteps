@@ -42,7 +42,7 @@ create procedure GetTitleAndDescription
 	@Longitude double precision
 )
 as
-select [Name], [Description] from Locations
+select [Name], [Description], DateVisited from Locations
 where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
 and UserID = @UserId;
 go
@@ -54,11 +54,12 @@ create procedure Update_Location
 	@UserId varchar(100),
 	@Title varchar(50),
 	@Description varchar(1000),
+	@DateVisited varchar(12),
 	@Latitude double precision,
 	@Longitude double precision
 )
 as
-update Locations set [Name] = @Title, [Description] = @Description where UserID = @UserId and Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
+update Locations set [Name] = @Title, [Description] = @Description, DateVisited = @DateVisited where UserID = @UserId and Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
 go
 
 drop procedure Location_GetList;
