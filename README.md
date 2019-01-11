@@ -30,6 +30,6 @@ Some working features include:
 <h2>Default map page without side bar collapsed</h2>
 <img src="https://github.com/levipomeroy/Footsteps/blob/master/Final%20Project/expanded.PNG" width=600> </img>
 
-<h2>Map page with Midnight theme applied</h2>
-<img src="https://github.com/levipomeroy/Footsteps/blob/master/Final%20Project/MidnightMap.PNG" width=600></img>
+<h2>Dashboard page - partially completed</h2>
+<img src="https://github.com/levipomeroy/Footsteps/blob/f24ec754778034f0d49d40c93f37cbb129108ba1/StartingDashboard.PNG?raw=true" width=600></img>
 
