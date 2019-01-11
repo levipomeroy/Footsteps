@@ -21,6 +21,7 @@ namespace Final_Project.Controllers
             return View();
         }
 
+        //service to get number of countires for user
         public JsonResult GetCountryCount()
         {
             string ID = User.Claims.ElementAt(0).Value;
@@ -28,10 +29,19 @@ namespace Final_Project.Controllers
             return Json(count);
         }
 
+        //service to get leaderboard for most pins
         public JsonResult GetMostPinsLeaderboard()
         {
             List<string> PinLeaderboard = _DashbaordRepo.GetUserWithMostPinsLeaderboard();
             return Json(PinLeaderboard);
+        }
+
+        public JsonResult GetDatesOfTrips()
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+
+            List<string> Dates = _DashbaordRepo.GetDatesOfTrips(ID);
+            return Json(Dates);
         }
     }
 }

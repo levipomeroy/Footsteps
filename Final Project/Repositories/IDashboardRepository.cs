@@ -8,6 +8,8 @@ namespace Final_Project.Repositories
     public interface IDashboardRepository
     {
         int GetNumberOfCountriesVisited(string UserID);
-        List<string> GetUserWithMostPinsLeaderboard(); 
+        List<string> GetUserWithMostPinsLeaderboard();
+
+        List<string> GetDatesOfTrips(string UserID);
     }
 }

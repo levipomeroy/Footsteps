@@ -128,6 +128,17 @@ group by UserName
 order by pincount desc
 go
 
+drop procedure GetDatesOfTrips
+go
+create procedure GetDatesOfTrips
+(
+	@UserId varchar(100)
+)
+as
+select DateVisited from Locations where UserID = @UserId; --will want to add category check her also
+go
+
+
 drop procedure GetListIDByName
 go
 create procedure GetListIDByName

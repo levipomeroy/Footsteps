@@ -17,6 +17,34 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
+        //This function gets the dates of trip visited for the user
+        public List<string> GetDatesOfTrips(string UserID)
+        {
+            List<string> Dates = new List<string>();
+            string Date = string.Empty;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetDatesOfTrips", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Date = reader["DateVisited"].ToString();
+                            Dates.Add(Date);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return Dates;
+        }
+
         //This function gets the number of unique countries visited for a specific user
         public int GetNumberOfCountriesVisited(string UserID)
         {

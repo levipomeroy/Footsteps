@@ -16,10 +16,12 @@
     </div>
 
     @*Content*@
-    <h2>Your Statistics</h2>
+    <div class="container">
+        <h2>Your Statistics</h2>
+    </div>
     <div class="row container" id="DashboardStats">
         @*Countries visited percent chart*@
-        <div class="col-2">
+        <div class="col-3">
             <div id="CountriesVisitedChart">
                 <label class="control-label">Countries Visited</label>
                 <div id="bar"></div>
@@ -30,7 +32,19 @@
         <div class="col-5">
             <div id="TripsOverTime">
                 <label class="control-label">Visited This Year</label>
-                <canvas id="lineChart"></canvas>
+                <div class="wrapperForCentering">
+                    <canvas id="lineChart" height="180" width="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+        @*Categories of trip chart*@
+        <div class="col-4">
+            <div id="CategoriesChart">
+                <label class="control-label">Categories</label>
+                <div class="wrapperForCentering">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -76,9 +90,9 @@
     </div>
 </div>
 <script>
-
     function StartUpFunc() {
         const num_countries_in_world = 195;
+
         //Set up countries visited bar
         var bar = new RadialProgress(document.getElementById("bar"), { colorFg: "#0080FF", thick: 10, fixedTextSize: 0.25, colorText: "#000000" });
         bar.setIndeterminate(false);
@@ -93,50 +107,13 @@
             }
         });
 
-        //Call service to get pin leaderboard info and populate it
-         $.ajax({
-            url: '@Url.Action("GetMostPinsLeaderboard", "Dashboard")',
-            type: 'POST',
-            data: { },
-             success: function (data) {
-                 var content = "<ul>";
-                 for (var i = 0; i < 5; i++) {
-                         content += "<li>" + data[i] + "</li>";
-                 }
-                 content += "</ul>";
-                 document.getElementById("MostPinsLeaderboardBody").innerHTML = content;
-            }
-        });
-
-
-        //////////////////// This is for the trips over time graph /////////////////////////////
-        var ctxL = document.getElementById("lineChart").getContext('2d');
-        var myLineChart = new Chart(ctxL, {
-            type: 'line',
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                datasets: [{
-                    label: "Places per month",
-                    data: [3, 6, 0, 2, 4, 8, 4, 5, 7, 6, 1, 2],
-                    backgroundColor: [
-                        '#66b3ff',
-                    ],
-                    borderColor: [
-                        '#0080FF',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: false
-            }
-        });
-        /////////////////////////////////////// end trip over time /////////////////////////////
-
+        NumberOfLocaionsLeaderboard(); //populate location number leaderboard
+        TripsOverTimeGraph(); //populate trip over time graph
+        CategoryChart(); //populate category doughnut chart
     }
     window.onload = StartUpFunc;
 
-
+    //stuff for circular progress bar
     window.rp_requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || (function (callback, element) { setTimeout(callback, 1000 / 60); });
     function RadialProgress(container, cfg) {
         container.innerHTML = "";
@@ -214,6 +191,130 @@
         setText: function (t) { this.text.innerHTML = t; }
     }
 
+
+    //Call service to get pin leaderboard info and populate it
+    function NumberOfLocaionsLeaderboard() {
+         $.ajax({
+            url: '@Url.Action("GetMostPinsLeaderboard", "Dashboard")',
+            type: 'POST',
+            data: { },
+             success: function (data) {
+                 var content = "<ul>";
+                 for (var i = 0; i < 5; i++) {
+                         content += "<li>" + data[i] + "</li>";
+                 }
+                 content += "</ul>";
+                 document.getElementById("MostPinsLeaderboardBody").innerHTML = content;
+            }
+        });
+    }
+
+
+    //Get data and populate trips over time chart
+    function TripsOverTimeGraph() {
+        //get data
+        var months = [];
+        var monthCount = {
+            "January": 0, "February": 0, "March": 0, "April": 0,
+            "May": 0, "June": 0, "July": 0, "August": 0, "September": 0, "October": 0,
+            "November": 0, "December": 0};
+        $.ajax({
+            url: '@Url.Action("GetDatesOfTrips", "Dashboard")',
+            type: 'POST',
+            data: { },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var arr = data[i].split("-");
+                    months.push(arr[1]);
+                }
+                for (var i = 0; i < months.length; i++) {
+                    if (months[i] == 1) {
+                        monthCount["January"]++;
+                    }
+                    else if (months[i] == 2) {
+                        monthCount["February"]++;
+                    }
+                    else if (months[i] == 3) {
+                        monthCount["March"]++;
+                    }
+                    else if (months[i] == 4) {
+                        monthCount["April"]++;
+                    }
+                    else if (months[i] == 5) {
+                        monthCount["May"]++;
+                    }
+                    else if (months[i] == 6) {
+                        monthCount["June"]++;
+                    }
+                    else if (months[i] == 7) {
+                        monthCount["July"]++;
+                    }
+                    else if (months[i] == 8) {
+                        monthCount["August"]++;
+                    }
+                    else if (months[i] == 9) {
+                        monthCount["September"]++;
+                    }
+                    else if (months[i] == 10) {
+                        monthCount["October"]++;
+                    }
+                    else if (months[i] == 11) {
+                        monthCount["November"]++;
+                    }
+                    else if (months[i] == 12) {
+                        monthCount["December"]++;
+                    }
+                }
+
+                //alert(monthCount["January"]);
+                var ctxL = document.getElementById("lineChart").getContext('2d');
+                var myLineChart = new Chart(ctxL, {
+                    type: 'line',
+                    data: {
+                        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        datasets: [{
+                            label: "Places per month",
+                            data: [monthCount["January"], monthCount["February"], monthCount["March"],
+                            monthCount["April"], monthCount["May"], monthCount["June"],
+                            monthCount["July"], monthCount["August"], monthCount["September"],
+                            monthCount["October"], monthCount["November"], monthCount["December"]],
+                            backgroundColor: [
+                                '#b3d9ff',
+                            ],
+                            borderColor: [
+                                '#0080FF',
+                            ],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: false
+                    }
+                });
+            }
+        });
+    }
+
+
+    //category chart func
+    function CategoryChart() {
+        //Set up for categories doughnut chart
+        var ctxD = document.getElementById("doughnutChart").getContext('2d');
+        var myLineChart = new Chart(ctxD, {
+            type: 'doughnut',
+            data: {
+                labels: ["Visited", "Want to go", "Lived", "Bucket list"],
+                datasets: [{
+                    data: [250, 50, 10, 40],
+                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
+                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    }
 </script>
 
 <script type="text/javascript" src="~/MDB/js/mdb.min.js"></script>

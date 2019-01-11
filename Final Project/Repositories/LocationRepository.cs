@@ -67,6 +67,7 @@ namespace Final_Project.Repositories
                             location.Name = reader["Name"].ToString();
                             location.Description = reader["Description"].ToString();
                             location.Category = (int)reader["Category"];
+                            location.DateVisited = reader["DateVisited"].ToString();
 
                             Locations.Add(location);
                         }
