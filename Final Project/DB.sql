@@ -106,6 +106,28 @@ create procedure GetNumberOfLocations(
 as
 select count(ID) LocCount from Locations where UserID = @UserID ;
 go
+
+--Get count of counties visited, will need to reverse lookup to get countries added by right-click
+--will also need to add category part later (only 'been to', not 'want to go to')
+drop procedure GetNumberOfCountries;
+go
+create procedure GetNumberOfCountries(
+	@UserID varchar(100)
+)
+as
+select count(distinct Country) CountryCount from locations where UserID = @UserID;
+go
+
+
+drop procedure GetMostPinsUsers;
+go
+create procedure GetMostPinsUsers
+as select top 5 UserName, count(UserName) pincount from 
+AspNetUsers join Locations on AspNetUsers.Id = Locations.UserID 
+group by UserName
+order by pincount desc
+go
+
 drop procedure GetListIDByName
 go
 create procedure GetListIDByName

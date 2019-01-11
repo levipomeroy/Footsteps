@@ -23,6 +23,7 @@ namespace Final_Project
             services.AddTransient<ILocationRepository, LocationRepository>();
             services.AddTransient<IContactRepository, ContactRepository>();
             services.AddTransient<IListRepository, ListRepository>();
+            services.AddTransient<IDashboardRepository, DashboardRepository>();
 
             //Set up settings for connectionstring
             var MyConfig = new ConfigurationBuilder()
