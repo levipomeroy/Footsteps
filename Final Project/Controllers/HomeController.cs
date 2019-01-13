@@ -105,6 +105,18 @@ namespace Final_Project.Controllers
         public void Update_Location(string Title, string Description, string DateVisited, double lat, double lon)
         {
             string ID = User.Claims.ElementAt(0).Value;
+            if (Title == null)
+            {
+                Title = "";
+            }
+            if (Description == null)
+            {
+                Description = "";
+            }
+            if(DateVisited == null)
+            {
+                DateVisited = "99/99/9999";
+            }
             _LocationRepo.Update_Location(ID, Title, Description, DateVisited, lat, lon);
         }
     }

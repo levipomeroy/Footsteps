@@ -283,3 +283,5 @@ select * from AspNetRoleClaims;
 
 --select * from locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840';
 --delete from locations where Country is null
+
+select * from Locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840'
