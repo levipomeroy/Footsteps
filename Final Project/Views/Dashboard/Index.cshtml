@@ -69,8 +69,8 @@
                 <div class="col-4">
                     <div id="MostCountriesLeaderboard" class="card">
                         <div class="card-header">Most Countries</div>
-                        <div class="card-body">
-
+                        <div id="MostCountriesLeaderboardBody" class="card-body">
+                            @*will be dynamically filled from script below*@
                         </div>
                     </div>
                 </div>
@@ -108,6 +108,7 @@
         });
 
         NumberOfLocaionsLeaderboard(); //populate location number leaderboard
+        NumberOfCountriesLeaderboard(); //populate country number leaderboard
         TripsOverTimeGraph(); //populate trip over time graph
         CategoryChart(); //populate category doughnut chart
     }
@@ -205,6 +206,22 @@
                  }
                  content += "</ul>";
                  document.getElementById("MostPinsLeaderboardBody").innerHTML = content;
+            }
+        });
+    }
+
+    function NumberOfCountriesLeaderboard() {
+                 $.ajax({
+            url: '@Url.Action("GetMostCountriesLeaderboard", "Dashboard")',
+            type: 'POST',
+            data: { },
+             success: function (data) {
+                 var content = "<ul>";
+                 for (var i = 0; i < 5; i++) {
+                         content += "<li>" + data[i] + "</li>";
+                 }
+                 content += "</ul>";
+                 document.getElementById("MostCountriesLeaderboardBody").innerHTML = content;
             }
         });
     }

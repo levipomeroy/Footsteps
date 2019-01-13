@@ -11,5 +11,6 @@ namespace Final_Project.Repositories
         List<string> GetUserWithMostPinsLeaderboard();
 
         List<string> GetDatesOfTrips(string UserID);
+        List<string> GetUsersWithMostCountries();
     }
 }

@@ -36,6 +36,14 @@ namespace Final_Project.Controllers
             return Json(PinLeaderboard);
         }
 
+        //service to get leaderboard for most countries
+        public JsonResult GetMostCountriesLeaderboard()
+        {
+            List<string> CountryLeaderboard = _DashbaordRepo.GetUsersWithMostCountries();
+            return Json(CountryLeaderboard);
+        }
+
+        //service to get dates of trips for trips over time graph
         public JsonResult GetDatesOfTrips()
         {
             string ID = User.Claims.ElementAt(0).Value;

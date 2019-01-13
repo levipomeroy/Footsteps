@@ -72,6 +72,31 @@ namespace Final_Project.Repositories
             return count;
         }
 
+        public List<string> GetUsersWithMostCountries()
+        {
+            List<string> CountryLeaderBoard = new List<string>();
+            string userName = string.Empty;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetMostCountriesUsers", newConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            userName = reader["UserName"].ToString();
+                            CountryLeaderBoard.Add(userName);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return CountryLeaderBoard;
+        }
+
         //This function gets a list of the top 5 users based on number of locations
         public List<string> GetUserWithMostPinsLeaderboard()
         {

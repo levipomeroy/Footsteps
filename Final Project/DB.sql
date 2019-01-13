@@ -130,6 +130,17 @@ group by UserName
 order by pincount desc
 go
 
+------------------ Most countries leaderboard--------------------------------
+drop procedure GetMostCountriesUsers;
+go 
+create procedure GetMostCountriesUsers
+as select top 5 UserName, count(distinct Country) CountryCount
+from AspNetUsers join Locations on AspNetUsers.Id = Locations.UserID 
+group by UserName
+order by CountryCount desc
+go
+------------------------------------------------------------------------------
+
 drop procedure GetDatesOfTrips
 go
 create procedure GetDatesOfTrips
