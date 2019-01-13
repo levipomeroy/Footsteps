@@ -69,10 +69,10 @@ namespace Final_Project.Controllers
 
         //Service to add location from click anywhere on the map
         [HttpPost]
-        public void AddLocationWithLatLon(double lat, double lon) //not used yet
+        public void AddLocationWithLatLon(double lat, double lon, string country) //not used yet
         {
             string ID = User.Claims.ElementAt(0).Value;
-            _LocationRepo.AddLocationWithLatLon(ID, lat, lon);
+            _LocationRepo.AddLocationWithLatLon(ID, lat, lon, country);
         }
 
         //Service to get title and description from db for infowindow on marker on map

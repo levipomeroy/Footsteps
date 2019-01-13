@@ -126,7 +126,7 @@ namespace Final_Project.Repositories
             return numLocations;
         }
 
-        public void AddLocationWithLatLon(string UserID, double Latitude, double Longitude)
+        public void AddLocationWithLatLon(string UserID, double Latitude, double Longitude, string country)
         {
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
@@ -135,6 +135,7 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@UserId", UserID);
                     command.Parameters.AddWithValue("@Latitude", Latitude);
                     command.Parameters.AddWithValue("@Longitude", Longitude);
+                    command.Parameters.AddWithValue("@Country", country);
 
                     command.CommandType = CommandType.StoredProcedure;
                     newConnection.Open();

@@ -70,17 +70,19 @@ create procedure Location_GetList(
 AS
 Select * from Locations where UserID = @UserID;
 go
+
 drop procedure AddMarkerWithLatLon;
 go
 create procedure AddMarkerWithLatLon
 (
 	@UserId varchar(100),
 	@Latitude double precision,
-	@Longitude double precision
+	@Longitude double precision,
+	@Country varchar(50)
 )
 as
 insert into Locations (UserID, Latitude, Longitude, Country, [Name], [Description], Category, DateAdded) 
-values (@UserId, @Latitude, @Longitude, '', '','',0, GETDATE());
+values (@UserId, @Latitude, @Longitude, @Country, '','',0, GETDATE());
 go
 
 select * from Locations;
@@ -135,9 +137,9 @@ create procedure GetDatesOfTrips
 	@UserId varchar(100)
 )
 as
-select DateVisited from Locations where UserID = @UserId; --will want to add category check her also
+select DateVisited from Locations where UserID = @UserId
+and YEAR(DateVisited) = YEAR(GETDATE());--will want to add category check her also
 go
-
 
 drop procedure GetListIDByName
 go

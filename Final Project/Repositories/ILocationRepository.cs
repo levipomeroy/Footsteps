@@ -15,7 +15,7 @@ namespace Final_Project.Repositories
         void Edit(LocationObject location);
 
         int GetNumberOfLocationsForUser(string UserId);
-        void AddLocationWithLatLon(string UserID, double Latitude, double Longitude);
+        void AddLocationWithLatLon(string UserID, double Latitude, double Longitude, string country);
         LocationModel GetTitleAndDescription(string UserID, double Latitude, double Longitude);
         void Update_Location(string UserID, string Title, string Description, string DateVisited, double lat, double lon);
     }

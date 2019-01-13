@@ -39,12 +39,12 @@
     }
 
     //add marker from right click or search on map
-    function AddMarkerFromLatLon(lat, lon) {
+    function AddMarkerFromLatLon(lat, lon, country) {
          $.ajax({
             //url: '/Home/AddLocationWithLatLon',
             url: '@Url.Action("AddLocationWithLatLon", "Home")', //either url works
-            type: 'POST',
-            data: { lat: lat, lon: lon },
+             type: 'POST',
+             data: { lat: lat, lon: lon, country: country },
         });
         window.location.reload(); //reloads page but kinda a shitty way to do it, hopefully will fix later
     }   

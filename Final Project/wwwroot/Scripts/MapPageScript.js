@@ -56,8 +56,13 @@ function initMap() {
 
         var lat = place.geometry.location.lat();
         var lon = place.geometry.location.lng();
+        //get country of location
+        var filtered_array = place.address_components.filter(function (address_component) {
+            return address_component.types.includes("country");
+        });
+        var country = filtered_array[0].long_name;
         //info window for searched place
-        var SearchedLocationOptions = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + ')" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
+        var SearchedLocationOptions = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + "," + "'" + country + "'" + ')" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
         var infowindow = new google.maps.InfoWindow({
             content: SearchedLocationOptions
         });
@@ -71,25 +76,42 @@ function initMap() {
      * they clicked. This is usefult because it doenst have to be an address,
      * it can be in the middle of no where. 
      ***************************************************************/
+    var geocoder = new google.maps.Geocoder();
     map.addListener('rightclick', function (e) {
         var lat = e.latLng.lat();
         var lon = e.latLng.lng();
+        var filtered_array;
+        var country = "something";
 
-        //New content string 
-        var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + ')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
+        geocoder.geocode({
+            'latLng': e.latLng
+        },
+            function (results, status) { //Get country name
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    filtered_array = results[0].address_components.filter(function (address_component) {
+                        return address_component.types.includes("country");
+                    });
+                    country = filtered_array[0].long_name;
 
-        var marker200 = new google.maps.Marker({
-            position: { lat: lat, lng: lon },
-            map: map,
-            icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    //New content string 
+                    var contentString = '<button type="button" onclick="AddMarkerFromLatLon(' + "'" + lat + "'" + "," + "'" + lon + "'" + "," + "'" + country + "'" + ')" id="AddRightClickMarkerButton" class="btn btn-default">' + '<i class="fas fa-save"></i>' + '</button>';
+
+                    var marker200 = new google.maps.Marker({
+                        position: { lat: lat, lng: lon },
+                        map: map,
+                        icon: {
+                            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" //maybe change to https
+                        }
+                    });
+                    var NewLocationinfowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    marker200.addListener('click', function () {
+                        NewLocationinfowindow.open(map, marker200);
+                    });
+                }
             }
-        });
-        var NewLocationinfowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-        marker200.addListener('click', function () {
-            NewLocationinfowindow.open(map, marker200);
         });
     });
 
