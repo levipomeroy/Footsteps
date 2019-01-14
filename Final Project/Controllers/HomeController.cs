@@ -102,7 +102,7 @@ namespace Final_Project.Controllers
         }
 
         //service to update a location from edit in infowindow
-        public void Update_Location(string Title, string Description, string DateVisited, double lat, double lon)
+        public void Update_Location(string Title, string Description, string DateVisited, string Category, double lat, double lon)
         {
             string ID = User.Claims.ElementAt(0).Value;
             if (Title == null)
@@ -117,7 +117,7 @@ namespace Final_Project.Controllers
             {
                 DateVisited = "99/99/9999";
             }
-            _LocationRepo.Update_Location(ID, Title, Description, DateVisited, lat, lon);
+            _LocationRepo.Update_Location(ID, Title, Description, DateVisited, Category, lat, lon);
         }
     }
 }

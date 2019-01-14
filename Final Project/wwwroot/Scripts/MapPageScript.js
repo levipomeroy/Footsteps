@@ -128,8 +128,15 @@ function initMap() {
             '<div contentEditable="false" id="Title">...</div>' +
             '<div id="DescritptionLBL"> <strong>Descritption</strong> </div>' +
             '<div contentEditable="false" id="Description">...</div>' +
-            '<div id="DateVisitedLBL"> <strong>Date Visited</strong> </div>' +
+            '<div id="DateVisitedLBL"> <strong>Date</strong> </div>' +
             '<input contentEditable="false" type="date" id="DateVisited" readonly="true" style="border: none; outline: none"/>' +
+            '<div id="CategoryLBL"> <strong>Category</strong> </div>' +
+            '<select disabled="true" id="CategoryEditor">' +
+            '<option value="Visited">Visited</option>' +
+            '<option value="Want to go">Want to go</option>' +
+            '<option value="Plan to go">Plan to go</option>' +
+            '<option value="Lived">Lived</option>' +
+            '</select>' + 
             '</div>' +
             '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="EditBtn" onclick="EditMarkerClickHandle()"><i class="fas fa-edit"></i></button>' +
             '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
@@ -171,6 +178,7 @@ function EditMarkerClickHandle() {
     document.getElementById("Title").contentEditable = true;
     document.getElementById("Description").contentEditable = true;
     document.getElementById("DateVisited").readOnly = false;
+    document.getElementById("CategoryEditor").disabled = false;
 }
 
 /**********************************************************************

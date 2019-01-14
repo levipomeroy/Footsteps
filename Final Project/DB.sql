@@ -55,11 +55,12 @@ create procedure Update_Location
 	@Title varchar(50),
 	@Description varchar(1000),
 	@DateVisited varchar(12),
+	@Category varchar(15),
 	@Latitude double precision,
 	@Longitude double precision
 )
 as
-update Locations set [Name] = @Title, [Description] = @Description, DateVisited = @DateVisited where UserID = @UserId and Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
+update Locations set [Name] = @Title, [Description] = @Description, DateVisited = @DateVisited, Category = @Category where UserID = @UserId and Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5);
 go
 
 drop procedure Location_GetList;

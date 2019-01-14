@@ -68,8 +68,9 @@
         document.getElementById("Title").contentEditable = false;
         document.getElementById("Description").contentEditable = false;
         document.getElementById("DateVisited").readOnly = true;
+        document.getElementById("CategoryEditor").disabled = true;
 
-        //Will want to add more fields to the data later but these 3 are all i have right now
+        var CategorySelect = document.getElementById("CategoryEditor");
 
         $.ajax({
             url: '@Url.Action("Update_Location", "Home")', 
@@ -78,11 +79,11 @@
                 Title: document.getElementById("Title").innerHTML,
                 Description: document.getElementById("Description").innerHTML,
                 DateVisited: document.getElementById("DateVisited").value,
+                Category: CategorySelect.options[CategorySelect.selectedIndex].text,
                 lat: MarkerList[id].getPosition().lat(),
                 lon: MarkerList[id].getPosition().lng()
             },
         });
-
     }
 
 </script>

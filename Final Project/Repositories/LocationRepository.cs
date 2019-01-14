@@ -173,7 +173,7 @@ namespace Final_Project.Repositories
             return model;
         }
 
-        public void Update_Location(string UserID, string Title, string Description, string DateVisited, double lat, double lon)
+        public void Update_Location(string UserID, string Title, string Description, string DateVisited, string Category, double lat, double lon)
         {
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
@@ -183,6 +183,7 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@Title", Title);
                     command.Parameters.AddWithValue("@Description", Description);
                     command.Parameters.AddWithValue("@DateVisited", DateVisited);
+                    command.Parameters.AddWithValue("@Category", Category);
                     command.Parameters.AddWithValue("@Latitude", lat);
                     command.Parameters.AddWithValue("@Longitude", lon);
 
