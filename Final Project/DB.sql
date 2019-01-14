@@ -120,7 +120,7 @@ as
 select count(distinct Country) CountryCount from locations where UserID = @UserID;
 go
 
-
+------------------ Most locations leaderboard--------------------------------
 drop procedure GetMostPinsUsers;
 go
 create procedure GetMostPinsUsers
@@ -129,6 +129,19 @@ AspNetUsers join Locations on AspNetUsers.Id = Locations.UserID
 group by UserName
 order by pincount desc
 go
+-----------------------------------------------------------------------------
+
+------------- Most locations this month leaderboard--------------------------
+drop procedure GetMostLocationsThisMonth;
+go
+create procedure GetMostLocationsThisMonth
+as select UserName, count(UserName) pincount from 
+AspNetUsers join Locations on AspNetUsers.Id = Locations.UserID 
+where Month(DateVisited) = MONTH(GETDATE()) 
+group by UserName
+order by pincount desc
+go
+-----------------------------------------------------------------------------
 
 ------------------ Most countries leaderboard--------------------------------
 drop procedure GetMostCountriesUsers;
@@ -283,5 +296,3 @@ select * from AspNetRoleClaims;
 
 --select * from locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840';
 --delete from locations where Country is null
-
-select * from Locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840'

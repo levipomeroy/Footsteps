@@ -43,6 +43,13 @@ namespace Final_Project.Controllers
             return Json(CountryLeaderboard);
         }
 
+        //service to get leaderboard for most locations this month
+        public JsonResult GetUsersWithMostLocationsThisMonth()
+        {
+            List<string> MonthLeaderboard = _DashbaordRepo.GetUsersWithMostLocationsThisMonth();
+            return Json(MonthLeaderboard);
+        }
+
         //service to get dates of trips for trips over time graph
         public JsonResult GetDatesOfTrips()
         {

@@ -97,6 +97,31 @@ namespace Final_Project.Repositories
             return CountryLeaderBoard;
         }
 
+        public List<string> GetUsersWithMostLocationsThisMonth()
+        {
+            List<string> LocationThisMonthLeaderBoard = new List<string>();
+            string userName = string.Empty;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetMostLocationsThisMonth", newConnection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            userName = reader["UserName"].ToString();
+                            LocationThisMonthLeaderBoard.Add(userName);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return LocationThisMonthLeaderBoard;
+        }
+
         //This function gets a list of the top 5 users based on number of locations
         public List<string> GetUserWithMostPinsLeaderboard()
         {

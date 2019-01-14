@@ -79,8 +79,8 @@
                 <div class="col-4">
                     <div id="MostLocationsMonthLeaderboard" class="card">
                         <div class="card-header">Most Locations This Month</div>
-                        <div class="card-body">
-
+                        <div id="MostLocationsThisMonthLeaderboardBody" class="card-body">
+                            @*will be dynamically filled from script below*@
                         </div>
                     </div>
                 </div>
@@ -109,6 +109,7 @@
 
         NumberOfLocaionsLeaderboard(); //populate location number leaderboard
         NumberOfCountriesLeaderboard(); //populate country number leaderboard
+        NumberOfLocationsThisMonthLeaderboard(); //populate location this month leaderboard
         TripsOverTimeGraph(); //populate trip over time graph
         CategoryChart(); //populate category doughnut chart
     }
@@ -222,6 +223,22 @@
                  }
                  content += "</ul>";
                  document.getElementById("MostCountriesLeaderboardBody").innerHTML = content;
+            }
+        });
+    }
+
+    function NumberOfLocationsThisMonthLeaderboard() {
+        $.ajax({
+            url: '@Url.Action("GetUsersWithMostLocationsThisMonth", "Dashboard")',
+            type: 'POST',
+            data: { },
+             success: function (data) {
+                 var content = "<ul>";
+                 for (var i = 0; i < 5 && i < data.length; i++) {
+                    content += "<li>" + data[i] + "</li>";
+                 }
+                 content += "</ul>";
+                 document.getElementById("MostLocationsThisMonthLeaderboardBody").innerHTML = content;
             }
         });
     }
