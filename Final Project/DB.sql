@@ -42,7 +42,7 @@ create procedure GetTitleAndDescription
 	@Longitude double precision
 )
 as
-select [Name], [Description], DateVisited from Locations
+select [Name], [Description], DateVisited, Category from Locations
 where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
 and UserID = @UserId;
 go

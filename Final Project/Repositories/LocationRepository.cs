@@ -165,6 +165,7 @@ namespace Final_Project.Repositories
                             model.Name = reader["Name"].ToString();
                             model.Description = reader["Description"].ToString();
                             model.DateVisited = reader["DateVisited"].ToString();
+                            model.Category = reader["Category"].ToString();
                         }
                         reader.Close();
                     }

@@ -84,6 +84,7 @@ namespace Final_Project.Controllers
             string title = string.Empty;
             string desription = string.Empty;
             string date = string.Empty;
+            string category = string.Empty;
 
             if(model.Name != null)
             {
@@ -97,7 +98,11 @@ namespace Final_Project.Controllers
             {
                 date = model.DateVisited;
             }
-            var result = new { title = title, description = desription, dateVisited = date };
+            if(model.Category != null && model.Category != "0")
+            {
+                category = model.Category;
+            }
+            var result = new { title = title, description = desription, dateVisited = date, category = category };
             return Json(result);
         }
 
