@@ -118,11 +118,10 @@ function initMap() {
     //Add all locations from model to the map
     var i;
     for (i = 0; i < LocList.length; i++) {
-        AddMarker(LocList[i].latitude, LocList[i].longitude, LocList[i].name, i);
+        AddMarker(LocList[i].latitude, LocList[i].longitude, LocList[i].name, LocList[i].category, i);
     }
 
-    function AddMarker(latitude, longitude, MarkerTitle, index) {
-        //var InfoWindowContent = '<button type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>';
+    function AddMarker(latitude, longitude, MarkerTitle, Category, index) {
         var InfoWindowContent = '<div>' +
             '<div id="TitleLBL"> <strong>Title</strong> </div>' +
             '<div contentEditable="false" id="Title">...</div>' +
@@ -142,12 +141,26 @@ function initMap() {
             '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
             '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="SaveUpdatesBtn" onclick="SaveUpdatesForMarker(' + "'" + index + "'" + ')"><i class="fas fa-save"></i></button>';
 
+        var PinUrl;
+        if (Category === "Visited") {
+            PinUrl = "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        }
+        else if (Category === "Want to go") {
+            PinUrl = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        }
+        else if (Category === "Plan to go") {
+            PinUrl = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        }
+        else if (Category === "Lived") {
+            PinUrl = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        }
+
         //create new marker
         var tempMarker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
             map: map,
             icon: {
-                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                url: PinUrl
             },
             title: MarkerTitle,
             id: index
