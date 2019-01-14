@@ -38,7 +38,7 @@ namespace Final_Project.Controllers
                 ViewBag.LocationAddSuccess = true;
             }
             
-            return View();
+            return View(new LocationModel());
         }
     }
 }

@@ -30,8 +30,8 @@ namespace Final_Project.Models
         [StringLength(1000, ErrorMessage = "Name cannot be more than 1000 characters long")]
         public string Description { get; set; }
 
-        [Required]
-        public int Category { get; set; }
+        [Required(ErrorMessage = "Category is a required field")]
+        public string Category { get; set; }
 
         public List<LocationObject> LocationList { get; set; }
 
@@ -39,5 +39,7 @@ namespace Final_Project.Models
 
         [Required(ErrorMessage = "Date Visited is a required field")]
         public string DateVisited { get; set; }
+
+        public List<string> CategoryOptions = new List<string> { "Visited", "Want to go", "Plan to go", "Lived" };
     }
 }

@@ -66,7 +66,7 @@ namespace Final_Project.Repositories
                             location.Longitude = (double)reader["Longitude"];
                             location.Name = reader["Name"].ToString();
                             location.Description = reader["Description"].ToString();
-                            location.Category = (int)reader["Category"];
+                            location.Category = reader["Category"].ToString();
                             location.DateVisited = reader["DateVisited"].ToString();
 
                             Locations.Add(location);
@@ -89,9 +89,9 @@ namespace Final_Project.Repositories
                     command.Parameters.AddWithValue("@Longitude", location.Longitude);
                     command.Parameters.AddWithValue("@Name", location.Name);
                     command.Parameters.AddWithValue("@Description", location.Description);
-                    command.Parameters.AddWithValue("@Category", location.Category);
                     command.Parameters.AddWithValue("@UserID", location.UserID);
                     command.Parameters.AddWithValue("@DateVisited", location.DateVisited);
+                    command.Parameters.AddWithValue("@Category", location.Category);
 
 
                     command.CommandType = CommandType.StoredProcedure;

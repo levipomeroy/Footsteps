@@ -12,6 +12,6 @@ autocomplete.addListener('place_changed', function () {
             }
         }
     }
-    document.getElementById('Category').value = 0;
+    //document.getElementById('Category').value = 0;
 
 });

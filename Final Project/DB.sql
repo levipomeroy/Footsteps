@@ -11,7 +11,7 @@ create table Locations
 	Longitude DOUBLE PRECISION,
 	[Name] varchar(50),
 	[Description] varchar(1000),
-	Category int,
+	Category varchar(15),
 	UserID varchar(100),
 	DateVisited varchar(12),
 	DateAdded varchar(12)
@@ -25,7 +25,7 @@ create procedure Location_Insert (
 	@Longitude DOUBLE PRECISION,
 	@Name varchar(50),
 	@Description varchar(1000),
-	@Category int,
+	@Category varchar(15),
 	@UserID varchar(100),
 	@DateVisited varchar(12)
 )

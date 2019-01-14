@@ -202,7 +202,7 @@
             data: { },
              success: function (data) {
                  var content = "<ul>";
-                 for (var i = 0; i < 5; i++) {
+                 for (var i = 0; i < 5 && i < data.length; i++) {
                          content += "<li>" + data[i] + "</li>";
                  }
                  content += "</ul>";
@@ -218,7 +218,7 @@
             data: { },
              success: function (data) {
                  var content = "<ul>";
-                 for (var i = 0; i < 5; i++) {
+                 for (var i = 0; i < 5 && i < data.length; i++) {
                          content += "<li>" + data[i] + "</li>";
                  }
                  content += "</ul>";
