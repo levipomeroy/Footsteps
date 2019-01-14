@@ -29,6 +29,13 @@ namespace Final_Project.Controllers
             return Json(count);
         }
 
+        public JsonResult GetCategoryCount()
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            List<KeyValuePair<string, int>> CategoryCount = _DashbaordRepo.GetCategoryCount(ID);
+            return Json(CategoryCount);
+        }
+
         //service to get leaderboard for most pins
         public JsonResult GetMostPinsLeaderboard()
         {

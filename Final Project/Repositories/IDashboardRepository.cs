@@ -13,5 +13,7 @@ namespace Final_Project.Repositories
         List<string> GetDatesOfTrips(string UserID);
         List<string> GetUsersWithMostCountries();
         List<string> GetUsersWithMostLocationsThisMonth();
+
+        List<KeyValuePair<string, int>> GetCategoryCount(string UserID);
     }
 }

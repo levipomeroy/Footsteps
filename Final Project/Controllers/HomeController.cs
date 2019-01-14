@@ -118,9 +118,9 @@ namespace Final_Project.Controllers
             {
                 Description = "";
             }
-            if(DateVisited == null)
+            if (DateVisited == null)
             {
-                DateVisited = "99/99/9999";
+                DateVisited = "01/01/9999";
             }
             _LocationRepo.Update_Location(ID, Title, Description, DateVisited, Category, lat, lon);
         }

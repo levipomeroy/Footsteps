@@ -17,6 +17,36 @@ namespace Final_Project.Repositories
             _MySettings = settings.Value;
         }
 
+        public List<KeyValuePair<string, int>> GetCategoryCount(string UserID)
+        {
+            List<KeyValuePair<string, int>> CategoryCount = new List<KeyValuePair<string, int>>();
+            KeyValuePair<string, int> Category;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetCategoryCount", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string ReadCat = reader["Category"].ToString();
+                            int ReadCatVal = (int)reader["CategoryCount"];
+                            Category = new KeyValuePair<string, int>(ReadCat, ReadCatVal);
+
+                            CategoryCount.Add(Category);
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return CategoryCount;
+        }
+
         //This function gets the dates of trip visited for the user
         public List<string> GetDatesOfTrips(string UserID)
         {

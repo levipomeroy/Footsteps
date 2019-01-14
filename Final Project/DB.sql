@@ -110,7 +110,6 @@ as
 select count(ID) LocCount from Locations where UserID = @UserID ;
 go
 
---Get count of counties visited, will need to reverse lookup to get countries added by right-click
 --will also need to add category part later (only 'been to', not 'want to go to')
 drop procedure GetNumberOfCountries;
 go
@@ -118,8 +117,24 @@ create procedure GetNumberOfCountries(
 	@UserID varchar(100)
 )
 as
-select count(distinct Country) CountryCount from locations where UserID = @UserID;
+select count(distinct Country) CountryCount from locations where UserID = @UserID and Category = 'Visited';
 go
+
+------------------------ Get Category count ---------------------------------
+drop procedure GetCategoryCount;
+go
+create procedure GetCategoryCount
+(
+	@UserId varchar(100)
+)
+as
+select Category, count(Category) CategoryCount 
+from Locations 
+where UserID = @UserId
+group by Category
+order by CategoryCount;
+-----------------------------------------------------------------------------
+
 
 ------------------ Most locations leaderboard--------------------------------
 drop procedure GetMostPinsUsers;
@@ -155,6 +170,7 @@ order by CountryCount desc
 go
 ------------------------------------------------------------------------------
 
+----------------------------- Get dates of trips this year -------------------
 drop procedure GetDatesOfTrips
 go
 create procedure GetDatesOfTrips
@@ -165,6 +181,8 @@ as
 select DateVisited from Locations where UserID = @UserId
 and YEAR(DateVisited) = YEAR(GETDATE());--will want to add category check her also
 go
+-----------------------------------------------------------------------------
+
 
 drop procedure GetListIDByName
 go
@@ -295,5 +313,7 @@ select * from AspNetUserLogins;
 select * from AspNetUserClaims;
 select * from AspNetRoleClaims;
 
---select * from locations where UserID = 'b7acd927-a6e1-4978-9b7c-d533cb94e840';
---delete from locations where Country is null
+
+--select * from Locations
+
+--delete from Locations where DateVisited = '00/00/0000'

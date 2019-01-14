@@ -332,20 +332,45 @@
 
     //category chart func
     function CategoryChart() {
-        //Set up for categories doughnut chart
-        var ctxD = document.getElementById("doughnutChart").getContext('2d');
-        var myLineChart = new Chart(ctxD, {
-            type: 'doughnut',
-            data: {
-                labels: ["Visited", "Want to go", "Lived", "Bucket list"],
-                datasets: [{
-                    data: [250, 50, 10, 40],
-                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
-                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"]
-                }]
-            },
-            options: {
-                responsive: true
+         $.ajax({
+            url: '@Url.Action("GetCategoryCount", "Dashboard")',
+            type: 'POST',
+            data: { },
+             success: function (data) {
+                 var CatObj = JSON.parse(JSON.stringify(data));
+                 var Values = [0, 0, 0, 0];
+                 for (var i = 0; i < data.length; i++) {
+                     if (CatObj[i].key === "Visited") {
+                         Values[0] = CatObj[i].value;
+                     }
+                     else if (CatObj[i].key === "Want to go") {
+                         Values[1] = CatObj[i].value;
+                     }
+                     else if (CatObj[i].key === "Plan to go") {
+                         Values[2] = CatObj[i].value;
+                     }
+                     else if (CatObj[i].key === "Lived") {
+                         Values[3] = CatObj[i].value;
+                     }
+                 }
+                 //alert(Values);
+
+                 //Set up for categories doughnut chart
+                 var ctxD = document.getElementById("doughnutChart").getContext('2d');
+                 var myLineChart = new Chart(ctxD, {
+                     type: 'doughnut',
+                     data: {
+                         labels: ["Visited", "Want to go", "Plan to go", "Lived"],
+                         datasets: [{
+                             data: [Values[0], Values[1], Values[2], Values[3]],
+                             backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"],
+                             hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5"]
+                         }]
+                     },
+                     options: {
+                         responsive: true
+                     }
+                 });
             }
         });
     }
