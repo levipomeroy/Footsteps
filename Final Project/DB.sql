@@ -120,6 +120,39 @@ as
 select count(distinct Country) CountryCount from locations where UserID = @UserID and Category = 'Visited';
 go
 
+
+------------------------------------------------------------------------------
+----------------------------- Image Stuff ------------------------------------
+drop Table Images;
+go
+create table Images
+(
+	LocationID int,
+	[Image] varchar(max),
+	UserID varchar(100)
+)
+go
+
+------ Add image proc ----------
+drop procedure AddImage;
+go
+create procedure AddImage
+(
+	@Latitude DOUBLE PRECISION,
+	@Longitude DOUBLE PRECISION,
+	@UserID varchar(100),
+	@Image varchar(max)
+)
+as
+insert into Images (LocationID, [Image], UserID) 
+values (
+	(select ID from Locations where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5))
+	, @Image
+	, @UserID)
+go
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 ------------------------ Get Category count ---------------------------------
 drop procedure GetCategoryCount;
 go

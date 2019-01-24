@@ -139,6 +139,7 @@ function initMap() {
             '</div>' +
             '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="EditBtn" onclick="EditMarkerClickHandle()"><i class="fas fa-edit"></i></button>' +
             '<button style="background: none" type="button" onclick="RemoveMarkerFromMap(' + "'" + index + "'" + ')" id="deleteButton" data-id="' + index + '" class="btn btn-default">' + '<i class="fas fa-trash-alt"></i>' + '</button>' +
+            '<button style="background: none" type="button" onclick="OpenFileBrowser(' + "'" + index + "'" + ')" id="UploadImage" class="btn btn-default">' + '<i class="far fa-images"></i>' + '</button>' +
             '<button style="background: none; outline: none; border: none" type="button" class="btn btn-default" id="SaveUpdatesBtn" onclick="SaveUpdatesForMarker(' + "'" + index + "'" + ')"><i class="fas fa-save"></i></button>';
 
         var PinUrl;

@@ -18,10 +18,15 @@
         </div>
     </div>
     <div class="row" id="map"></div>
+    @*<input type="file" id="uploadImageBox" multiple onchange="ImagesSelectedHandler()" name="Image" ENCTYPE=”multipart/form-data” />*@
+    @*accept=".png,.jpg,.jpeg,.gif,.bmp"*@
+    <input type="file" id="uploadImageBox" onchange="ImagesSelectedHandler()" />
+
+
 
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDQe2Nov8eYcEOSJpHSxo5CIyC9BvMTgk&libraries=places&callback=initMap"
-    async defer></script>
+        async defer></script>
 
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
@@ -47,12 +52,12 @@
              data: { lat: lat, lon: lon, country: country },
         });
         window.location.reload(); //reloads page but kinda a shitty way to do it, hopefully will fix later
-    }   
+    }
 
      //Send lat and lon and get back title, description, and DateVisited
     function GetTitleAndDescription(lat, lon) {
         $.ajax({
-            url: '@Url.Action("GetTitleAndDescription", "Home")', 
+            url: '@Url.Action("GetTitleAndDescription", "Home")',
             type: 'POST',
             data: { lat: lat, lon: lon },
             success: function (data) {
@@ -74,7 +79,7 @@
         var CategorySelect = document.getElementById("CategoryEditor");
 
         $.ajax({
-            url: '@Url.Action("Update_Location", "Home")', 
+            url: '@Url.Action("Update_Location", "Home")',
             type: 'POST',
             data: {
                 Title: document.getElementById("Title").innerHTML,
@@ -87,7 +92,72 @@
         });
     }
 
-</script>
+    var IndexForImage = null;
+    //open file browser to pick image
+    function OpenFileBrowser(data) {
+        document.getElementById("uploadImageBox").click();
+        IndexForImage = data;
+        //alert(MarkerList[IndexForImage].getPosition().lat());
+    }
 
+    //Get the image selected and send it to controller
+    function ImagesSelectedHandler(e) {
+        var Selectedfiles = document.getElementById("uploadImageBox");
+
+        var ImageString = null;
+        var FR = new FileReader();
+        FR.addEventListener("load", function (e) {
+            ImageString = e.target.result;
+            //alert(ImageString);
+            $.ajax({
+                url: '@Url.Action("AddImage", "Home")',
+                type: 'POST',
+                data: {
+                    Image: ImageString,
+                    lat: MarkerList[IndexForImage].getPosition().lat(),
+                    lon: MarkerList[IndexForImage].getPosition().lng()
+                },
+            });
+        });
+        FR.readAsDataURL(Selectedfiles.files[0]);
+
+
+        ///////////////////////// Old way /////////////////////////////////
+        //var formdata = new FormData(); //FormData object
+        //formdata.append("FileUpload", Selectedfiles.files[0]);
+
+       // var lat = JSON.stringify(MarkerList[IndexForImage].getPosition().lat());
+        //var lon = JSON.stringify(MarkerList[IndexForImage].getPosition().lng());
+
+        /////////////////////// Correct way!! //////////////////////
+        //var xhr = new XMLHttpRequest();
+        //xhr.open('POST', '/Home/AddImage', true);
+        //xhr.send(formdata);
+        ////////////////////////////////////////////////////////////
+    }
+
+
+    @*function handleFileSelect(evt) {
+        //var files = evt.target.files; // FileList object
+
+        var formdata = new FormData(evt.target.files[0]); //FormData object
+
+        $.ajax({
+            url: '@Url.Action("AddImage", "Home")',
+            data: {
+                lat: MarkerList[IndexForImage].getPosition().lat(),
+                lon: MarkerList[IndexForImage].getPosition().lng(),
+                Image: formdata
+            },
+            type: 'POST',
+            contentType: false,
+            processData: false,
+        });
+
+        return false;
+    }*@
+
+//document.getElementById('uploadImageBox').addEventListener('change', handleFileSelect, false);
+</script>
 
 <script src="~/Scripts/MapPageScript.js"></script>

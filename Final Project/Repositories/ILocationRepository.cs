@@ -18,5 +18,7 @@ namespace Final_Project.Repositories
         void AddLocationWithLatLon(string UserID, double Latitude, double Longitude, string country);
         LocationModel GetTitleAndDescription(string UserID, double Latitude, double Longitude);
         void Update_Location(string UserID, string Title, string Description, string DateVisited, string Category, double lat, double lon);
+
+        void AddImage(string Image, double Latitude, double Longitude, string UserID);
     }
 }

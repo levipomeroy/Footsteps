@@ -194,5 +194,23 @@ namespace Final_Project.Repositories
                 }
             }
         }
+
+        public void AddImage(string Image, double Latitude, double Longitude, string UserID)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("AddImage", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@Latitude", Latitude);
+                    command.Parameters.AddWithValue("@Longitude", Longitude);
+                    command.Parameters.AddWithValue("@Image", Image);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

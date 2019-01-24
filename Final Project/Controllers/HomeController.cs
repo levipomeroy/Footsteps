@@ -8,6 +8,10 @@ using Final_Project.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace Final_Project.Controllers
 {
@@ -124,5 +128,14 @@ namespace Final_Project.Controllers
             }
             _LocationRepo.Update_Location(ID, Title, Description, DateVisited, Category, lat, lon);
         }
+
+        //service to add image for a location
+        [HttpPost]
+        public void AddImage(string Image, double lat, double lon)
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            _LocationRepo.AddImage(Image, lat, lon, ID);
+        }
+
     }
 }
