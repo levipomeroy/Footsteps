@@ -122,7 +122,7 @@ function initMap() {
     }
 
     function AddMarker(latitude, longitude, MarkerTitle, Category, index) {
-        var InfoWindowContent = '<div>' +
+        var InfoWindowContent = '<div id="InfoWindowDiv">' +
             '<div id="TitleLBL"> <strong>Title</strong> </div>' +
             '<div contentEditable="false" id="Title">...</div>' +
             '<div id="DescritptionLBL"> <strong>Descritption</strong> </div>' +

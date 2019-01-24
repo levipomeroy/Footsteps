@@ -106,7 +106,7 @@ namespace Final_Project.Controllers
             {
                 category = model.Category;
             }
-            var result = new { title = title, description = desription, dateVisited = date, category = category };
+            var result = new { title = title, description = desription, dateVisited = date, category = category, Images = model.Images };
             return Json(result);
         }
 

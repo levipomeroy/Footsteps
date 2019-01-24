@@ -66,6 +66,15 @@
                 document.getElementById("Description").innerHTML = objResult.description;
                 document.getElementById("DateVisited").value = objResult.dateVisited;
                 document.getElementById("CategoryEditor").value = objResult.category;
+
+                var Image = null;
+                var child = document.createElement('div');
+                for (var i = 0; i < objResult.images.length; i++) {
+                        Image = "<img src =" + "'" + objResult.images[i] + "'" + " alt='Image' height='70' width='70'/>"
+                    child.innerHTML += Image;
+                }
+                document.getElementById('InfoWindowDiv').appendChild(child);
+
             }
         });
     }
@@ -122,7 +131,7 @@
         FR.readAsDataURL(Selectedfiles.files[0]);
 
 
-        ///////////////////////// Old way /////////////////////////////////
+        ///////////////////////// Old way -- turns out this way sucks /////////////////////////////////
         //var formdata = new FormData(); //FormData object
         //formdata.append("FileUpload", Selectedfiles.files[0]);
 
@@ -135,29 +144,6 @@
         //xhr.send(formdata);
         ////////////////////////////////////////////////////////////
     }
-
-
-    @*function handleFileSelect(evt) {
-        //var files = evt.target.files; // FileList object
-
-        var formdata = new FormData(evt.target.files[0]); //FormData object
-
-        $.ajax({
-            url: '@Url.Action("AddImage", "Home")',
-            data: {
-                lat: MarkerList[IndexForImage].getPosition().lat(),
-                lon: MarkerList[IndexForImage].getPosition().lng(),
-                Image: formdata
-            },
-            type: 'POST',
-            contentType: false,
-            processData: false,
-        });
-
-        return false;
-    }*@
-
-//document.getElementById('uploadImageBox').addEventListener('change', handleFileSelect, false);
 </script>
 
 <script src="~/Scripts/MapPageScript.js"></script>

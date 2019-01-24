@@ -42,10 +42,18 @@ create procedure GetTitleAndDescription
 	@Longitude double precision
 )
 as
-select [Name], [Description], DateVisited, Category from Locations
+--select [Name], [Description], DateVisited, Category from Locations --old way, no images
+select [Name], [Description], DateVisited, Category, [Image] from Locations left outer join Images 
+on Locations.ID = Images.LocationID and Locations.UserID = Images.UserID
 where Round(Latitude,5) = Round(@Latitude, 5) and Round(Longitude,5) = Round(@Longitude,5)
-and UserID = @UserId;
+and Locations.UserID = @UserId;
 go
+------- test, can delete when done with images stuff-----------
+--select [Name], [Description], DateVisited, Category, [Image] from Locations left outer join Images 
+--on Locations.ID = Images.LocationID and Locations.UserID = Images.UserID
+--where Round(Latitude,5) = Round(26.9739306062453, 5) and Round(Longitude,5) = Round(-112.968758940697,5)
+--and Locations.UserID = '54e26bab-af93-4c86-a5bf-80d8d886f92f';
+-------------------------
 
 drop procedure Update_Location;
 go

@@ -41,5 +41,7 @@ namespace Final_Project.Models
         public string DateVisited { get; set; }
 
         public List<string> CategoryOptions = new List<string> { "Visited", "Want to go", "Plan to go", "Lived" };
+
+        public List<string> Images { get; set; }
     }
 }

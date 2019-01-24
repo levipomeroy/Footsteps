@@ -147,6 +147,8 @@ namespace Final_Project.Repositories
         public LocationModel GetTitleAndDescription(string UserID, double Latitude, double Longitude)
         {
             LocationModel model = new LocationModel();
+            string Image = string.Empty;
+            model.Images = new List<string>();
             using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
             {
                 using (SqlCommand command = new SqlCommand("GetTitleAndDescription", newConnection))
@@ -166,6 +168,8 @@ namespace Final_Project.Repositories
                             model.Description = reader["Description"].ToString();
                             model.DateVisited = reader["DateVisited"].ToString();
                             model.Category = reader["Category"].ToString();
+                            Image = reader["Image"].ToString();
+                            model.Images.Add(Image);
                         }
                         reader.Close();
                     }
