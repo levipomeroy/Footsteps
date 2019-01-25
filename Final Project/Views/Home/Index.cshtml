@@ -20,7 +20,7 @@
     <div class="row" id="map"></div>
     @*<input type="file" id="uploadImageBox" multiple onchange="ImagesSelectedHandler()" name="Image" ENCTYPE=”multipart/form-data” />*@
     @*accept=".png,.jpg,.jpeg,.gif,.bmp"*@
-    <input type="file" id="uploadImageBox" onchange="ImagesSelectedHandler()" />
+    <input type="file" id="uploadImageBox" onchange="ImagesSelectedHandler()" style="display:none"/>
 
 
 
@@ -67,14 +67,14 @@
                 document.getElementById("DateVisited").value = objResult.dateVisited;
                 document.getElementById("CategoryEditor").value = objResult.category;
 
-                var Image = null;
-                var child = document.createElement('div');
-                for (var i = 0; i < objResult.images.length; i++) {
-                        Image = "<img src =" + "'" + objResult.images[i] + "'" + " alt='Image' height='70' width='70'/>"
-                    child.innerHTML += Image;
+                if (objResult.images.length > 1) {
+                    //Add images for marker into div of infowindow
+                    for (var i = 0; i < objResult.images.length; i++) {
+                        var Image = "<img src =" + "'" + objResult.images[i] + "'" + " alt='Image' height='100' style='margin: 3px;'/>"
+                        //child.innerHTML += Image;
+                    document.getElementById('ImageDiv').insertAdjacentHTML('beforeend', Image);
+                    }
                 }
-                document.getElementById('InfoWindowDiv').appendChild(child);
-
             }
         });
     }
@@ -126,23 +126,14 @@
                     lat: MarkerList[IndexForImage].getPosition().lat(),
                     lon: MarkerList[IndexForImage].getPosition().lng()
                 },
+                success: function (data) {
+                    //update the infowindow to show uploaded image
+                    var Image = "<img src=" + "'" + ImageString + "'" + " alt='Image' height='100' style='margin: 3px;'/>"
+                    document.getElementById('ImageDiv').insertAdjacentHTML('beforeend', Image);
+                }
             });
         });
         FR.readAsDataURL(Selectedfiles.files[0]);
-
-
-        ///////////////////////// Old way -- turns out this way sucks /////////////////////////////////
-        //var formdata = new FormData(); //FormData object
-        //formdata.append("FileUpload", Selectedfiles.files[0]);
-
-       // var lat = JSON.stringify(MarkerList[IndexForImage].getPosition().lat());
-        //var lon = JSON.stringify(MarkerList[IndexForImage].getPosition().lng());
-
-        /////////////////////// Correct way!! //////////////////////
-        //var xhr = new XMLHttpRequest();
-        //xhr.open('POST', '/Home/AddImage', true);
-        //xhr.send(formdata);
-        ////////////////////////////////////////////////////////////
     }
 </script>
 

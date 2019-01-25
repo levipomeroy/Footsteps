@@ -358,3 +358,6 @@ select * from AspNetRoleClaims;
 --select * from Locations
 
 --delete from Locations where DateVisited = '00/00/0000'
+
+--select * from Images
+--delete from Images where LocationID = 3007
