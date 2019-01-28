@@ -20,7 +20,7 @@
     <div class="row" id="map"></div>
     @*<input type="file" id="uploadImageBox" multiple onchange="ImagesSelectedHandler()" name="Image" ENCTYPE=”multipart/form-data” />*@
     @*accept=".png,.jpg,.jpeg,.gif,.bmp"*@
-    <input type="file" id="uploadImageBox" onchange="ImagesSelectedHandler()" style="display:none"/>
+    <input type="file" id="uploadImageBox" onchange="ImagesSelectedHandler()" style="display:none" multiple accept=".png,.jpg,.jpeg,.gif,.bmp" />
 
 
 
@@ -67,7 +67,10 @@
                 document.getElementById("DateVisited").value = objResult.dateVisited;
                 document.getElementById("CategoryEditor").value = objResult.category;
 
-                if (objResult.images.length > 1) {
+                //alert(objResult.images[0]);
+                //alert(objResult.images[0]);
+                //alert(objResult.images.length);
+                if (objResult.images[0] != null && objResult.images[0] != "") {
                     //Add images for marker into div of infowindow
                     for (var i = 0; i < objResult.images.length; i++) {
                         var Image = "<img src =" + "'" + objResult.images[i] + "'" + " alt='Image' height='100' style='margin: 3px;'/>"
@@ -113,9 +116,9 @@
     function ImagesSelectedHandler(e) {
         var Selectedfiles = document.getElementById("uploadImageBox");
 
-        var ImageString = null;
-        var FR = new FileReader();
-        FR.addEventListener("load", function (e) {
+        //var ImageString = null;
+        //var FR = new FileReader();
+        @*FR.addEventListener("load", function (e) {
             ImageString = e.target.result;
             //alert(ImageString);
             $.ajax({
@@ -128,12 +131,42 @@
                 },
                 success: function (data) {
                     //update the infowindow to show uploaded image
+                    alert("updated image");
                     var Image = "<img src=" + "'" + ImageString + "'" + " alt='Image' height='100' style='margin: 3px;'/>"
                     document.getElementById('ImageDiv').insertAdjacentHTML('beforeend', Image);
                 }
             });
-        });
-        FR.readAsDataURL(Selectedfiles.files[0]);
+        });*@
+        //alert(Selectedfiles.files.length);
+
+        var SuccessCount = 0;
+        var ImageStringArray = [];
+        for (var i = 0; i < Selectedfiles.files.length; i++) {
+            var ImageString = null;
+            var FR2 = new FileReader();
+            
+            FR2.addEventListener("load", function (e) {
+                ImageString = e.target.result; //get image string
+                ImageStringArray.push(ImageString); //add image string to arraay
+            $.ajax({
+                url: '@Url.Action("AddImage", "Home")',
+                type: 'POST',
+                data: {
+                    Image: ImageString,
+                    lat: MarkerList[IndexForImage].getPosition().lat(),
+                    lon: MarkerList[IndexForImage].getPosition().lng()
+                },
+                success: function (data) {
+                    //update the infowindow to show uploaded image
+                    var Image = "<img src=" + "'" + ImageStringArray[SuccessCount] + "'" + " alt='Image' height='100' style='margin: 3px;'/>"
+                    document.getElementById('ImageDiv').insertAdjacentHTML('beforeend', Image);
+                    SuccessCount++; //index into array for current image callback
+                }
+            });
+            });
+            FR2.readAsDataURL(Selectedfiles.files[i]);
+        }
+        //FR.readAsDataURL(Selectedfiles.files[0]); //for single image
     }
 </script>
 
