@@ -20,7 +20,8 @@ function AddList() {
     }
 }
 
-function ListClicked(ID) {
+function ListClicked(ID, Name) {
+    //alert(Name);
     if (ID !== null) {
         SelectedListID = ID;
         //send list id to server and get back list of items in that list
@@ -36,6 +37,10 @@ function ListClicked(ID) {
                 for (var i = 0; i < objList.length; i++) {
                     document.getElementById("ItemBody").innerHTML += "<div>" + objList[i].item + "</div>";
                 }
+
+                //change list items header to include clicked on name plus same button again to add more
+                document.getElementById("ItemHeader").innerHTML = Name + 
+                    '<button id="AddListItemBtn" onclick="AddListItem()" type="button" class="btn btn-default"><i class="fas fa-plus"></i></button>';
             }
         });
     }
