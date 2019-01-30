@@ -203,7 +203,7 @@ function EditMarkerClickHandle() {
  * Purpose: This function changes the map theme to a dark blue theme.
  **********************************************************************/
 function MidNightTheme() {
-
+    ChangeThemeToMidnight();
     map.setOptions({
         styles:
             [
@@ -449,6 +449,7 @@ function MidNightTheme() {
  * Purpose: This function changes the map theme to the default theme
  **********************************************************************/
 function DefaultTheme() {
+    ChangeThemeToDefault();
     map.setOptions({
         styles:
             [
@@ -469,6 +470,7 @@ function DefaultTheme() {
  * Purpose: This function changes the map theme to a dark theme
  **********************************************************************/
 function DarkTheme() {
+    ChangeThemeToDark();
     map.setOptions({
         styles:
             [
@@ -508,6 +510,7 @@ function DarkTheme() {
  * Purpose: This function changes the map theme to a light theme
  **********************************************************************/
 function LightTheme() {
+    ChangeThemeToLight();
     map.setOptions({
         styles:
             [
@@ -681,4 +684,17 @@ function LightTheme() {
                 }
             ]
     });
+}
+
+function ChangeThemeToMidnight() {
+    document.getElementById("MapPageStyle").setAttribute("href", "../Styles/MidnightTheme.css");
+}
+function ChangeThemeToDark() {
+    document.getElementById("MapPageStyle").setAttribute("href", "../Styles/DarkTheme.css");
+}
+function ChangeThemeToLight() {
+    document.getElementById("MapPageStyle").setAttribute("href", "../Styles/LightTheme.css");
+}
+function ChangeThemeToDefault() {
+    document.getElementById("MapPageStyle").setAttribute("href", "../Styles/MapPageStyle.css");
 }

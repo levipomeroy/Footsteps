@@ -23,7 +23,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.js"></script>
     <!-- My Styles -->
-    <link rel="stylesheet" type="text/css" href="~/Styles/MapPageStyle.css" />
+    <link id="MapPageStyle" rel="stylesheet" type="text/css" href="~/Styles/MapPageStyle.css" />
     <link rel="stylesheet" type="text/css" href="~/Styles/ValidationStyle.css" />
     <!-- My Scripts -->
     <script src="~/Scripts/DefaultLayoutScript.js"></script>
@@ -42,7 +42,7 @@
                 <li>
                     <a href="../Dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
                 </li>
-                <li>
+                <li id="ThemesSubMenu">
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-sliders-h"></i> Themes</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
