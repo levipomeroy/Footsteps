@@ -1,5 +1,6 @@
 ﻿:root {
-    --LightColor: #FFFFFF;
+    --LightColor: #404040;
+    --HighlightColor: #FFFFFF;
     --GreyColor: #666666;
     --BackgroundColor: #a1c99c;
     --BackgroundColorButSlightlyDarker: #b9d7b5;
@@ -135,7 +136,7 @@ a, a:hover, a:focus {
 
     #sidebar ul.components {
         padding: 20px 0;
-        border-bottom: 1px solid var(--LightColor);
+        border-bottom: 1px solid var(--HighlightColor); /*changed here*/
     }
 
     #sidebar ul p {
@@ -152,11 +153,11 @@ a, a:hover, a:focus {
 
         #sidebar ul li a:hover {
             color: var(--BackgroundColor);
-            background: var(--LightColor);
+            background: var(--HighlightColor); /*here*/
         }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
-        color: var(--LightColor);
+        color: var(--HighlightColor); /*and here*/
         background: var(--BackgroundColorButSlightlyDarker);
     }
 
