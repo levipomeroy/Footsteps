@@ -26,6 +26,9 @@
 
 <script>
     var LocList = @Html.Raw(Json.Serialize(Model.LocationList));
+    var ThemeChoice = "@Model.Theme.ToString()";
+
+    //GetTheme();
 
     //Remove marker from map and db
     function RemoveMarkerFromMap(id) {
@@ -137,6 +140,41 @@
         }
     }
 
+
+    function InsertOrUpdateTheme(Theme) {
+        $.ajax({
+            url: '@Url.Action("InsertOrUpdateTheme", "Home")',
+            type: 'POST',
+            data: {
+                Theme: Theme
+            },
+        });
+    }
+
+    function GetTheme() {
+        @*$.ajax({
+            url: '@Url.Action("GetTheme", "Home")',
+            type: 'POST',
+            data: {},
+            success: function (data) {
+                ThemeChoice = data;
+                if (ThemeChoice === "Midnight") {
+                    MidNightTheme();
+                }
+                else if (ThemeChoice === "Dark") {
+                    DarkTheme();
+                }
+                else if (ThemeChoice === "Light") {
+                    LightTheme();
+                }
+                else {
+                    DefaultTheme();
+                }
+            }
+        });*@
+    }
+
+    //GetTheme();
 </script>
 
 <script src="~/Scripts/MapPageScript.js"></script>

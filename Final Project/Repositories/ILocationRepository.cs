@@ -20,5 +20,9 @@ namespace Final_Project.Repositories
         void Update_Location(string UserID, string Title, string Description, string DateVisited, string Category, double lat, double lon);
 
         void AddImage(string Image, double Latitude, double Longitude, string UserID);
+
+        //these dont really beling in this repository, but it makes no difference
+        void InsertOrUpdateTheme(string Theme, string UserID);
+        string GetTheme(string UserID);
     }
 }

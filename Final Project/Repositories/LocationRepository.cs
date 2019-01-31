@@ -216,5 +216,47 @@ namespace Final_Project.Repositories
                 }
             }
         }
+
+        //these dont really beling in this repository, but it makes no difference
+        public void InsertOrUpdateTheme(string Theme, string UserID)
+        {
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("InsertOrUpdateTheme", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+                    command.Parameters.AddWithValue("@Theme", Theme);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public string GetTheme(string UserID)
+        {
+            string Theme = string.Empty;
+            using (SqlConnection newConnection = new SqlConnection(_MySettings.ConnectionStrings["DefaultConnection"]))
+            {
+                using (SqlCommand command = new SqlCommand("GetTheme", newConnection))
+                {
+                    command.Parameters.AddWithValue("@UserID", UserID);
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    newConnection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Theme = reader["Theme"].ToString();
+                        }
+                        reader.Close();
+                    }
+                }
+            }
+            return Theme;
+        }
     }
 }

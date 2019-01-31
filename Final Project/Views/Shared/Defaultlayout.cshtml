@@ -27,9 +27,21 @@
     <link rel="stylesheet" type="text/css" href="~/Styles/ValidationStyle.css" />
     <!-- My Scripts -->
     <script src="~/Scripts/DefaultLayoutScript.js"></script>
+    <script>
+        LoadFunction();
+
+        function LoadFunction() {
+            setTimeout(MakeVisible, 500);
+        }
+        function MakeVisible() {
+            document.getElementById("Everything").style.visibility = "visible";
+
+        }
+    </script>
 </head>
 <body>
-    <div class="wrapper">
+    @*id="Everything" style="visibility:hidden"*@
+    <div class="wrapper" id="Everything" style="visibility:hidden">
         <!-- Sidebar -->
         <nav id="sidebar">
             <div class="sidebar-header">
@@ -80,4 +92,32 @@
 </body>
 </html>
 
+<script>
+    GetTheme();
 
+    function GetTheme() {
+         $.ajax({
+            url: '@Url.Action("GetTheme", "Home")',
+            type: 'POST',
+            data: {},
+             success: function (data) {
+                ThemeChoice = data;
+                if (ThemeChoice === "Midnight") {
+                    ChangeThemeToMidnight();
+                }
+                else if (ThemeChoice === "Dark") {
+                    ChangeThemeToDark();
+                }
+                else if (ThemeChoice === "Light") {
+                    ChangeThemeToLight();
+                }
+                else {
+                    ChangeThemeToDefault();
+                }
+            }
+        });
+    }
+
+    
+    //GetTheme();
+</script>

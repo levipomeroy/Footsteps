@@ -2,6 +2,12 @@
 <head>
     <title>Dashboard</title>
     <link href="~/Styles/DashboardStyle.css" rel="stylesheet" />
+    <script>
+        setTimeout(MakeVisible, 500);
+        function MakeVisible() {
+            document.getElementById("Everything").style.visibility = "visible";
+        }
+    </script>
 </head>
 
 <div id="content" class="container grid">
@@ -374,6 +380,13 @@
             }
         });
     }
+
+    //function DashboardLoaded() {
+    //    document.getElementById("Everything").style.visibility = "visible";
+    //}
+
 </script>
 
+
 <script type="text/javascript" src="~/MDB/js/mdb.min.js"></script>
+<script src="~/Scripts/MapPageScript.js"></script>

@@ -39,6 +39,7 @@ namespace Final_Project.Controllers
                 string ID = User.Claims.ElementAt(0).Value;
                 LocationModel locationModel = new LocationModel();
                 locationModel.LocationList = _LocationRepo.GetList(ID);
+                locationModel.Theme = _LocationRepo.GetTheme(ID);
 
                 return View(locationModel);
             }
@@ -137,5 +138,21 @@ namespace Final_Project.Controllers
             _LocationRepo.AddImage(Image, lat, lon, ID);
         }
 
+        //service to insert or update users prefered theme 
+        [HttpPost]
+        public void InsertOrUpdateTheme(string Theme)
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            _LocationRepo.InsertOrUpdateTheme(Theme, ID);
+        }
+
+        //service to get theme for user
+        public string GetTheme()
+        {
+            string ID = User.Claims.ElementAt(0).Value;
+            string Theme = _LocationRepo.GetTheme(ID);
+
+            return Theme;
+        }
     }
 }

@@ -339,6 +339,45 @@ create procedure Get_List_Items
 as 
 select * from UserListItem where ListID = @ListID and UserID = @UserID;
 
+----------------------- Theme stuff ----------------------------------------
+drop table Themes;
+go
+create table Themes
+(
+	Theme varchar(20),
+	UserID varchar(100)
+);
+go
+--------- get theme ------------
+drop procedure GetTheme;
+go
+create procedure GetTheme
+(
+	@UserID varchar(100)
+)
+as
+select Theme from Themes where UserID = @UserID;
+go
+--------- insert/update theme ------------------
+drop procedure InsertOrUpdateTheme;
+go
+create procedure InsertOrUpdateTheme
+(
+	@UserID varchar(100),
+	@Theme varchar(20)
+)
+as
+if exists (select Theme from Themes where UserID = @UserID)
+begin
+	update Themes set Theme = @Theme where UserID = @UserID;
+end
+else
+begin
+	insert into Themes (Theme, UserID) values (@Theme, @UserID);
+end
+go
+
+
 ------------------------------------------------------------------------------
 ---------------- User stuff --------------------------------------------------
 ------------------------------------------------------------------------------
@@ -361,3 +400,5 @@ select * from AspNetRoleClaims;
 
 --select * from Images
 --delete from Images where LocationID = 3007
+
+select * from Themes
