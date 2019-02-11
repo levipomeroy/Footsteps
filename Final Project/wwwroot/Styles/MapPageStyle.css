@@ -136,7 +136,7 @@ a, a:hover, a:focus {
 
     #sidebar ul.components {
         padding: 20px 0;
-        border-bottom: 1px solid var(--HighlightColor); /*changed here*/
+        border-bottom: 1px solid var(--HighlightColor);
     }
 
     #sidebar ul p {
@@ -153,11 +153,11 @@ a, a:hover, a:focus {
 
         #sidebar ul li a:hover {
             color: var(--BackgroundColor);
-            background: var(--HighlightColor); /*here*/
+            background: var(--HighlightColor); 
         }
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
-        color: var(--HighlightColor); /*and here*/
+        color: var(--HighlightColor); 
         background: var(--BackgroundColorButSlightlyDarker);
     }
 
